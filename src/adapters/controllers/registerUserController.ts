@@ -3,7 +3,7 @@ import { RegisterUserInput } from "./schemas/registerUserSchema";
 import { User } from "../../model/user";
 import { Decimal } from "@prisma/client/runtime/library";
 import { Email } from "../../model/data/email";
-import { RegisterUserOnDb } from "../../usecases/registerUser/registerUserOnDb";
+import { RegisterUserOnDb } from "../../usecases/registerUserOnDb";
 import { Password } from "../../model/data/password";
 
 export class RegisterUserController {
