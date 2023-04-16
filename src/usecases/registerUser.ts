@@ -1,7 +1,7 @@
 import { User } from "../model/user";
 import { UserRepository } from "./interfaces/userRepository";
 
-export class RegisterUserOnDb {
+export class RegisterUser {
   private readonly userRepository: UserRepository;
 
   constructor(userRepository: UserRepository) {
@@ -9,7 +9,7 @@ export class RegisterUserOnDb {
   }
 
   async registerUser(user: User): Promise<void> {
-    if (await this.userRepository.exists(user)) {
+    if (await this.userRepository.exists(user.username)) {
       throw new Error("Usuário já existente");
     }
 
