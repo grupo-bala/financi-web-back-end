@@ -27,6 +27,7 @@ model financi_user {
   password      String
   fixedincome   Decimal         @db.Decimal(10, 2)
   balance       Decimal         @db.Decimal(10, 2)
+  email         String
   goal          goal[]
   transaction   transaction[]
   viewed_lesson viewed_lesson[]
