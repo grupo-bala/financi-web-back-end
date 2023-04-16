@@ -1,10 +1,10 @@
 import { RegisterUserController } from "../../adapters/controllers/registerUserController";
 import { PostgresUserRepository } from "../../adapters/repositories/postgresUserRepository";
-import { RegisterUserOnDb } from "../../usecases/registerUserOnDb";
+import { RegisterUser } from "../../usecases/registerUser";
 
 export function makeRegisterUserController(): RegisterUserController {
   return new RegisterUserController(
-    new RegisterUserOnDb(
+    new RegisterUser(
       new PostgresUserRepository()
     )
   );
