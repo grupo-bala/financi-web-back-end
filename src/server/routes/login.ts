@@ -2,7 +2,7 @@ import { FastifyInstance } from "fastify";
 import { $ref } from "../../adapters/controllers/schemas/buildSchemas";
 import { makeLoginUserController } from "../factories/login";
 
-export async function loginRoute(fastify: FastifyInstance) {
+export async function registerLoginRoute(fastify: FastifyInstance) {
   fastify.get("/login", {
     schema: {
       querystring: $ref("loginUserSchema")
