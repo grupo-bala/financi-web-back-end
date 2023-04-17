@@ -17,7 +17,7 @@ export class LoginUserController {
     try {
       const jwt = await this.loginUser.loginUser(query.username, new Password(query.password));
       await reply
-        .send({ msg: jwt.value });
+        .send({ msg: jwt.encoded });
     } catch (error) {
       await reply
         .status(StatusCodes.UNAUTHORIZED)

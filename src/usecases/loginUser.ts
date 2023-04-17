@@ -16,6 +16,6 @@ export class LoginUser {
       throw new Error("Nome de usuário ou senha inválidos");
     }
 
-    return new Token(username, false);
+    return Token.encode(username, false);
   }
 }
