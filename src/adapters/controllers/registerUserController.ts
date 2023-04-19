@@ -25,7 +25,7 @@ export class RegisterUserController {
         new Decimal(body.fixedIncome),
         new Decimal(0),
         new Email(body.email),
-        new Password(body.password)
+        Password.fromString(body.password)
       );
       
       await this.registerUser.registerUser(newUser);

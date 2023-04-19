@@ -55,7 +55,7 @@ export class PostgresUserRepository implements UserRepository {
       user.fixedincome,
       user.balance,
       new Email(user.email),
-      new Password(user.password, true)
+      Password.fromHash(user.password)
     );
   }
 }
