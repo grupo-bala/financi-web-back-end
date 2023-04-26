@@ -10,12 +10,16 @@ export class LoginUser {
   }
 
   async loginUser(username: string, password: Password): Promise<Token> {
-    if (!await this.userRepository.exists(username)) {
-      throw new Error("Nome de usuário ou senha inválidos");
-    } else if ((await this.userRepository.getByUsername(username)).password.value !== password.value) {
+    try {
+      const user = await this.userRepository.getByUsername(username);
+
+      if (user.password.value !== password.value) {
+        throw null;
+      }
+
+      return Token.encode(username, user.isAdmin);
+    } catch (error) {
       throw new Error("Nome de usuário ou senha inválidos");
     }
-
-    return Token.encode(username, false);
   }
 }
