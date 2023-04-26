@@ -28,6 +28,7 @@ model financi_user {
   fixedincome   Decimal         @db.Decimal(10, 2)
   balance       Decimal         @db.Decimal(10, 2)
   email         String
+  isadmin       Boolean         @default(false)
   goal          goal[]
   transaction   transaction[]
   viewed_lesson viewed_lesson[]
