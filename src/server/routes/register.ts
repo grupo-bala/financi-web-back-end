@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { $ref } from "../../adapters/controllers/schemas/buildSchemas";
-import { makeRegisterUserController } from "../factories/register";
+import { RegisterUserController } from "../../adapters/controllers/registerUserController";
 
 export async function registerRegisterRoute(fastify: FastifyInstance) {
   fastify.post("/register", {
@@ -8,6 +8,6 @@ export async function registerRegisterRoute(fastify: FastifyInstance) {
       body: $ref("registerUserSchema")
     }
   }, async (request, response) => {
-    await makeRegisterUserController().handle(request, response);
+    await new RegisterUserController().handle(request, response);
   });
 }
