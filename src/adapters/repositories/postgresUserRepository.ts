@@ -18,18 +18,19 @@ export class PostgresUserRepository implements UserRepository {
     return sameIdQtd > 0;
   }
 
-  async add(user: User): Promise<void> {
+  async add({ username, balance, fixedIncome, password, email, isAdmin, name }: User): Promise<void> {
     await new PrismaHelper()
       .client
       .financi_user
       .create({
         data: {
-          name: user.name,
-          username: user.username,
-          balance: user.balance,
-          fixedincome: user.fixedIncome,
-          password: user.password.value,
-          email: user.email.value
+          name,
+          username,
+          balance,
+          isadmin: isAdmin,
+          fixedincome: fixedIncome,
+          password: password.value,
+          email: email.value,
         }
       });
   }
@@ -48,14 +49,15 @@ export class PostgresUserRepository implements UserRepository {
       throw new Error("Usuário não existente");
     }
 
-    return new User(
-      user.id,
-      user.name,
-      user.username,
-      user.fixedincome,
-      user.balance,
-      new Email(user.email),
-      Password.fromHash(user.password)
-    );
+    return new User({
+      id: user.id,
+      name: user.name,
+      username: user.username,
+      fixedIncome: user.fixedincome,
+      balance: user.fixedincome,
+      email: new Email(user.email),
+      password: Password.fromHash(user.password),
+      isAdmin: user.isadmin
+    });
   }
 }
