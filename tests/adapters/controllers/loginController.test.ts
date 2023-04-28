@@ -22,7 +22,7 @@ describe("testes do controller de login", () => {
 
     const res = await server.inject({
       method: "GET",
-      url: `http://localhost:${process.env.PORT}/login`,
+      url: `http://localhost/login`,
       query: {
         username: "test",
         password: "test"
@@ -46,7 +46,7 @@ describe("testes do controller de login", () => {
 
     const res = await server.inject({
       method: "GET",
-      url: `http://localhost:${process.env.PORT}/login`,
+      url: `http://localhost/login`,
       query: {
         username: "test",
         password: "test"
