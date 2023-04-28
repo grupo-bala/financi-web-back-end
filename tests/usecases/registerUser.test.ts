@@ -17,7 +17,16 @@ describe("testes de cadastro de usuário", () => {
     const registerUser = new RegisterUser(pg);
 
     await expect(registerUser.registerUser(
-      new User(-1, "", "valid", new Decimal(-1), new Decimal(-1), new Email("email@email.com"), Password.fromHash(""))
+      new User({
+        id: -1,
+        username: "valid",
+        name: "",
+        isAdmin: false,
+        fixedIncome: new Decimal(0),
+        balance: new Decimal(0),
+        email: new Email("grupo@bala.com"),
+        password: Password.fromHash("")
+      })
     )).resolves.not.toThrow();
   });
 
@@ -29,7 +38,16 @@ describe("testes de cadastro de usuário", () => {
     const registerUser = new RegisterUser(pg);
 
     await expect(registerUser.registerUser(
-      new User(-1, "", "valid", new Decimal(-1), new Decimal(-1), new Email("email@email.com"), Password.fromHash(""))
+      new User({
+        id: -1,
+        username: "valid",
+        name: "",
+        isAdmin: false,
+        fixedIncome: new Decimal(0),
+        balance: new Decimal(0),
+        email: new Email("grupo@bala.com"),
+        password: Password.fromHash("")
+      })
     )).rejects.toThrow();
   });
 });

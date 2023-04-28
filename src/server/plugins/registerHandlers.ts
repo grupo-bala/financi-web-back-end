@@ -3,10 +3,20 @@ import { registerLoginRoute } from "../routes/login";
 import { registerRegisterRoute } from "../routes/register";
 import { schemas } from "../../adapters/controllers/schemas/buildSchemas";
 import { validateJWT } from "../hooks/auth";
+import { verifyIsAdmin } from "../hooks/admin";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   registerLoginRoute(fastify);
   registerRegisterRoute(fastify);
+}
+
+async function registerAdminRoutes(fastify: FastifyInstance) {
+  fastify.addHook("preHandler", validateJWT);
+  fastify.addHook("preHandler", verifyIsAdmin);
+
+  fastify.get("/admin", async (request, reply) => {
+    await reply.send("Ok");
+  });
 }
 
 async function registerAuthRoutes(fastify: FastifyInstance) {
@@ -24,4 +34,5 @@ export async function registerHandlers(fastify: FastifyInstance) {
 
   fastify.register(registerFreeRoutes);
   fastify.register(registerAuthRoutes);
+  fastify.register(registerAdminRoutes);
 }

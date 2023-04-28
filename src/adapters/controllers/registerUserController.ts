@@ -6,27 +6,25 @@ import { Email } from "../../model/data/email";
 import { RegisterUser } from "../../usecases/registerUser";
 import { Password } from "../../model/data/password";
 import { StatusCodes } from "http-status-codes";
+import { PostgresUserRepository } from "../repositories/postgresUserRepository";
 
 export class RegisterUserController {
-  private readonly registerUser: RegisterUser;
-
-  constructor(registerUser: RegisterUser) {
-    this.registerUser = registerUser;
-  }
+  private readonly registerUser = new RegisterUser(new PostgresUserRepository());
 
   async handle(request: FastifyRequest, reply: FastifyReply) {
     const body = request.body as RegisterUserInput;
     
     try {
-      const newUser = new User(
-        -1,
-        body.name,
-        body.username,
-        new Decimal(body.fixedIncome),
-        new Decimal(0),
-        new Email(body.email),
-        Password.fromString(body.password)
-      );
+      const newUser = new User({
+        id: -1,
+        balance: new Decimal(0),
+        email: new Email(body.email),
+        isAdmin: false,
+        fixedIncome: new Decimal(body.fixedIncome),
+        name: body.name,
+        password: Password.fromString(body.password),
+        username: body.username
+      });
       
       await this.registerUser.registerUser(newUser);
       await reply.status(StatusCodes.CREATED).send();

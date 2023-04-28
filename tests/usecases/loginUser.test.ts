@@ -12,18 +12,30 @@ describe("testes de login de usuário", () => {
   beforeAll(() => {
     pg.getByUsername.mockImplementation(
       async () => 
-        new User(-1, "", "", new Decimal(-1), new Decimal(-1), new Email("grupo@bala.com"), Password.fromHash(""))
+        new User({
+          id: -1,
+          username: "",
+          name: "",
+          isAdmin: false,
+          fixedIncome: new Decimal(0),
+          balance: new Decimal(0),
+          email: new Email("grupo@bala.com"),
+          password: Password.fromHash("")
+        })
     );
 
     pg.exists.mockImplementation(async () => true);
   });
 
   test("nome de usuário inexistente deve falhar", async () => {
-    pg.exists.mockImplementationOnce(async () => false);
+    pg.getByUsername.mockImplementationOnce(_ => {
+      throw new Error("");
+    });
+
     const loginUser = new LoginUser(pg);
 
     await expect(
-      loginUser.loginUser("", Password.fromHash(""))
+      loginUser.loginUser("invalid", Password.fromHash(""))
     ).rejects.toThrow();
   });
 

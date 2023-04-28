@@ -3,13 +3,10 @@ import { LoginUser } from "../../usecases/loginUser";
 import { LoginUserInput } from "./schemas/loginUserSchema";
 import { StatusCodes } from "http-status-codes";
 import { Password } from "../../model/data/password";
+import { PostgresUserRepository } from "../repositories/postgresUserRepository";
 
 export class LoginUserController {
-  private readonly loginUser: LoginUser;
-
-  constructor(loginUser: LoginUser) {
-    this.loginUser = loginUser;
-  }
+  private readonly loginUser = new LoginUser(new PostgresUserRepository());
 
   async handle(request: FastifyRequest, reply: FastifyReply) {
     const query = request.query as LoginUserInput;
