@@ -5,7 +5,12 @@ import { registerHandlers } from "./server/plugins/registerHandlers";
 config();
 
 const server = Fastify({
-  logger: true
+  logger: {
+    level: "info",
+    transport: {
+      target: "pino-pretty"
+    }
+  }
 });
 
 server.register(registerHandlers);
