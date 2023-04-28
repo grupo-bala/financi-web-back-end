@@ -21,7 +21,7 @@ describe("testes do controller de registro", () => {
 
     const res = await server.inject({
       method: "POST",
-      url: `http://localhost:${process.env.PORT}/register`,
+      url: `http://localhost/register`,
       payload: JSON.stringify({
         name: "test",
         email: "test@test.com",
@@ -48,7 +48,7 @@ describe("testes do controller de registro", () => {
 
     const res = await server.inject({
       method: "POST",
-      url: `http://localhost:${process.env.PORT}/register`,
+      url: `http://localhost/register`,
       payload: JSON.stringify({
         name: "test",
         email: "test@test.com",
