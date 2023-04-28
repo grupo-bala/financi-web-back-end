@@ -8,7 +8,7 @@ import { Password } from "../../model/data/password";
 import { StatusCodes } from "http-status-codes";
 import { PostgresUserRepository } from "../repositories/postgresUserRepository";
 
-export class RegisterUserController {
+export class RegisterController {
   private readonly registerUser = new RegisterUser(new PostgresUserRepository());
 
   async handle(request: FastifyRequest, reply: FastifyReply) {
