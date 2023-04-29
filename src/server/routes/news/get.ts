@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { GetNewsController } from "../../../adapters/controllers/news/getNewsController";
+import { GetNewsController } from "../../../adapters/controllers/news/getController";
 import { $ref } from "../../../adapters/controllers/schemas/buildSchemas";
 
 export async function registerGetNewsRoute(fastify: FastifyInstance) {
