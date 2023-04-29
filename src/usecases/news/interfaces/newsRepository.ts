@@ -5,4 +5,5 @@ export interface NewsRepository {
   add: (news: News) => Promise<void>;
   getNews: (page: number, size: number) => Promise<News[]>;
   getSize: () => Promise<number>;
+  remove: (title: string) => Promise<void>;
 }
