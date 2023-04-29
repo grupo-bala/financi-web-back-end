@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { registerLoginRoute } from "../routes/login";
 import { registerRegisterRoute } from "../routes/register";
+import { registerAddNewsRoute } from "../routes/news/add";
 import { schemas } from "../../adapters/controllers/schemas/buildSchemas";
 import { validateJWT } from "../hooks/auth";
 import { verifyIsAdmin } from "../hooks/admin";
@@ -17,6 +18,8 @@ async function registerAdminRoutes(fastify: FastifyInstance) {
   fastify.get("/admin", async (request, reply) => {
     await reply.send("Ok");
   });
+
+  registerAddNewsRoute(fastify);
 }
 
 async function registerAuthRoutes(fastify: FastifyInstance) {
