@@ -59,4 +59,15 @@ export class PostgresNewsRepository implements NewsRepository {
       .news
       .count();
   }
+
+  async remove(title: string): Promise<void> {
+    await new PrismaHelper()
+      .client
+      .news
+      .delete({
+        where: {
+          title,
+        },
+      });
+  }
 }
