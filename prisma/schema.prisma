@@ -74,3 +74,16 @@ model viewed_lesson {
   lesson       lesson       @relation(fields: [id_lesson], references: [id], onDelete: NoAction, onUpdate: NoAction)
   financi_user financi_user @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
+
+model news {
+  id               Int       @id @default(autoincrement())
+  author           String
+  title            String
+  summary          String
+  content          String
+  publish_date     DateTime  @db.Date
+  last_update_date DateTime? @db.Date
+  img_url          String
+
+  @@unique([title, summary, content])
+}
