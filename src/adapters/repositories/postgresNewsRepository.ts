@@ -31,4 +31,32 @@ export class PostgresNewsRepository implements NewsRepository {
         },
       });
   }
+
+  async getNews(page: number, size: number): Promise<News[]> {
+    const prismaNews = await new PrismaHelper()
+      .client
+      .news
+      .findMany({
+        skip: (page - 1) * size,
+        take: size,
+        orderBy: {
+          id: "desc",
+        },
+      });
+
+    const news = [];
+
+    for (const {author, content, img_url, publish_date, last_update_date, summary, title} of prismaNews) {
+      news.push(new News(author, title, summary, content, publish_date, img_url, last_update_date ?? undefined));
+    }
+
+    return news;
+  }
+
+  async getSize(): Promise<number> {
+    return await new PrismaHelper()
+      .client
+      .news
+      .count();
+  }
 }
