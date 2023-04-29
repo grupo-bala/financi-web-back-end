@@ -78,7 +78,7 @@ model viewed_lesson {
 model news {
   id               Int       @id @default(autoincrement())
   author           String
-  title            String
+  title            String    @unique(map: "unique_title")
   summary          String
   content          String
   publish_date     DateTime  @db.Date
