@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { StatusCodes } from "http-status-codes";
 import { GetNews } from "../../../usecases/news/getNews";
 import { PostgresNewsRepository } from "../../repositories/postgresNewsRepository";
-import { GetNewsInput } from "../schemas/news/getNewsSchema";
+import { GetNewsInput } from "../schemas/news/getSchema";
 
 export class GetNewsController {
   private readonly getNews = new GetNews(new PostgresNewsRepository()); // todo
