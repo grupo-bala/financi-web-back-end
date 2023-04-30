@@ -6,6 +6,7 @@ import { schemas } from "../../adapters/controllers/schemas/buildSchemas";
 import { validateJWT } from "../hooks/auth";
 import { verifyIsAdmin } from "../hooks/admin";
 import { registerGetNewsRoute } from "../routes/news/get";
+import { registerRemoveNewsRoute } from "../routes/news/remove";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   registerLoginRoute(fastify);
@@ -22,6 +23,7 @@ async function registerAdminRoutes(fastify: FastifyInstance) {
   });
 
   registerAddNewsRoute(fastify);
+  registerRemoveNewsRoute(fastify);
 }
 
 async function registerAuthRoutes(fastify: FastifyInstance) {
