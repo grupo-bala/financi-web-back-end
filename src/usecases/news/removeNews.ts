@@ -1,18 +1,17 @@
-import { News } from "../../model/news";
-import { NewsRepository } from "./interfaces/repository";
+import { NewsRepository } from "./interfaces/newsRepository";
 
-export class GetNews {
+export class RemoveNews {
   private readonly newsRepository: NewsRepository;
 
   constructor(newsRepository: NewsRepository) {
     this.newsRepository = newsRepository;
   }
 
-  async get(id: number): Promise<News> {
+  async remove(id: number): Promise<void> {
     if (!(await this.newsRepository.existsById(id))) {
       throw new Error("Essa notícia não existe");
     }
 
-    return await this.newsRepository.get(id);
+    await this.newsRepository.remove(id);
   }
 }

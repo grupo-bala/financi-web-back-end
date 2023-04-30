@@ -1,8 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { UpdateNews } from "../../../usecases/news/update";
+import { UpdateNews } from "../../../usecases/news/updateNews";
 import { PostgresNewsRepository } from "../../repositories/postgresNewsRepository";
 import { StatusCodes } from "http-status-codes";
-import { UpdateNewsInput } from "../schemas/news/updateSchema";
+import { UpdateNewsInput } from "../schemas/news/updateNewsSchema";
 import { News } from "../../../model/news";
 
 export class UpdateNewsController {

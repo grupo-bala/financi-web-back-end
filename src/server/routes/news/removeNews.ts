@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { $ref } from "../../../adapters/controllers/schemas/buildSchemas";
-import { RemoveNewsController } from "../../../adapters/controllers/news/removeController";
+import { RemoveNewsController } from "../../../adapters/controllers/news/removeNewsController";
 
 export async function registerRemoveNewsRoute(fastify: FastifyInstance) {
   fastify.post("/remove-news", {

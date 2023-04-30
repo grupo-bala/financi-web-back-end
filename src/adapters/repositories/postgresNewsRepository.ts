@@ -1,5 +1,5 @@
 import { News } from "../../model/news";
-import { NewsRepository } from "../../usecases/news/interfaces/repository";
+import { NewsRepository } from "../../usecases/news/interfaces/newsRepository";
 import { PrismaHelper } from "./prismaHelper";
 
 export class PostgresNewsRepository implements NewsRepository {

@@ -1,14 +1,14 @@
 import { FastifyInstance } from "fastify";
 import { registerLoginRoute } from "../routes/login";
 import { registerRegisterRoute } from "../routes/register";
-import { registerAddNewsRoute } from "../routes/news/add";
+import { registerAddNewsRoute } from "../routes/news/addNews";
 import { schemas } from "../../adapters/controllers/schemas/buildSchemas";
 import { validateJWT } from "../hooks/auth";
 import { verifyIsAdmin } from "../hooks/admin";
-import { registerGetAllNewsRoute } from "../routes/news/getAll";
-import { registerRemoveNewsRoute } from "../routes/news/remove";
-import { registerGetNewsRoute } from "../routes/news/get";
-import { registerUpdateNewsRoute } from "../routes/news/update";
+import { registerGetAllNewsRoute } from "../routes/news/getNewsAll";
+import { registerRemoveNewsRoute } from "../routes/news/removeNews";
+import { registerGetNewsRoute } from "../routes/news/getNews";
+import { registerUpdateNewsRoute } from "../routes/news/updateNews";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   registerLoginRoute(fastify);

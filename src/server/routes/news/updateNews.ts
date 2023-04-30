@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { $ref } from "../../../adapters/controllers/schemas/buildSchemas";
-import { UpdateNewsController } from "../../../adapters/controllers/news/updateController";
+import { UpdateNewsController } from "../../../adapters/controllers/news/updateNewsController";
 
 export async function registerUpdateNewsRoute(fastify: FastifyInstance) {
   fastify.post("/update-news", {

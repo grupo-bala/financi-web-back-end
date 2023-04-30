@@ -1,11 +1,11 @@
 import { buildJsonSchemas } from "fastify-zod";
 import { registerUserSchema } from "./registerUserSchema";
 import { loginUserSchema } from "./loginUserSchema";
-import { addNewsSchema } from "./news/addSchema";
-import { getAllNewsSchema } from "./news/getAllSchema";
-import { removeNewsSchema } from "./news/removeSchema";
-import { getNewsSchema } from "./news/getSchema";
-import { updateNewsSchema } from "./news/updateSchema";
+import { addNewsSchema } from "./news/addNewsSchema";
+import { getAllNewsSchema } from "./news/getAllNewsSchema";
+import { removeNewsSchema } from "./news/removeNewsSchema";
+import { getNewsSchema } from "./news/getNewsSchema";
+import { updateNewsSchema } from "./news/updateNewsSchema";
 
 export const { schemas, $ref } = buildJsonSchemas({
   registerUserSchema,

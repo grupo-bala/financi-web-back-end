@@ -1,5 +1,5 @@
 import { News } from "../../model/news";
-import { NewsRepository } from "./interfaces/repository";
+import { NewsRepository } from "./interfaces/newsRepository";
 
 export class AddNews {
   private readonly newsRepository: NewsRepository;

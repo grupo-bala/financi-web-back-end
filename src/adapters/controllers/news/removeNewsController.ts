@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { RemoveNews } from "../../../usecases/news/remove";
+import { RemoveNews } from "../../../usecases/news/removeNews";
 import { PostgresNewsRepository } from "../../repositories/postgresNewsRepository";
-import { RemoveNewsInput } from "../schemas/news/removeSchema";
+import { RemoveNewsInput } from "../schemas/news/removeNewsSchema";
 import { StatusCodes } from "http-status-codes";
 
 export class RemoveNewsController {
