@@ -9,7 +9,7 @@ export class AddNews {
   }
 
   async add(news: News): Promise<void> {
-    if (await this.newsRepository.exists(news.title)) {
+    if (await this.newsRepository.existsByTitle(news.title)) {
       throw new Error("Uma notícia com esse título já está cadastrada");
     }
 

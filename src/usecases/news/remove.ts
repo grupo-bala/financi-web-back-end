@@ -7,11 +7,11 @@ export class RemoveNews {
     this.newsRepository = newsRepository;
   }
 
-  async remove(title: string): Promise<void> {
-    if (!(await this.newsRepository.exists(title))) {
+  async remove(id: number): Promise<void> {
+    if (!(await this.newsRepository.existsById(id))) {
       throw new Error("Essa notícia não existe");
     }
 
-    await this.newsRepository.remove(title);
+    await this.newsRepository.remove(id);
   }
 }

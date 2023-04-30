@@ -3,7 +3,7 @@ import { NewsRepository } from "../../usecases/news/interfaces/repository";
 import { PrismaHelper } from "./prismaHelper";
 
 export class PostgresNewsRepository implements NewsRepository {
-  async exists(title: string): Promise<boolean> {
+  async existsByTitle(title: string): Promise<boolean> {
     const count = await new PrismaHelper()
       .client
       .news
@@ -60,24 +60,24 @@ export class PostgresNewsRepository implements NewsRepository {
       .count();
   }
 
-  async remove(title: string): Promise<void> {
+  async remove(id: number): Promise<void> {
     await new PrismaHelper()
       .client
       .news
       .delete({
         where: {
-          title,
+          id,
         },
       });
   }
 
-  async get(title: string): Promise<News> {
-    const { author, content, img_url, last_update_date, publish_date, summary, id } = await new PrismaHelper()
+  async get(id: number): Promise<News> {
+    const { author, content, img_url, last_update_date, publish_date, summary, title } = await new PrismaHelper()
       .client
       .news
       .findUniqueOrThrow({
         where: {
-          title,
+          id,
         },
       });
 

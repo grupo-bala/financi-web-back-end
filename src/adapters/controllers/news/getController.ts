@@ -8,10 +8,10 @@ export class GetNewsController {
   private readonly getNews = new GetNews(new PostgresNewsRepository());
 
   async handle(request: FastifyRequest, reply: FastifyReply) {
-    const { title } = request.query as GetNewsInput;
+    const { id } = request.query as GetNewsInput;
 
     try {
-      const news = await this.getNews.get(title);
+      const news = await this.getNews.get(id);
 
       await reply
         .status(StatusCodes.OK)

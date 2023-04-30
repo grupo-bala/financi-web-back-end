@@ -8,11 +8,11 @@ export class GetNews {
     this.newsRepository = newsRepository;
   }
 
-  async get(title: string): Promise<News> {
-    if (!(await this.newsRepository.exists(title))) {
+  async get(id: number): Promise<News> {
+    if (!(await this.newsRepository.existsById(id))) {
       throw new Error("Essa notícia não existe");
     }
 
-    return await this.newsRepository.get(title);
+    return await this.newsRepository.get(id);
   }
 }

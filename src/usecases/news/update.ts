@@ -11,7 +11,7 @@ export class UpdateNews {
   async update(news: News): Promise<void> {
     if (!(await this.newsRepository.existsById(news.id!))) {
       throw new Error("Essa notícia não existe");
-    } else if (!(await this.newsRepository.exists(news.title))) {
+    } else if (!(await this.newsRepository.existsByTitle(news.title))) {
       throw new Error("Uma notícia com esse nome já existe");
     }
 
