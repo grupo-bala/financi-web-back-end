@@ -5,7 +5,7 @@ export class News {
   readonly summary: string;
   readonly content: string;
   readonly publishDate: Date;
-  readonly lastUpdateDate?: Date;
+  readonly lastUpdateDate: Date | null;
   readonly imgURL: string;
 
   constructor(
@@ -15,7 +15,7 @@ export class News {
     content: string,
     publishDate: Date,
     imgURL: string,
-    lastUpdateDate?: Date,
+    lastUpdateDate: Date | null,
     id?: number,
   ) {
     this.id = id;

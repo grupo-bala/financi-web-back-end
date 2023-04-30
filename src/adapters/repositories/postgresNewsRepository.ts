@@ -47,7 +47,7 @@ export class PostgresNewsRepository implements NewsRepository {
     const news = [];
 
     for (const { author, content, img_url, publish_date, last_update_date, summary, title } of prismaNews) {
-      news.push(new News(author, title, summary, content, publish_date, img_url, last_update_date ?? undefined));
+      news.push(new News(author, title, summary, content, publish_date, img_url, last_update_date));
     }
 
     return news;
@@ -86,7 +86,7 @@ export class PostgresNewsRepository implements NewsRepository {
       title,
       content,
       imgURL: img_url,
-      lastUpdateDate: last_update_date ?? undefined,
+      lastUpdateDate: last_update_date,
       publishDate: publish_date,
       summary,
     };
