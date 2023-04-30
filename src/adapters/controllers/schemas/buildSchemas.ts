@@ -5,6 +5,7 @@ import { addNewsSchema } from "./news/addSchema";
 import { getAllNewsSchema } from "./news/getAllSchema";
 import { removeNewsSchema } from "./news/removeSchema";
 import { getNewsSchema } from "./news/getSchema";
+import { updateNewsSchema } from "./news/updateSchema";
 
 export const { schemas, $ref } = buildJsonSchemas({
   registerUserSchema,
@@ -13,4 +14,5 @@ export const { schemas, $ref } = buildJsonSchemas({
   getAllNewsSchema,
   removeNewsSchema,
   getNewsSchema,
+  updateNewsSchema,
 });
