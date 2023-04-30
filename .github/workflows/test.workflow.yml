@@ -17,7 +17,15 @@ jobs:
         with:
           cache: 'npm'
       
+      - name: Install dependencies
+        run: npm i
+      
       - name: Run tests
-        run: npm i && npm test
-        env: 
+        run: npm test -- --collectCoverage
+        env:
           SECRET_KEY: test
+      
+      - name: Deploy coverage
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: coverage/lcov-report
