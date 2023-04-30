@@ -1,4 +1,4 @@
-import { NewsRepository } from "./interfaces/newsRepository";
+import { NewsRepository } from "./interfaces/repository";
 
 export class RemoveNews {
   private readonly newsRepository: NewsRepository;

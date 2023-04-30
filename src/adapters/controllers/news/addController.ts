@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { AddNewsInput } from "../schemas/news/addSchema";
 import { StatusCodes } from "http-status-codes";
-import { AddNews } from "../../../usecases/news/addNews";
+import { AddNews } from "../../../usecases/news/add";
 import { PostgresNewsRepository } from "../../repositories/postgresNewsRepository";
 import { News } from "../../../model/news";
 
