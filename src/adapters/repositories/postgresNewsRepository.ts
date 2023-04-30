@@ -25,7 +25,7 @@ export class PostgresNewsRepository implements NewsRepository {
           author,
           content,
           img_url: imgURL,
-          publish_date: publishDate,
+          publish_date: publishDate!,
           summary,
           title,
         },
@@ -46,8 +46,8 @@ export class PostgresNewsRepository implements NewsRepository {
 
     const news = [];
 
-    for (const { author, content, img_url, publish_date, last_update_date, summary, title } of prismaNews) {
-      news.push(new News(author, title, summary, content, publish_date, img_url, last_update_date));
+    for (const { author, content, img_url, publish_date, last_update_date, summary, title, id } of prismaNews) {
+      news.push(new News(author, title, summary, content, img_url, publish_date, last_update_date, id));
     }
 
     return news;
@@ -72,7 +72,7 @@ export class PostgresNewsRepository implements NewsRepository {
   }
 
   async get(title: string): Promise<News> {
-    const { author, content, img_url, last_update_date, publish_date, summary } = await new PrismaHelper()
+    const { author, content, img_url, last_update_date, publish_date, summary, id } = await new PrismaHelper()
       .client
       .news
       .findUniqueOrThrow({
@@ -89,6 +89,7 @@ export class PostgresNewsRepository implements NewsRepository {
       lastUpdateDate: last_update_date,
       publishDate: publish_date,
       summary,
+      id,
     };
   }
 }

@@ -1,22 +1,22 @@
 export class News {
-  readonly id?: number;
   readonly author: string;
   readonly title: string;
   readonly summary: string;
   readonly content: string;
-  readonly publishDate: Date;
-  readonly lastUpdateDate: Date | null;
   readonly imgURL: string;
+  readonly id: number | null;
+  readonly publishDate: Date | null;
+  readonly lastUpdateDate: Date | null;
 
   constructor(
     author: string,
     title: string,
     summary: string,
     content: string,
-    publishDate: Date,
     imgURL: string,
+    publishDate: Date | null,
     lastUpdateDate: Date | null,
-    id?: number,
+    id: number | null,
   ) {
     this.id = id;
     this.author = author;
