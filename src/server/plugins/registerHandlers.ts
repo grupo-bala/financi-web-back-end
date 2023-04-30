@@ -7,11 +7,13 @@ import { validateJWT } from "../hooks/auth";
 import { verifyIsAdmin } from "../hooks/admin";
 import { registerGetAllNewsRoute } from "../routes/news/getAll";
 import { registerRemoveNewsRoute } from "../routes/news/remove";
+import { registerGetNewsRoute } from "../routes/news/get";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   registerLoginRoute(fastify);
   registerRegisterRoute(fastify);
   registerGetAllNewsRoute(fastify);
+  registerGetNewsRoute(fastify);
 }
 
 async function registerAdminRoutes(fastify: FastifyInstance) {
