@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const removeNewsSchema = z.object({
-  title: z.string(),
+  id: z.number(),
 });
 
 export type RemoveNewsInput = z.infer<typeof removeNewsSchema>;
