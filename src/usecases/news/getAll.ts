@@ -1,14 +1,14 @@
 import { News } from "../../model/news";
 import { NewsRepository } from "./interfaces/repository";
 
-export class GetNews {
+export class GetAllNews {
   private readonly newsRepository: NewsRepository;
 
   constructor(newsRepository: NewsRepository) {
     this.newsRepository = newsRepository;
   }
 
-  async getNews(page: number, size: number): Promise<{ news: News[], howManyPages: number}> {
+  async getAll(page: number, size: number): Promise<{ news: News[], howManyPages: number}> {
     const repositorySize = await this.newsRepository.getSize();
 
     if (repositorySize === 0) {

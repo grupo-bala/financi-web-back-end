@@ -1,16 +1,16 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { StatusCodes } from "http-status-codes";
-import { GetNews } from "../../../usecases/news/get";
+import { GetAllNews } from "../../../usecases/news/getAll";
 import { PostgresNewsRepository } from "../../repositories/postgresNewsRepository";
-import { GetNewsInput } from "../schemas/news/getSchema";
+import { GetAllNewsInput } from "../schemas/news/getAllSchema";
 
-export class GetNewsController {
-  private readonly getNews = new GetNews(new PostgresNewsRepository()); // todo
+export class GetAllNewsController {
+  private readonly getNews = new GetAllNews(new PostgresNewsRepository()); // todo
 
   async handle(request: FastifyRequest, reply: FastifyReply) {
-    const { page, size } = request.query as GetNewsInput;
-    
-    const news = await this.getNews.getNews(page, size);
+    const { page, size } = request.query as GetAllNewsInput;
+
+    const news = await this.getNews.getAll(page, size);
 
     await reply.status(StatusCodes.OK).send({
       data: news.news,
