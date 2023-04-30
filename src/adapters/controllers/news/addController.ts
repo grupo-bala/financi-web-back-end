@@ -12,7 +12,7 @@ export class AddNewsController {
     const { author, content, imgURL, publishDate, summary, title } = request.body as AddNewsInput;
 
     try {
-      await this.addNews.add(new News(author, title, summary, content, publishDate, imgURL));
+      await this.addNews.add(new News(author, title, summary, content, publishDate, imgURL, null));
 
       await reply.status(StatusCodes.CREATED).send();
     } catch (error) {
