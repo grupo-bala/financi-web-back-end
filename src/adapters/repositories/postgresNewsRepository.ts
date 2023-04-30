@@ -32,7 +32,7 @@ export class PostgresNewsRepository implements NewsRepository {
       });
   }
 
-  async getNews(page: number, size: number): Promise<News[]> {
+  async getAll(page: number, size: number): Promise<News[]> {
     const prismaNews = await new PrismaHelper()
       .client
       .news

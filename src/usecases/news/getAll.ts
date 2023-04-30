@@ -18,7 +18,7 @@ export class GetAllNews {
       };
     }
 
-    const repositoryNews = await this.newsRepository.getNews(page, size);
+    const repositoryNews = await this.newsRepository.getAll(page, size);
 
     return {
       news: repositoryNews,
