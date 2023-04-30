@@ -16,7 +16,7 @@ export class PostgresNewsRepository implements NewsRepository {
     return count > 0;
   }
 
-  async add({author, content, imgURL, publishDate, summary, title}: News): Promise<void> {
+  async add({ author, content, imgURL, publishDate, summary, title }: News): Promise<void> {
     await new PrismaHelper()
       .client
       .news
@@ -46,7 +46,7 @@ export class PostgresNewsRepository implements NewsRepository {
 
     const news = [];
 
-    for (const {author, content, img_url, publish_date, last_update_date, summary, title} of prismaNews) {
+    for (const { author, content, img_url, publish_date, last_update_date, summary, title } of prismaNews) {
       news.push(new News(author, title, summary, content, publish_date, img_url, last_update_date ?? undefined));
     }
 
@@ -69,5 +69,26 @@ export class PostgresNewsRepository implements NewsRepository {
           title,
         },
       });
+  }
+
+  async get(title: string): Promise<News> {
+    const { author, content, img_url, last_update_date, publish_date, summary } = await new PrismaHelper()
+      .client
+      .news
+      .findUniqueOrThrow({
+        where: {
+          title,
+        },
+      });
+
+    return {
+      author,
+      title,
+      content,
+      imgURL: img_url,
+      lastUpdateDate: last_update_date ?? undefined,
+      publishDate: publish_date,
+      summary,
+    };
   }
 }
