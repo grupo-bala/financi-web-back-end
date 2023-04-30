@@ -92,4 +92,36 @@ export class PostgresNewsRepository implements NewsRepository {
       id,
     };
   }
+
+  async update({ author, content, imgURL, lastUpdateDate, summary, title, id }: News): Promise<void> {
+    await new PrismaHelper()
+      .client
+      .news
+      .update({
+        where: {
+          id: id!,
+        },
+        data: {
+          title,
+          author,
+          content,
+          img_url: imgURL,
+          last_update_date: lastUpdateDate!,
+          summary,
+        },
+      });
+  }
+
+  async existsById(id: number): Promise<boolean> {
+    const count = await new PrismaHelper()
+      .client
+      .news
+      .count({
+        where: {
+          id,
+        },
+      });
+
+    return count > 0;
+  }
 }
