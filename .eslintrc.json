@@ -17,22 +17,38 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "indent": [
+    "no-template-curly-in-string": "error",
+    "no-unreachable": "error",
+    "camelcase": "error",
+    "class-methods-use-this": "error",
+    "curly": "error",
+    "dot-notation": "error",
+    "eqeqeq": "error",
+    "func-style": [
       "error",
-      2
+      "declaration"
     ],
-    "linebreak-style": [
+    "no-console": "error",
+    "no-magic-numbers": [
       "error",
-      "unix"
+      {
+        "ignoreArrayIndexes": true,
+        "ignoreClassFieldInitialValues": true
+      }
     ],
-    "quotes": [
+    "prefer-arrow-callback": "error",
+    "array-bracket-newline": [
       "error",
-      "double"
+      {
+        "multiline": true 
+      }
     ],
-    "semi": [
+    "arrow-parens": [
       "error",
       "always"
     ],
+    "arrow-spacing": "error",
+    "brace-style": "error",
     "comma-dangle": [
       "error",
       {
@@ -43,8 +59,36 @@
         "functions": "always-multiline"
       }
     ],
+    "comma-spacing": "error",
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "max-len": "error",
+    "no-extra-parens": "error",
     "no-multi-spaces": "error",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 0
+      }
+    ],
+    "no-tabs": "error",
     "no-trailing-spaces": "error",
-    "object-curly-spacing": ["error", "always"]
+    "object-curly-spacing": ["error", "always"],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "@typescript-eslint/no-non-null-assertion": "off"
   }
 }
