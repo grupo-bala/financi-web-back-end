@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/server/hooks/auth.ts</title>
+    <title>Code coverage report for src/usecases/news/getAllNews.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/server/hooks</a> auth.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/usecases/news</a> getAllNews.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">14.28% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/9</span>
+                <span class='fraction'>1/7</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">14.28% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/9</span>
+                <span class='fraction'>1/7</span>
             </div>
         
             
@@ -82,43 +82,67 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FastifyReply, FastifyRequest } from "fastify";
-import { StatusCodes } from "http-status-codes";
-import { Token } from "../../adapters/data/token";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { News } from "../../model/news";
+import { NewsRepository } from "./interfaces/newsRepository";
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >validateJWT(</span>request: FastifyRequest, reply: FastifyReply) {
-  const jwt = <span class="cstat-no" title="statement not covered" >request.headers.authorization;</span>
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!jwt) {</span>
-<span class="cstat-no" title="statement not covered" >    return await reply</span>
-      .status(StatusCodes.UNAUTHORIZED)
-      .send({ msg: "O token de autenticação é necessário" });
+export class GetAllNews {
+  private readonly newsRepository: NewsRepository;
+&nbsp;
+<span class="fstat-no" title="function not covered" >  constructor(n</span>ewsRepository: NewsRepository) {
+<span class="cstat-no" title="statement not covered" >    this.newsRepository = newsRepository;</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    Token.decode(jwt.replace("Bearer ", ""));</span>
-  } catch (error) {
-<span class="cstat-no" title="statement not covered" >    return await reply</span>
-      .status(StatusCodes.UNAUTHORIZED)
-      .send({ msg: "O token de autenticação é inválido" });
+  async <span class="fstat-no" title="function not covered" >getAll(</span>page: number, size: number): Promise&lt;{ news: News[], howManyPages: number}&gt; {
+    const repositorySize = <span class="cstat-no" title="statement not covered" >await this.newsRepository.getSize();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (repositorySize === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        news: [],
+        howManyPages: 0,
+      };
+    }
+&nbsp;
+    const repositoryNews = <span class="cstat-no" title="statement not covered" >await this.newsRepository.getAll(page, size);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      news: repositoryNews,
+      howManyPages: repositorySize / size,
+    };
   }
 }</pre></td></tr></table></pre>
 
