@@ -8,6 +8,7 @@ import { verifyIsAdmin } from "../hooks/admin";
 import { registerGetAllNewsRoute } from "../routes/news/getAll";
 import { registerRemoveNewsRoute } from "../routes/news/remove";
 import { registerGetNewsRoute } from "../routes/news/get";
+import { registerUpdateNewsRoute } from "../routes/news/update";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   registerLoginRoute(fastify);
@@ -26,6 +27,7 @@ async function registerAdminRoutes(fastify: FastifyInstance) {
 
   registerAddNewsRoute(fastify);
   registerRemoveNewsRoute(fastify);
+  registerUpdateNewsRoute(fastify);
 }
 
 async function registerAuthRoutes(fastify: FastifyInstance) {
