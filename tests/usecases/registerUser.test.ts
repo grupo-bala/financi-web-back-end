@@ -14,10 +14,21 @@ jest.mock("../../src/adapters/repositories/postgresUserRepository");
 
 describe("testes de cadastro de usuário", () => {
   test("usuário inexistente deve passar", async () => {
+    const newUser = new User({
+      id: -1,
+      username: "valid",
+      name: "",
+      isAdmin: false,
+      fixedIncome: new Decimal(0),
+      balance: new Decimal(0),
+      email: new Email("grupo@bala.com"),
+      password: Password.fromHash(""),
+    });
+
     mock(PostgresUserRepository).mockImplementation(() => {
       return {
         exists: async (_: string) => false,
-        add: async (_: User) => {},
+        add: async (_: User) => newUser,
       };
     });
 
@@ -26,18 +37,7 @@ describe("testes de cadastro de usuário", () => {
     );
 
     await expect(
-      registerUser.registerUser(
-        new User({
-          id: -1,
-          username: "valid",
-          name: "",
-          isAdmin: false,
-          fixedIncome: new Decimal(0),
-          balance: new Decimal(0),
-          email: new Email("grupo@bala.com"),
-          password: Password.fromHash(""),
-        }),
-      ),
+      registerUser.registerUser(newUser),
     ).resolves.not.toThrow();
   });
 
