@@ -27,8 +27,8 @@ export class PostgresUserRepository implements UserRepository {
     email,
     isAdmin,
     name,
-  }: User): Promise<void> {
-    await PrismaHelper
+  }: User): Promise<User> {
+    const user = await PrismaHelper
       .client
       .financi_user
       .create({
@@ -42,6 +42,17 @@ export class PostgresUserRepository implements UserRepository {
           email: email.value,
         },
       });
+
+    return new User({
+      id: user.id,
+      name: user.name,
+      isAdmin: user.isadmin,
+      balance: user.balance,
+      fixedIncome: user.fixedincome,
+      email: new Email(user.email),
+      password: Password.fromHash(user.password),
+      username: user.username,
+    });
   }
 
   async getByUsername(username: string): Promise<User> {
