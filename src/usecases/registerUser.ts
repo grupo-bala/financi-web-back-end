@@ -2,7 +2,7 @@ import { User } from "../model/user";
 import { UserRepository } from "./interfaces/userRepository";
 
 export class RegisterUser {
-  private readonly userRepository: UserRepository;
+  readonly userRepository: UserRepository;
 
   constructor(userRepository: UserRepository) {
     this.userRepository = userRepository;

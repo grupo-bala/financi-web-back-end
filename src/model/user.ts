@@ -12,7 +12,16 @@ export class User {
   readonly email: Email;
   readonly password: Password;
 
-  constructor({ id, name, username, isAdmin, fixedIncome, balance, email, password }: {
+  constructor({
+    id,
+    name,
+    username,
+    isAdmin,
+    fixedIncome,
+    balance,
+    email,
+    password,
+  }: {
     id: number,
     name: string,
     username: string,

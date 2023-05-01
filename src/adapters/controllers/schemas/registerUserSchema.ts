@@ -5,7 +5,7 @@ export const registerUserSchema = z.object({
   email: z.string(),
   password: z.string(),
   username: z.string(),
-  fixedIncome: z.number()
+  fixedIncome: z.number(),
 });
 
 export type RegisterUserInput = z.infer<typeof registerUserSchema>;

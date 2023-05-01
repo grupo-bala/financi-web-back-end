@@ -1,7 +1,16 @@
-export interface Mocked<T> {
-  mockImplementation: (mockMethods: () => { [Property in keyof T]?: T[Property] }) => void
+/* eslint-disable @typescript-eslint/no-explicit-any */
+type MockedKeys<T> = {
+  [key in keyof T]?: T[key];
 }
 
-export function mock<T>(object: new (...args: any[]) => T): Mocked<T> {
+type MockedMethods<T> = T extends { new (...args: unknown[]): infer R }
+  ? MockedKeys<R> & MockedKeys<T>
+  : MockedKeys<T>;
+
+type Mocked<T> = {
+  mockImplementation: (mockMethods: () => MockedMethods<T>) => void;
+}
+
+export function mock<T>(object: new (...args: any[]) => T) {
   return object as unknown as Mocked<T>;
 }

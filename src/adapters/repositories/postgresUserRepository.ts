@@ -6,20 +6,29 @@ import { PrismaHelper } from "./prismaHelper";
 
 export class PostgresUserRepository implements UserRepository {
   async exists(username: string): Promise<boolean> {
-    const sameIdQtd = await new PrismaHelper()
+    const sameIdQtd = await PrismaHelper
       .client
       .financi_user
       .count({
         where: {
-          username
-        }
+          username,
+        },
       });
-    
-    return sameIdQtd > 0;
+
+    const none = 0;
+    return sameIdQtd > none;
   }
 
-  async add({ username, balance, fixedIncome, password, email, isAdmin, name }: User): Promise<void> {
-    await new PrismaHelper()
+  async add({
+    username,
+    balance,
+    fixedIncome,
+    password,
+    email,
+    isAdmin,
+    name,
+  }: User): Promise<void> {
+    await PrismaHelper
       .client
       .financi_user
       .create({
@@ -31,20 +40,20 @@ export class PostgresUserRepository implements UserRepository {
           fixedincome: fixedIncome,
           password: password.value,
           email: email.value,
-        }
+        },
       });
   }
 
   async getByUsername(username: string): Promise<User> {
-    const user = await new PrismaHelper()
+    const user = await PrismaHelper
       .client
       .financi_user
       .findFirst({
         where: {
-          username
-        }
+          username,
+        },
       });
-    
+
     if (user === null) {
       throw new Error("Usuário não existente");
     }
@@ -57,7 +66,7 @@ export class PostgresUserRepository implements UserRepository {
       balance: user.fixedincome,
       email: new Email(user.email),
       password: Password.fromHash(user.password),
-      isAdmin: user.isadmin
+      isAdmin: user.isadmin,
     });
   }
 }

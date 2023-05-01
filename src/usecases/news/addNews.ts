@@ -2,7 +2,7 @@ import { News } from "../../model/news";
 import { NewsRepository } from "./interfaces/newsRepository";
 
 export class AddNews {
-  private readonly newsRepository: NewsRepository;
+  readonly newsRepository: NewsRepository;
 
   constructor(newsRepository: NewsRepository) {
     this.newsRepository = newsRepository;

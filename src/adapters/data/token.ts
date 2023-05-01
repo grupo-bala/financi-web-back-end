@@ -18,11 +18,18 @@ export class Token {
   }
 
   static encode(username: string, isAdmin: boolean): Token {
-    const oneHour = Math.floor(Date.now() / 1000) + (60 * 60);
+    const millisecondsInSecond = 1000;
+    const oneMinute = 60;
+    const oneHour = oneMinute * oneMinute;
+
+    const expirationTime = Math.floor(
+      Date.now() / millisecondsInSecond,
+    ) + oneHour;
+
     const jwtToken = jwt.sign({
       sub: username,
       adm: isAdmin,
-      exp: oneHour
+      exp: expirationTime,
     }, process.env.SECRET_KEY!);
 
     return new Token(username, isAdmin, jwtToken);

@@ -4,7 +4,7 @@ import { PrismaHelper } from "./prismaHelper";
 
 export class PostgresNewsRepository implements NewsRepository {
   async existsByTitle(title: string): Promise<boolean> {
-    const count = await new PrismaHelper()
+    const count = await PrismaHelper
       .client
       .news
       .count({
@@ -13,11 +13,19 @@ export class PostgresNewsRepository implements NewsRepository {
         },
       });
 
-    return count > 0;
+    const none = 0;
+    return count > none;
   }
 
-  async add({ author, content, imgURL, publishDate, summary, title }: News): Promise<void> {
-    await new PrismaHelper()
+  async add({
+    author,
+    content,
+    imgURL,
+    publishDate,
+    summary,
+    title,
+  }: News): Promise<void> {
+    await PrismaHelper
       .client
       .news
       .create({
@@ -33,11 +41,11 @@ export class PostgresNewsRepository implements NewsRepository {
   }
 
   async getAll(page: number, size: number): Promise<News[]> {
-    const prismaNews = await new PrismaHelper()
+    const prismaNews = await PrismaHelper
       .client
       .news
       .findMany({
-        skip: (page - 1) * size,
+        skip: --page * size,
         take: size,
         orderBy: {
           id: "desc",
@@ -46,22 +54,44 @@ export class PostgresNewsRepository implements NewsRepository {
 
     const news = [];
 
-    for (const { author, content, img_url, publish_date, last_update_date, summary, title, id } of prismaNews) {
-      news.push(new News(author, title, summary, content, img_url, publish_date, last_update_date, id));
+    for (
+      const {
+        author,
+        content,
+        img_url: imgURL,
+        publish_date: publishDate,
+        last_update_date: lastUpdateDate,
+        summary,
+        title,
+        id,
+      } of prismaNews
+    ) {
+      news.push(
+        new News(
+          author,
+          title,
+          summary,
+          content,
+          imgURL,
+          publishDate,
+          lastUpdateDate,
+          id,
+        ),
+      );
     }
 
     return news;
   }
 
   async getSize(): Promise<number> {
-    return await new PrismaHelper()
+    return await PrismaHelper
       .client
       .news
       .count();
   }
 
   async remove(id: number): Promise<void> {
-    await new PrismaHelper()
+    await PrismaHelper
       .client
       .news
       .delete({
@@ -72,7 +102,15 @@ export class PostgresNewsRepository implements NewsRepository {
   }
 
   async get(id: number): Promise<News> {
-    const { author, content, img_url, last_update_date, publish_date, summary, title } = await new PrismaHelper()
+    const {
+      author,
+      content,
+      img_url: imgURL,
+      last_update_date: lastUpdateDate,
+      publish_date: publishDate,
+      summary,
+      title,
+    } = await PrismaHelper
       .client
       .news
       .findUniqueOrThrow({
@@ -85,16 +123,24 @@ export class PostgresNewsRepository implements NewsRepository {
       author,
       title,
       content,
-      imgURL: img_url,
-      lastUpdateDate: last_update_date,
-      publishDate: publish_date,
+      imgURL,
+      lastUpdateDate,
+      publishDate,
       summary,
       id,
     };
   }
 
-  async update({ author, content, imgURL, lastUpdateDate, summary, title, id }: News): Promise<void> {
-    await new PrismaHelper()
+  async update({
+    author,
+    content,
+    imgURL,
+    lastUpdateDate,
+    summary,
+    title,
+    id,
+  }: News): Promise<void> {
+    await PrismaHelper
       .client
       .news
       .update({
@@ -113,7 +159,7 @@ export class PostgresNewsRepository implements NewsRepository {
   }
 
   async existsById(id: number): Promise<boolean> {
-    const count = await new PrismaHelper()
+    const count = await PrismaHelper
       .client
       .news
       .count({
@@ -122,6 +168,7 @@ export class PostgresNewsRepository implements NewsRepository {
         },
       });
 
-    return count > 0;
+    const none = 0;
+    return count > none;
   }
 }

@@ -3,7 +3,7 @@ import { Password } from "../model/data/password";
 import { UserRepository } from "./interfaces/userRepository";
 
 export class LoginUser {
-  private readonly userRepository: UserRepository;
+  readonly userRepository: UserRepository;
 
   constructor(userRepository: UserRepository) {
     this.userRepository = userRepository;

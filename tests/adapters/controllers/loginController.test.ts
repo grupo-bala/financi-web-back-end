@@ -3,6 +3,7 @@ import { registerHandlers } from "../../../src/server/plugins/registerHandlers";
 import { LoginUser } from "../../../src/usecases/loginUser";
 import { Token } from "../../../src/adapters/data/token";
 import { Password } from "../../../src/model/data/password";
+import { StatusCodes } from "http-status-codes";
 import { mock } from "../../util";
 
 const server = Fastify();
@@ -13,27 +14,30 @@ describe("testes do controller de login", () => {
     server.register(registerHandlers);
   });
 
-  test("caso de uso sem erros deve retornar status code 200 e um token não vazio", async () => {
-    mock(LoginUser).mockImplementation(() => {
-      return {
-        loginUser: async (_: string, __: Password) => Token.encode("test", false),
-      }
-    });
+  test(
+    "caso de uso sem erros deve retornar status code 200 e um token não vazio",
+    async () => {
+      mock(LoginUser).mockImplementation(() => {
+        return {
+          loginUser: async (_: string, __: Password) => Token.encode("", false),
+        };
+      });
 
-    const res = await server.inject({
-      method: "GET",
-      url: `http://localhost/login`,
-      query: {
-        username: "test",
-        password: "test"
-      }
-    });
+      const res = await server.inject({
+        method: "GET",
+        url: "http://localhost/login",
+        query: {
+          username: "test",
+          password: "test",
+        },
+      });
 
-    const body = await JSON.parse(res.body);
+      const body = await JSON.parse(res.body);
 
-    expect(res.statusCode).toBe(200);
-    expect(body.msg).not.toBe("");
-  });
+      expect(res.statusCode).toBe(StatusCodes.OK);
+      expect(body.msg).not.toBe("");
+    },
+  );
 
   test("erro no caso de uso deve retornar status code 401", async () => {
     mock(LoginUser).mockImplementation(() => {
@@ -41,18 +45,18 @@ describe("testes do controller de login", () => {
         loginUser: async (_: string, __: Password) => {
           throw new Error("");
         },
-      }
+      };
     });
 
     const res = await server.inject({
       method: "GET",
-      url: `http://localhost/login`,
+      url: "http://localhost/login",
       query: {
         username: "test",
-        password: "test"
-      }
+        password: "test",
+      },
     });
 
-    expect(res.statusCode).toBe(401);
+    expect(res.statusCode).toBe(StatusCodes.UNAUTHORIZED);
   });
 });

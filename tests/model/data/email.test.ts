@@ -12,4 +12,4 @@ describe("testes do email", () => {
   test("email grupo.com não é válido", () => {
     expect(() => new Email("grupo.com")).toThrow();
   });
-})
+});
