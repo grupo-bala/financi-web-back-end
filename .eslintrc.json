@@ -19,8 +19,12 @@
   "rules": {
     "no-template-curly-in-string": "error",
     "no-unreachable": "error",
-    "camelcase": "error",
-    "class-methods-use-this": "error",
+    "camelcase": [
+      "error",
+      {
+        "properties": "never"
+      }
+    ],
     "curly": "error",
     "dot-notation": "error",
     "eqeqeq": "error",
@@ -89,6 +93,12 @@
       "error",
       "always"
     ],
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ]
   }
 }
