@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.66% </span>
+                <span class="strong">38.46% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/12</span>
+                <span class='fraction'>5/13</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">41.66% </span>
+                <span class="strong">38.46% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/12</span>
+                <span class='fraction'>5/13</span>
             </div>
         
             
@@ -125,7 +125,16 @@
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -143,6 +152,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -195,20 +213,29 @@ import { PrismaHelper } from "./prismaHelper";
 &nbsp;
 export class PostgresUserRepository implements UserRepository {
   async <span class="fstat-no" title="function not covered" >exists(</span>username: string): Promise&lt;boolean&gt; {
-    const sameIdQtd = <span class="cstat-no" title="statement not covered" >await new PrismaHelper()</span>
+    const sameIdQtd = <span class="cstat-no" title="statement not covered" >await PrismaHelper</span>
       .client
       .financi_user
       .count({
         where: {
-          username
-        }
+          username,
+        },
       });
-    
-<span class="cstat-no" title="statement not covered" >    return sameIdQtd &gt; 0;</span>
+&nbsp;
+    const none = <span class="cstat-no" title="statement not covered" >0;</span>
+<span class="cstat-no" title="statement not covered" >    return sameIdQtd &gt; none;</span>
   }
 &nbsp;
-  async <span class="fstat-no" title="function not covered" >add(</span>{ username, balance, fixedIncome, password, email, isAdmin, name }: User): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >    await new PrismaHelper()</span>
+  async <span class="fstat-no" title="function not covered" >add(</span>{
+    username,
+    balance,
+    fixedIncome,
+    password,
+    email,
+    isAdmin,
+    name,
+  }: User): Promise&lt;void&gt; {
+<span class="cstat-no" title="statement not covered" >    await PrismaHelper</span>
       .client
       .financi_user
       .create({
@@ -220,20 +247,20 @@ export class PostgresUserRepository implements UserRepository {
           fixedincome: fixedIncome,
           password: password.value,
           email: email.value,
-        }
+        },
       });
   }
 &nbsp;
   async <span class="fstat-no" title="function not covered" >getByUsername(</span>username: string): Promise&lt;User&gt; {
-    const user = <span class="cstat-no" title="statement not covered" >await new PrismaHelper()</span>
+    const user = <span class="cstat-no" title="statement not covered" >await PrismaHelper</span>
       .client
       .financi_user
       .findFirst({
         where: {
-          username
-        }
+          username,
+        },
       });
-    
+&nbsp;
 <span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (user === null) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new Error("Usuário não existente");</span>
     }
@@ -246,7 +273,7 @@ export class PostgresUserRepository implements UserRepository {
       balance: user.fixedincome,
       email: new Email(user.email),
       password: Password.fromHash(user.password),
-      isAdmin: user.isadmin
+      isAdmin: user.isadmin,
     });
   }
 }</pre></td></tr></table></pre>
@@ -256,7 +283,7 @@ export class PostgresUserRepository implements UserRepository {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-30T20:49:08.769Z
+                at 2023-05-01T03:45:54.087Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
