@@ -11,6 +11,7 @@ import {
 import { registerRemoveNewsRoute } from "../routes/news/removeNews";
 import { registerGetNewsRoute } from "../routes/news/getNews";
 import { registerUpdateNewsRoute } from "../routes/news/updateNews";
+import cors from "@fastify/cors";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   registerLoginRoute(fastify);
@@ -44,6 +45,10 @@ export async function registerHandlers(fastify: FastifyInstance) {
   for (const schema of schemas) {
     fastify.addSchema(schema);
   }
+
+  fastify.register(cors, {
+    origin: "*",
+  });
 
   fastify.register(registerFreeRoutes);
   fastify.register(registerAuthRoutes);
