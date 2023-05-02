@@ -15,11 +15,19 @@ export class GetAllNewsPreviewController {
   async handle(request: FastifyRequest, reply: FastifyReply) {
     const { page, size } = request.query as GetAllNewsPreviewInput;
 
-    const result = await this.useCase.getAll(page, size);
+    try {
+      const result = await this.useCase.getAll(page, size);
 
-    await reply.status(StatusCodes.OK).send({
-      data: result.previews,
-      pages: result.howManyPages,
-    });
+      await reply.status(StatusCodes.OK).send({
+        data: result.previews,
+        pages: result.howManyPages,
+      });
+    } catch (e) {
+      const error = e as Error;
+
+      await reply
+        .status(StatusCodes.BAD_REQUEST)
+        .send({ msg: error.message });
+    }
   }
 }
