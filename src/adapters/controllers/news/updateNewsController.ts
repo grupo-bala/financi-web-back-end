@@ -41,8 +41,14 @@ export class UpdateNewsController {
         .send();
     } catch (e) {
       const error = e as Error;
+      let statusCode = StatusCodes.NOT_FOUND;
+
+      if (error.message === "Uma notícia com esse nome já existe") {
+        statusCode = StatusCodes.CONFLICT;
+      }
+
       await reply
-        .status(StatusCodes.NOT_FOUND)
+        .status(statusCode)
         .send({ msg: error.message });
     }
   }
