@@ -24,10 +24,6 @@ async function registerAdminRoutes(fastify: FastifyInstance) {
   fastify.addHook("preHandler", validateJWT);
   fastify.addHook("preHandler", verifyIsAdmin);
 
-  fastify.get("/admin", async (request, reply) => {
-    await reply.send("Ok");
-  });
-
   registerAddNewsRoute(fastify);
   registerRemoveNewsRoute(fastify);
   registerUpdateNewsRoute(fastify);
@@ -35,10 +31,6 @@ async function registerAdminRoutes(fastify: FastifyInstance) {
 
 async function registerAuthRoutes(fastify: FastifyInstance) {
   fastify.addHook("preHandler", validateJWT);
-
-  fastify.get("/dev", async (request, reply) => {
-    await reply.send("Ok");
-  });
 }
 
 export async function registerHandlers(fastify: FastifyInstance) {
