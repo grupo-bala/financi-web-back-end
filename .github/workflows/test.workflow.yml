@@ -27,6 +27,8 @@ jobs:
         run: npm test -- --collectCoverage
         env:
           SECRET_KEY: test
+          PORT: 8080
+          DATABASE_URL: none
       
       - name: Deploy coverage
         uses: JamesIves/github-pages-deploy-action@v4
