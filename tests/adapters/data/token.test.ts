@@ -1,9 +1,16 @@
 import { Token } from "../../../src/adapters/data/token";
+import { EnviromentVars } from "../../../src/server/config/enviromentVars";
 
-const testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\
-.eyJzdWIiOiJhZG0iLCJhZG0iOnRydWUsImV4cCI6MTY4MzA1NDUwOC\
-wiaWF0IjoxNjgzMDUwOTA4fQ.Lr1xtG7K0zYu-p7UEjx0Zd8zqfQlQk\
-PDYm5kWXXKQYY";
+const testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.\
+eyJzdWIiOiJhZG0iLCJhZG0iOnRydWUsImV4cCI6OTk5OTk5OTk5OSwiaWF0IjoxNjgzMDY5NDIxfQ.\
+A4nYPOlqWmqnPfRRgA3M6-d82bIKiiy-T0AbOwILIsI";
+
+jest.mock("../../../src/server/config/enviromentVars.ts");
+Object.defineProperty(
+  EnviromentVars,
+  "vars",
+  { get: () => ({ SECRET_KEY: "test" }) },
+);
 
 describe("testes do token jwt", () => {
   test("token deve manter o mesmo username e autoridade e durar 1 hora", () => {
