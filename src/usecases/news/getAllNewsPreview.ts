@@ -12,6 +12,14 @@ export class GetAllNewsPreview {
     previews: NewsPreview[],
     howManyPages: number
   }> {
+    const negativeOrZero = 0;
+
+    if (page <= negativeOrZero) {
+      throw new Error("A página deve ser um número positivo maior que zero");
+    } else if (size <= negativeOrZero) {
+      throw new Error("O tamanho deve ser um número positivo maior que zero");
+    }
+
     const repositorySize = await this.newsRepository.getSize();
     const empty = 0;
 
