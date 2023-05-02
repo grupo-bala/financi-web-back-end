@@ -1,21 +1,21 @@
 import { FastifyInstance } from "fastify";
 import {
-  GetAllNewsController,
-} from "../../../adapters/controllers/news/getAllNewsController";
+  GetAllNewsPreviewController,
+} from "../../../adapters/controllers/news/getAllNewsPreviewController";
 import { $ref } from "../../../adapters/controllers/schemas/buildSchemas";
-import { GetAllNews } from "../../../usecases/news/getAllNews";
+import { GetAllNewsPreview } from "../../../usecases/news/getAllNewsPreview";
 import {
   PostgresNewsRepository,
 } from "../../../adapters/repositories/postgresNewsRepository";
 
-export async function registerGetAllNewsRoute(fastify: FastifyInstance) {
-  fastify.get("/get-all-news", {
+export async function registerGetAllNewsPreviewRoute(fastify: FastifyInstance) {
+  fastify.get("/get-all-news-preview", {
     schema: {
       querystring: $ref("getAllNewsSchema"),
     },
   }, async (request, response) => {
-    await new GetAllNewsController(
-      new GetAllNews(
+    await new GetAllNewsPreviewController(
+      new GetAllNewsPreview(
         new PostgresNewsRepository(),
       ),
     ).handle(request, response);

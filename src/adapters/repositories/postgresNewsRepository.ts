@@ -1,4 +1,5 @@
 import { News } from "../../model/news";
+import { NewsPreview } from "../../model/newsPreview";
 import { NewsRepository } from "../../usecases/news/interfaces/newsRepository";
 import { PrismaHelper } from "./prismaHelper";
 
@@ -40,7 +41,7 @@ export class PostgresNewsRepository implements NewsRepository {
       });
   }
 
-  async getAll(page: number, size: number): Promise<News[]> {
+  async getAllPreviews(page: number, size: number): Promise<NewsPreview[]> {
     const prismaNews = await PrismaHelper
       .client
       .news
@@ -52,35 +53,22 @@ export class PostgresNewsRepository implements NewsRepository {
         },
       });
 
-    const news = [];
+    const newsPreview = [];
 
     for (
       const {
-        author,
-        content,
         img_url: imgURL,
         publish_date: publishDate,
-        last_update_date: lastUpdateDate,
-        summary,
         title,
         id,
       } of prismaNews
     ) {
-      news.push(
-        new News(
-          author,
-          title,
-          summary,
-          content,
-          imgURL,
-          publishDate,
-          lastUpdateDate,
-          id,
-        ),
+      newsPreview.push(
+        new NewsPreview(id, title, imgURL, publishDate),
       );
     }
 
-    return news;
+    return newsPreview;
   }
 
   async getSize(): Promise<number> {

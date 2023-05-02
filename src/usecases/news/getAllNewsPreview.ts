@@ -1,7 +1,7 @@
-import { News } from "../../model/news";
+import { NewsPreview } from "../../model/newsPreview";
 import { NewsRepository } from "./interfaces/newsRepository";
 
-export class GetAllNews {
+export class GetAllNewsPreview {
   readonly newsRepository: NewsRepository;
 
   constructor(newsRepository: NewsRepository) {
@@ -9,7 +9,7 @@ export class GetAllNews {
   }
 
   async getAll(page: number, size: number): Promise<{
-    news: News[],
+    previews: NewsPreview[],
     howManyPages: number
   }> {
     const repositorySize = await this.newsRepository.getSize();
@@ -17,16 +17,16 @@ export class GetAllNews {
 
     if (repositorySize === empty) {
       return {
-        news: [],
+        previews: [],
         howManyPages: 0,
       };
     }
 
-    const repositoryNews = await this.newsRepository.getAll(page, size);
+    const repositoryNews = await this.newsRepository.getAllPreviews(page, size);
 
     return {
-      news: repositoryNews,
-      howManyPages: repositorySize / size,
+      previews: repositoryNews,
+      howManyPages: Math.ceil(repositorySize / size),
     };
   }
 }
