@@ -26,7 +26,7 @@ describe("testes do repositório de usuários", () => {
     ).toBeTruthy();
   });
 
-  test("adicionar usuário deve passar", async () => {
+  test("adicionar usuário não existente deve passar", async () => {
     const pg = new PostgresUserRepository();
     const returnUser: financiUser = {
       name: "test",
@@ -60,5 +60,66 @@ describe("testes do repositório de usuários", () => {
     expect(returnedUser.username).toBe(returnUser.username);
     expect(returnedUser.email.value).toBe(returnUser.email);
     expect(returnedUser.password.value).toBe(returnUser.password);
+  });
+
+  test("adicionar usuário extistente deve falhar", async () => {
+    const pg = new PostgresUserRepository();
+    const newUser = new User({
+      name: "test",
+      username: "test",
+      email: new Email("test@test.com"),
+      balance: new Decimal(0),
+      fixedIncome: new Decimal(0),
+      id: -1,
+      isAdmin: false,
+      password: Password.fromHash(""),
+    });
+
+    prismaMock.financi_user.create.mockImplementation(
+      (_: any) => {
+        throw new Error();
+      },
+    );
+
+    await expect(pg.add(newUser)).rejects.toThrow();
+  });
+
+  test("buscar usuário existente deve passar", async () => {
+    const pg = new PostgresUserRepository();
+    const returnUser: financiUser = {
+      name: "test",
+      username: "test",
+      email: "test@test.com",
+      balance: new Decimal(0),
+      fixedincome: new Decimal(0),
+      id: -1,
+      isadmin: false,
+      password: "test",
+    };
+
+    prismaMock.financi_user.findFirst.mockImplementation(
+      (_: any) => returnUser as any,
+    );
+
+    const returnedUser = await pg.getByUsername("test");
+
+    expect(returnedUser.name).toBe(returnUser.name);
+    expect(returnedUser.username).toBe(returnUser.username);
+    expect(returnedUser.email.value).toBe(returnUser.email);
+    expect(returnedUser.password.value).toBe(returnUser.password);
+  });
+
+  test("buscar usuário inexistente deve falhar", async () => {
+    const pg = new PostgresUserRepository();
+
+    prismaMock.financi_user.findFirst.mockImplementation(
+      (_: any) => {
+        throw new Error("");
+      },
+    );
+
+    expect(async () => {
+      await pg.getByUsername("teste");
+    }).rejects.toThrow();
   });
 });
