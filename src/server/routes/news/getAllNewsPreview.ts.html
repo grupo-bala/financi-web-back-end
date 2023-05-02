@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/adapters/controllers/news/getAllNewsController.ts</title>
+    <title>Code coverage report for src/server/routes/news/getAllNewsPreview.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/adapters/controllers/news</a> getAllNewsController.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/server/routes/news</a> getAllNewsPreview.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -89,46 +89,46 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FastifyReply, FastifyRequest } from "fastify";
-import { StatusCodes } from "http-status-codes";
-import { GetAllNews } from "../../../usecases/news/getAllNews";
-import { GetAllNewsInput } from "../schemas/news/getAllNewsSchema";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FastifyInstance } from "fastify";
+import {
+  GetAllNewsPreviewController,
+} from "../../../adapters/controllers/news/getAllNewsPreviewController";
+import { $ref } from "../../../adapters/controllers/schemas/buildSchemas";
+import { GetAllNewsPreview } from "../../../usecases/news/getAllNewsPreview";
+import {
+  PostgresNewsRepository,
+} from "../../../adapters/repositories/postgresNewsRepository";
 &nbsp;
-export class GetAllNewsController {
-  readonly useCase: GetAllNews;
-&nbsp;
-<span class="fstat-no" title="function not covered" >  constructor(u</span>seCase: GetAllNews) {
-<span class="cstat-no" title="statement not covered" >    this.useCase = useCase;</span>
-  }
-&nbsp;
-  async <span class="fstat-no" title="function not covered" >handle(</span>request: FastifyRequest, reply: FastifyReply) {
-    const { page, size } = <span class="cstat-no" title="statement not covered" >request.query as GetAllNewsInput;</span>
-&nbsp;
-    const news = <span class="cstat-no" title="statement not covered" >await this.useCase.getAll(page, size);</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    await reply.status(StatusCodes.OK).send({</span>
-      data: news.news,
-      pages: news.howManyPages,
-    });
-  }
+export async function registerGetAllNewsPreviewRoute(fastify: FastifyInstance) {
+  fastify.get("/get-all-news-preview", {
+    schema: {
+      querystring: $ref("getAllNewsSchema"),
+    },
+  }, <span class="fstat-no" title="function not covered" >async (r</span>equest, response) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
+<span class="cstat-no" title="statement not covered" >    await new GetAllNewsPreviewController(</span>
+      new GetAllNewsPreview(
+        new PostgresNewsRepository(),
+      ),
+    ).handle(request, response);
+  });
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -136,7 +136,7 @@ export class GetAllNewsController {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-01T22:38:56.692Z
+                at 2023-05-02T01:50:54.202Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
