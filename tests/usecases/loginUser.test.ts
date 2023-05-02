@@ -31,9 +31,16 @@ describe("testes de login de usuário", () => {
   test("senha incorreta deve falhar", async () => {
     mock(PostgresUserRepository).mockImplementation(() => {
       return {
-        getByUsername: async (_: string) => {
-          throw new Error("");
-        },
+        getByUsername: async (_: string) => new User({
+          id: -1,
+          name: "",
+          username: "",
+          isAdmin: false,
+          fixedIncome: new Decimal(0),
+          balance: new Decimal(0),
+          email: new Email("test@test.com"),
+          password: Password.fromHash(""),
+        }),
       };
     });
 
