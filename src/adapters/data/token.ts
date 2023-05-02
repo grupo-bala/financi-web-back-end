@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { EnviromentVars } from "../../server/config/enviromentVars";
 
 type jwt = {
   sub: string,
@@ -30,14 +31,14 @@ export class Token {
       sub: username,
       adm: isAdmin,
       exp: expirationTime,
-    }, process.env.SECRET_KEY!);
+    }, EnviromentVars.vars.SECRET_KEY);
 
     return new Token(username, isAdmin, jwtToken);
   }
 
   static decode(token: string): Token {
     try {
-      const payload = jwt.verify(token, process.env.SECRET_KEY!) as jwt;
+      const payload = jwt.verify(token, EnviromentVars.vars.SECRET_KEY) as jwt;
       return new Token(payload.sub, payload.adm, token);
     } catch (error) {
       throw new Error("Token inválido");

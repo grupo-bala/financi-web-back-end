@@ -1,8 +1,10 @@
 import { config } from "dotenv";
 import Fastify from "fastify";
 import { registerHandlers } from "./server/plugins/registerHandlers";
+import { EnviromentVars } from "./server/config/enviromentVars";
 
 config();
+EnviromentVars.validateVars();
 
 const server = Fastify({
   logger: {
@@ -16,7 +18,7 @@ const server = Fastify({
 server.register(registerHandlers);
 
 server.listen(
-  { port: Number(process.env.PORT!),
+  { port: Number(EnviromentVars.vars.PORT),
     host: "0.0.0.0",
   }, (err, addr) => {
     if (err) {
