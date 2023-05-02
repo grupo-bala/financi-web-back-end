@@ -1,8 +1,9 @@
 import { Token } from "../../../src/adapters/data/token";
 
-const testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG0\
-iLCJhZG0iOnRydWUsImV4cCI6MTY4MzA1MjY3NiwiaWF0IjoxNjgzMDQ\
-5MDc2fQ.gP7hpJxWc84mPAA2lpBdcgmFdmgUOue-vVG-cLT_Owg";
+const testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\
+.eyJzdWIiOiJhZG0iLCJhZG0iOnRydWUsImV4cCI6MTY4MzA1NDUwOC\
+wiaWF0IjoxNjgzMDUwOTA4fQ.Lr1xtG7K0zYu-p7UEjx0Zd8zqfQlQk\
+PDYm5kWXXKQYY";
 
 describe("testes do token jwt", () => {
   test("token deve manter o mesmo username e autoridade e durar 1 hora", () => {
