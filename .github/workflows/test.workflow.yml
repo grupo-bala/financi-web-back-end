@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup for tests
-        uses: ./.github/workflows/setup.worflow.yml
+        uses: ./.github/workflows/setup.workflow.yml
       
       - name: Run tests
         run: npm test -- --collectCoverage
