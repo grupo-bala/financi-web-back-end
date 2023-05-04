@@ -7,9 +7,46 @@ on:
 
 jobs:
   lint:
-    name: Run Eslint
-    uses: ./.github/workflows/lint.workflow.yml
+    name: Run linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup for lint
+        uses: actions/checkout@v3
+      
+      - name: Install node
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm i
+      
+      - name: Run eslint
+        run: npm run lint
   
   test:
     name: Run tests
-    uses: ./.github/workflows/test.workflow.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup for tests
+        uses: actions/checkout@v3
+      
+      - name: Install node
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm i
+      
+      - name: Run tests
+        run: npm test -- --collectCoverage
+        env:
+          SECRET_KEY: test
+          PORT: 8080
+          DATABASE_URL: none
+
+      - name: Deploy coverage
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: coverage/lcov-report
