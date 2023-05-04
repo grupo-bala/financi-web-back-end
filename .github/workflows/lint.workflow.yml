@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup for lint
-        uses: grupo-bala/.github/workflows/setup.worflow.yml
+        uses: ./.github/workflows/setup.worflow.yml
       
       - name: Run eslint
         run: npm run lint

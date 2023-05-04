@@ -8,8 +8,8 @@ on:
 jobs:
   lint:
     name: Run Eslint
-    uses: grupo-bala/.github/workflows/lint.workflow.yml
+    uses: ./.github/workflows/lint.workflow.yml
   
   test:
     name: Run tests
-    uses: grupo-bala/.github/workflows/test.workflow.yml
+    uses: ./.github/workflows/test.workflow.yml
