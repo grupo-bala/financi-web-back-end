@@ -1,0 +1,15 @@
+name: Lint workflow
+
+on:
+  workflow_call
+
+jobs:
+  test:
+    name: Run linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup for lint
+        uses: grupo-bala/.github/workflows/setup.worflow.yml
+      
+      - name: Run eslint
+        run: npm run lint
