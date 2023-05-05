@@ -21,9 +21,9 @@ describe("testes do repositório de usuários", () => {
       (_args: any) => 1 as any,
     );
 
-    expect(
+    await expect(
       pg.exists("teste"),
-    ).toBeTruthy();
+    ).resolves.toBeTruthy();
   });
 
   test("adicionar usuário não existente deve passar", async () => {
@@ -118,8 +118,8 @@ describe("testes do repositório de usuários", () => {
       },
     );
 
-    expect(async () => {
-      await pg.getByUsername("teste");
-    }).rejects.toThrow();
+    await expect(
+      pg.getByUsername("teste"),
+    ).rejects.toThrow();
   });
 });
