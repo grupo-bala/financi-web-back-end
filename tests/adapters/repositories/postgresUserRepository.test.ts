@@ -113,9 +113,7 @@ describe("testes do repositório de usuários", () => {
     const pg = new PostgresUserRepository();
 
     prismaMock.financi_user.findFirst.mockImplementation(
-      (_: any) => {
-        throw new Error("");
-      },
+      (_: any) => null as any,
     );
 
     await expect(
