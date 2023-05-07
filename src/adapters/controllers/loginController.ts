@@ -21,7 +21,11 @@ export class LoginController {
       );
 
       await reply
-        .send({ msg: jwt.encoded });
+        .setCookie("financi-jwt", jwt.encoded, {
+          httpOnly: true,
+          expires: new Date(jwt.expirationTime),
+        })
+        .send();
     } catch (e) {
       const error = e as Error;
       await reply
