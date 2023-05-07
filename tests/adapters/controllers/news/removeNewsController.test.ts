@@ -30,8 +30,8 @@ describe("testes do controller de remover uma notícia", () => {
     const response = await server.inject({
       method: "POST",
       url: "http://localhost/remove-news",
-      headers: {
-        Authorization: `Bearer ${adminToken.encoded}`,
+      cookies: {
+        "financi-jwt": adminToken.encoded,
       },
       payload: {
         id: "-1",
@@ -54,8 +54,8 @@ describe("testes do controller de remover uma notícia", () => {
     const response = await server.inject({
       method: "POST",
       url: "http://localhost/remove-news",
-      headers: {
-        Authorization: `Bearer ${adminToken.encoded}`,
+      cookies: {
+        "financi-jwt": adminToken.encoded,
       },
       payload: {
         id: "1",

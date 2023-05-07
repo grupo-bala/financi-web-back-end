@@ -13,7 +13,7 @@ Object.defineProperty(
 describe("testes do hook de autenticação", () => {
   test("cabeçalho sem token deve falhar", async () => {
     const request = {
-      headers: {},
+      cookies: {},
     } as any;
 
     const response = {
@@ -35,8 +35,8 @@ describe("testes do hook de autenticação", () => {
 
   test("token inválido deve falhar", async () => {
     const request = {
-      headers: {
-        authorization: "invalid",
+      cookies: {
+        "financi-jwt": "invalid",
       },
     } as any;
 

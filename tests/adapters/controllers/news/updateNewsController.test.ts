@@ -33,8 +33,8 @@ describe("testes do controller de atualizar uma notícia", () => {
       const response = await server.inject({
         method: "POST",
         url: "http://localhost/update-news",
-        headers: {
-          Authorization: `Bearer ${adminToken.encoded}`,
+        cookies: {
+          "financi-jwt": adminToken.encoded,
         },
         payload: {
           author: "",
@@ -68,8 +68,8 @@ describe("testes do controller de atualizar uma notícia", () => {
       const response = await server.inject({
         method: "POST",
         url: "http://localhost/update-news",
-        headers: {
-          Authorization: `Bearer ${adminToken.encoded}`,
+        cookies: {
+          "financi-jwt": adminToken.encoded,
         },
         payload: {
           author: "",
@@ -99,8 +99,8 @@ describe("testes do controller de atualizar uma notícia", () => {
     const response = await server.inject({
       method: "POST",
       url: "http://localhost/update-news",
-      headers: {
-        Authorization: `Bearer ${adminToken.encoded}`,
+      cookies: {
+        "financi-jwt": adminToken.encoded,
       },
       payload: {
         author: "",

@@ -32,10 +32,7 @@ describe("testes do controller de login", () => {
         },
       });
 
-      const body = await JSON.parse(res.body);
-
       expect(res.statusCode).toBe(StatusCodes.OK);
-      expect(body.msg).not.toBe("");
     },
   );
 

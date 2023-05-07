@@ -33,8 +33,8 @@ describe("testes do controller de adicionar notícia", () => {
       const response = await server.inject({
         method: "POST",
         url: "http://localhost/add-news",
-        headers: {
-          Authorization: `Bearer ${adminToken.encoded}`,
+        cookies: {
+          "financi-jwt": adminToken.encoded,
         },
         payload: {
           author: "test",
@@ -65,8 +65,8 @@ describe("testes do controller de adicionar notícia", () => {
       const response = await server.inject({
         method: "POST",
         url: "http://localhost/add-news",
-        headers: {
-          Authorization: `Bearer ${adminToken.encoded}`,
+        cookies: {
+          "financi-jwt": adminToken.encoded,
         },
         payload: {
           author: "test",

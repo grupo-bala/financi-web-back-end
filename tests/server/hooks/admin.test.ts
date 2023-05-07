@@ -15,8 +15,8 @@ describe("testes do hook de admin", () => {
   test("token sem autorização deve falhar", async () => {
     const token = Token.encode("test", false);
     const request = {
-      headers: {
-        authorization: `Bearer ${token.encoded}`,
+      cookies: {
+        "financi-jwt": token.encoded,
       },
     } as any;
 
@@ -40,8 +40,8 @@ describe("testes do hook de admin", () => {
   test("token autorizado deve passar", async () => {
     const token = Token.encode("test", true);
     const request = {
-      headers: {
-        authorization: `Bearer ${token.encoded}`,
+      cookies: {
+        "financi-jwt": token.encoded,
       },
     } as any;
 
