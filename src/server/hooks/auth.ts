@@ -6,7 +6,8 @@ export async function validateJWT(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const jwt = request.headers.authorization;
+  const jwt = request.cookies["financi-jwt"];
+
   if (!jwt) {
     return await reply
       .status(StatusCodes.UNAUTHORIZED)
@@ -14,7 +15,7 @@ export async function validateJWT(
   }
 
   try {
-    Token.decode(jwt.replace("Bearer ", ""));
+    Token.decode(jwt);
   } catch (error) {
     return await reply
       .status(StatusCodes.UNAUTHORIZED)

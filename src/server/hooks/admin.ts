@@ -6,9 +6,9 @@ export async function verifyIsAdmin(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const jwt = request.headers.authorization!;
+  const jwt = request.cookies["financi-jwt"]!;
 
-  if (!Token.decode(jwt.replace("Bearer ", "")).isAdmin) {
+  if (!Token.decode(jwt).isAdmin) {
     return await reply
       .status(StatusCodes.UNAUTHORIZED)
       .send({ msg: "Usuário não autorizado" });
