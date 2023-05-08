@@ -1,4 +1,3 @@
-import { buildJsonSchemas } from "fastify-zod";
 import { registerUserSchema } from "./registerUserSchema";
 import { loginUserSchema } from "./loginUserSchema";
 import { addNewsSchema } from "./news/addNewsSchema";
@@ -7,7 +6,7 @@ import { removeNewsSchema } from "./news/removeNewsSchema";
 import { getNewsSchema } from "./news/getNewsSchema";
 import { updateNewsSchema } from "./news/updateNewsSchema";
 
-export const { schemas, $ref } = buildJsonSchemas({
+export const schemas = {
   registerUserSchema,
   loginUserSchema,
   addNewsSchema,
@@ -15,4 +14,4 @@ export const { schemas, $ref } = buildJsonSchemas({
   removeNewsSchema,
   getNewsSchema,
   updateNewsSchema,
-});
+};
