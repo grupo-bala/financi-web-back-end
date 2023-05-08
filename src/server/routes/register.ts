@@ -1,5 +1,4 @@
 import { FastifyInstance } from "fastify";
-import { $ref } from "../../adapters/controllers/schemas/buildSchemas";
 import {
   RegisterController,
 } from "../../adapters/controllers/registerController";
@@ -7,17 +6,20 @@ import { RegisterUser } from "../../usecases/registerUser";
 import {
   PostgresUserRepository,
 } from "../../adapters/repositories/postgresUserRepository";
+import { ZodTypeProvider } from "fastify-type-provider-zod";
+import { schemas } from "../../adapters/controllers/schemas/schemas";
 
 export async function registerRegisterRoute(fastify: FastifyInstance) {
-  fastify.post("/register", {
+  fastify.withTypeProvider<ZodTypeProvider>().post("/register", {
     schema: {
-      body: $ref("registerUserSchema"),
+      body: schemas.registerUserSchema,
+      tags: ["user"],
     },
-  }, async (request, response) => {
+  }, async (req, res) => {
     await new RegisterController(
       new RegisterUser(
         new PostgresUserRepository(),
       ),
-    ).handle(request, response);
+    ).handle(req, res);
   });
 }

@@ -1,5 +1,4 @@
 import { FastifyInstance } from "fastify";
-import { $ref } from "../../../adapters/controllers/schemas/buildSchemas";
 import {
   UpdateNewsController,
 } from "../../../adapters/controllers/news/updateNewsController";
@@ -7,17 +6,20 @@ import { UpdateNews } from "../../../usecases/news/updateNews";
 import {
   PostgresNewsRepository,
 } from "../../../adapters/repositories/postgresNewsRepository";
+import { ZodTypeProvider } from "fastify-type-provider-zod";
+import { schemas } from "../../../adapters/controllers/schemas/schemas";
 
 export async function registerUpdateNewsRoute(fastify: FastifyInstance) {
-  fastify.post("/update-news", {
+  fastify.withTypeProvider<ZodTypeProvider>().put("/update-news", {
     schema: {
-      body: $ref("updateNewsSchema"),
+      body: schemas.updateNewsSchema,
+      tags: ["news"],
     },
-  }, async (request, response) => {
+  }, async (req, res) => {
     await new UpdateNewsController(
       new UpdateNews(
         new PostgresNewsRepository(),
       ),
-    ).handle(request, response);
+    ).handle(req, res);
   });
 }
