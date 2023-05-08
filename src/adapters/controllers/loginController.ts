@@ -12,7 +12,7 @@ export class LoginController {
   }
 
   async handle(request: FastifyRequest, reply: FastifyReply) {
-    const query = request.query as LoginUserInput;
+    const query = request.body as LoginUserInput;
 
     try {
       const jwt = await this.useCase.loginUser(
