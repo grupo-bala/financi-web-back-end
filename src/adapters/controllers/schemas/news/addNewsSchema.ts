@@ -5,7 +5,7 @@ export const addNewsSchema = z.object({
   title: z.string(),
   summary: z.string(),
   content: z.string(),
-  publishDate: z.date(),
+  publishDate: z.coerce.date(),
   imgURL: z.string(),
 });
 

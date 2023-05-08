@@ -1,12 +1,12 @@
 import { z } from "zod";
 
 export const updateNewsSchema = z.object({
-  id: z.number(),
+  id: z.coerce.number(),
   author: z.string(),
   title: z.string(),
   summary: z.string(),
   content: z.string(),
-  updateDate: z.date(),
+  updateDate: z.coerce.date(),
   imgURL: z.string(),
 });
 
