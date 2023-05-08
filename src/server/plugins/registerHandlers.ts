@@ -2,7 +2,6 @@ import { FastifyInstance } from "fastify";
 import { registerLoginRoute } from "../routes/login";
 import { registerRegisterRoute } from "../routes/register";
 import { registerAddNewsRoute } from "../routes/news/addNews";
-import { schemas } from "../../adapters/controllers/schemas/buildSchemas";
 import { validateJWT } from "../hooks/auth";
 import { verifyIsAdmin } from "../hooks/admin";
 import {
@@ -13,6 +12,16 @@ import { registerGetNewsRoute } from "../routes/news/getNews";
 import { registerUpdateNewsRoute } from "../routes/news/updateNews";
 import cors from "@fastify/cors";
 import cookie from "@fastify/cookie";
+import {
+  jsonSchemaTransform,
+  serializerCompiler,
+  validatorCompiler,
+} from "fastify-type-provider-zod";
+import swagger from "@fastify/swagger";
+import swaggerUi from "@fastify/swagger-ui";
+import { EnviromentVars } from "../config/enviromentVars";
+import { ZodError } from "zod";
+import { StatusCodes } from "http-status-codes";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   registerLoginRoute(fastify);
@@ -35,9 +44,42 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
 }
 
 export async function registerHandlers(fastify: FastifyInstance) {
-  for (const schema of schemas) {
-    fastify.addSchema(schema);
-  }
+  fastify.setValidatorCompiler(validatorCompiler);
+  fastify.setSerializerCompiler(serializerCompiler);
+
+  fastify.register(swagger, {
+    swagger: {
+      info: {
+        title: "Financi API",
+        description: "API para front-end do site Financi",
+        version: "0.1.0",
+      },
+      host: EnviromentVars.vars.SWAGGER_UI_HOST,
+      schemes: ["http"],
+      tags: [
+        {
+          name: "user",
+          description: "User related end-points",
+        },
+        {
+          name: "news",
+          description: "News related end-points",
+        },
+      ],
+    },
+    transform: jsonSchemaTransform,
+  });
+
+  fastify.register(swaggerUi, {
+    routePrefix: "/docs",
+    uiConfig: {
+      deepLinking: false,
+    },
+    staticCSP: true,
+    transformStaticCSP: (header) => header,
+    transformSpecification: (swaggerObject) => swaggerObject,
+    transformSpecificationClone: true,
+  });
 
   fastify.register(cors, {
     origin: "*",
@@ -48,4 +90,13 @@ export async function registerHandlers(fastify: FastifyInstance) {
   fastify.register(registerFreeRoutes);
   fastify.register(registerAuthRoutes);
   fastify.register(registerAdminRoutes);
+
+  fastify.setErrorHandler(async (error, req, res) => {
+    if (error instanceof ZodError) {
+      fastify.log.warn(error);
+      await res
+        .status(StatusCodes.BAD_REQUEST)
+        .send(error.issues);
+    }
+  });
 }
