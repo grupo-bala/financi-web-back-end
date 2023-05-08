@@ -1,4 +1,10 @@
-const envKeys = ["PORT", "DATABASE_URL", "SECRET_KEY"] as const;
+const envKeys = [
+  "PORT",
+  "DATABASE_URL",
+  "SECRET_KEY",
+  "SWAGGER_UI_HOST",
+] as const;
+
 type EnvVars = typeof envKeys[number];
 
 export class EnviromentVars {
