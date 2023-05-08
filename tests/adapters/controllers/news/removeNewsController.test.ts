@@ -28,7 +28,7 @@ describe("testes do controller de remover uma notícia", () => {
     });
 
     const response = await server.inject({
-      method: "POST",
+      method: "DELETE",
       url: "http://localhost/remove-news",
       cookies: {
         "financi-jwt": adminToken.encoded,
@@ -52,7 +52,7 @@ describe("testes do controller de remover uma notícia", () => {
     });
 
     const response = await server.inject({
-      method: "POST",
+      method: "DELETE",
       url: "http://localhost/remove-news",
       cookies: {
         "financi-jwt": adminToken.encoded,

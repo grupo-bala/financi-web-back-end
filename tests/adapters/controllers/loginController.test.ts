@@ -24,9 +24,9 @@ describe("testes do controller de login", () => {
       });
 
       const res = await server.inject({
-        method: "GET",
+        method: "POST",
         url: "http://localhost/login",
-        query: {
+        payload: {
           username: "test",
           password: "test",
         },
@@ -46,9 +46,9 @@ describe("testes do controller de login", () => {
     });
 
     const res = await server.inject({
-      method: "GET",
+      method: "POST",
       url: "http://localhost/login",
-      query: {
+      payload: {
         username: "test",
         password: "test",
       },

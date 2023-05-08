@@ -31,7 +31,7 @@ describe("testes do controller de atualizar uma notícia", () => {
       });
 
       const response = await server.inject({
-        method: "POST",
+        method: "PUT",
         url: "http://localhost/update-news",
         cookies: {
           "financi-jwt": adminToken.encoded,
@@ -66,7 +66,7 @@ describe("testes do controller de atualizar uma notícia", () => {
       });
 
       const response = await server.inject({
-        method: "POST",
+        method: "PUT",
         url: "http://localhost/update-news",
         cookies: {
           "financi-jwt": adminToken.encoded,
@@ -97,7 +97,7 @@ describe("testes do controller de atualizar uma notícia", () => {
     });
 
     const response = await server.inject({
-      method: "POST",
+      method: "PUT",
       url: "http://localhost/update-news",
       cookies: {
         "financi-jwt": adminToken.encoded,
