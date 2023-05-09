@@ -9,7 +9,9 @@ export class AddGoal {
   }
 
   async add(goal: Goal) {
-    if (await this.goalsRepository.existsInUserByTitle(goal)) {
+    if (await this.goalsRepository.existsInUserByTitle(
+      goal.userId, goal.title,
+    )) {
       throw new Error("Uma meta com esse nome já existe para esse usuário");
     }
 
