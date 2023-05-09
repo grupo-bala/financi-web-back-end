@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import {
   GetAllNewsPreviewController,
-} from "../../../adapters/controllers/news/getAllNewsPreviewController";
+} from "../../../adapters/controllers/news/getAllNewsPreview.controller";
 import { GetAllNewsPreview } from "../../../usecases/news/getAllNewsPreview";
 import {
   PostgresNewsRepository,

@@ -1,23 +1,23 @@
 import { FastifyInstance } from "fastify";
 import {
-  UpdateNewsController,
-} from "../../../adapters/controllers/news/updateNewsController";
-import { UpdateNews } from "../../../usecases/news/updateNews";
+  RemoveNewsController,
+} from "../../../adapters/controllers/news/removeNews.controller";
+import { RemoveNews } from "../../../usecases/news/removeNews";
 import {
   PostgresNewsRepository,
 } from "../../../adapters/repositories/postgresNewsRepository";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { schemas } from "../../../adapters/controllers/schemas/schemas";
 
-export async function registerUpdateNewsRoute(fastify: FastifyInstance) {
-  fastify.withTypeProvider<ZodTypeProvider>().put("/update-news", {
+export async function registerRemoveNewsRoute(fastify: FastifyInstance) {
+  fastify.withTypeProvider<ZodTypeProvider>().delete("/remove-news", {
     schema: {
-      body: schemas.updateNewsSchema,
+      body: schemas.removeNewsSchema,
       tags: ["news"],
     },
   }, async (req, res) => {
-    await new UpdateNewsController(
-      new UpdateNews(
+    await new RemoveNewsController(
+      new RemoveNews(
         new PostgresNewsRepository(),
       ),
     ).handle(req, res);

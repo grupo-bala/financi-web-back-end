@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import {
   LoginController,
-} from "../../../adapters/controllers/user/loginController";
+} from "../../../adapters/controllers/user/login.controller";
 import {
   PostgresUserRepository,
 } from "../../../adapters/repositories/postgresUserRepository";

@@ -1,15 +1,15 @@
 import { FastifyInstance } from "fastify";
-import { registerLoginRoute } from "../routes/user/login";
-import { registerRegisterRoute } from "../routes/user/register";
-import { registerAddNewsRoute } from "../routes/news/addNews";
+import { registerLoginRoute } from "../routes/user/login.route";
+import { registerRegisterRoute } from "../routes/user/register.route";
+import { registerAddNewsRoute } from "../routes/news/addNews.route";
 import { validateJWT } from "../hooks/auth";
 import { verifyIsAdmin } from "../hooks/admin";
 import {
   registerGetAllNewsPreviewRoute,
-} from "../routes/news/getAllNewsPreview";
-import { registerRemoveNewsRoute } from "../routes/news/removeNews";
-import { registerGetNewsRoute } from "../routes/news/getNews";
-import { registerUpdateNewsRoute } from "../routes/news/updateNews";
+} from "../routes/news/getAllNewsPreview.route";
+import { registerRemoveNewsRoute } from "../routes/news/removeNews.route";
+import { registerGetNewsRoute } from "../routes/news/getNews.route";
+import { registerUpdateNewsRoute } from "../routes/news/updateNews.route";
 import cors from "@fastify/cors";
 import cookie from "@fastify/cookie";
 import {
