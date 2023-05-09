@@ -45,6 +45,7 @@ jobs:
           SECRET_KEY: test
           PORT: 8080
           DATABASE_URL: none
+          SWAGGER_UI_HOST: localhost
 
       - name: Deploy coverage
         uses: JamesIves/github-pages-deploy-action@v4
