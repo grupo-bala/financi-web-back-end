@@ -2,14 +2,14 @@
 import { Decimal } from "@prisma/client/runtime/library";
 import {
   PostgresUserRepository,
-} from "../../src/adapters/repositories/postgresUserRepository";
-import { Password } from "../../src/model/data/password";
-import { User } from "../../src/model/user";
-import { LoginUser } from "../../src/usecases/loginUser";
-import { Email } from "../../src/model/data/email";
-import { mock } from "../util";
+} from "../../../src/adapters/repositories/postgresUserRepository";
+import { Password } from "../../../src/model/data/password";
+import { User } from "../../../src/model/user";
+import { LoginUser } from "../../../src/usecases/user/loginUser";
+import { Email } from "../../../src/model/data/email";
+import { mock } from "../../util";
 
-jest.mock("../../src/adapters/repositories/postgresUserRepository");
+jest.mock("../../../src/adapters/repositories/postgresUserRepository");
 
 describe("testes de login de usuário", () => {
   test("nome de usuário inexistente deve falhar", async () => {

@@ -1,13 +1,15 @@
 import Fastify from "fastify";
-import { registerHandlers } from "../../../src/server/plugins/registerHandlers";
-import { LoginUser } from "../../../src/usecases/loginUser";
-import { Token } from "../../../src/adapters/data/token";
-import { Password } from "../../../src/model/data/password";
+import {
+  registerHandlers,
+} from "../../../../src/server/plugins/registerHandlers";
+import { LoginUser } from "../../../../src/usecases/user/loginUser";
+import { Token } from "../../../../src/adapters/data/token";
+import { Password } from "../../../../src/model/data/password";
 import { StatusCodes } from "http-status-codes";
-import { mock } from "../../util";
+import { mock } from "../../../util";
 
 const server = Fastify();
-jest.mock("../../../src/usecases/loginUser.ts");
+jest.mock("../../../../src/usecases/user/loginUser.ts");
 
 describe("testes do controller de login", () => {
   beforeAll(() => {

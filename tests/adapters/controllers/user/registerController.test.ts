@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import Fastify from "fastify";
-import { mock } from "../../util";
-import { RegisterUser } from "../../../src/usecases/registerUser";
-import { User } from "../../../src/model/user";
-import { registerHandlers } from "../../../src/server/plugins/registerHandlers";
+import { mock } from "../../../util";
+import { RegisterUser } from "../../../../src/usecases/user/registerUser";
+import { User } from "../../../../src/model/user";
+import {
+  registerHandlers,
+} from "../../../../src/server/plugins/registerHandlers";
 import { StatusCodes } from "http-status-codes";
 
 const server = Fastify();
-jest.mock("../../../src/usecases/registerUser.ts");
+jest.mock("../../../../src/usecases/user/registerUser.ts");
 
 describe("testes do controller de registro", () => {
   beforeAll(() => {

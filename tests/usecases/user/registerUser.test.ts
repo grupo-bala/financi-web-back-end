@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-magic-numbers */
-import { User } from "../../src/model/user";
-import { RegisterUser } from "../../src/usecases/registerUser";
+import { User } from "../../../src/model/user";
+import { RegisterUser } from "../../../src/usecases/user/registerUser";
 import {
   PostgresUserRepository,
-} from "../../src/adapters/repositories/postgresUserRepository";
+} from "../../../src/adapters/repositories/postgresUserRepository";
 import { Decimal } from "@prisma/client/runtime/library";
-import { Email } from "../../src/model/data/email";
-import { Password } from "../../src/model/data/password";
-import { mock } from "../util";
+import { Email } from "../../../src/model/data/email";
+import { Password } from "../../../src/model/data/password";
+import { mock } from "../../util";
 
-jest.mock("../../src/adapters/repositories/postgresUserRepository");
+jest.mock("../../../src/adapters/repositories/postgresUserRepository");
 
 describe("testes de cadastro de usuário", () => {
   test("usuário inexistente deve passar", async () => {
