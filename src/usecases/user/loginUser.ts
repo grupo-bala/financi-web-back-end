@@ -17,7 +17,7 @@ export class LoginUser {
         throw null;
       }
 
-      return Token.encode(username, user.isAdmin);
+      return Token.encode(user.id, user.isAdmin);
     } catch (error) {
       throw new Error("Nome de usuário ou senha inválidos");
     }
