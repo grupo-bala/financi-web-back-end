@@ -23,7 +23,8 @@ export class LoginController {
       await reply
         .setCookie("financi-jwt", jwt.encoded, {
           httpOnly: true,
-          expires: new Date(jwt.expirationTime),
+          path: "/",
+          sameSite: "strict",
         })
         .send();
     } catch (e) {
