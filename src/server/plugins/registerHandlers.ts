@@ -23,6 +23,8 @@ import { EnviromentVars } from "../config/enviromentVars";
 import { ZodError } from "zod";
 import { StatusCodes } from "http-status-codes";
 import { registerAddGoalRoute } from "../routes/goals/addGoal.route";
+import { registerGetAllGoalsRoute } from "../routes/goals/getAllGoals.route";
+import { registerRemoveGoalRoute } from "../routes/goals/removeGoal.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -44,6 +46,8 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   fastify.addHook("preHandler", validateJWT);
 
   await registerAddGoalRoute(fastify);
+  await registerGetAllGoalsRoute(fastify);
+  await registerRemoveGoalRoute(fastify);
 }
 
 export async function registerHandlers(fastify: FastifyInstance) {
