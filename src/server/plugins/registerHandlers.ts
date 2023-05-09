@@ -47,7 +47,7 @@ export async function registerHandlers(fastify: FastifyInstance) {
   fastify.setValidatorCompiler(validatorCompiler);
   fastify.setSerializerCompiler(serializerCompiler);
 
-  fastify.register(swagger, {
+  await fastify.register(swagger, {
     swagger: {
       info: {
         title: "Financi API",
@@ -70,7 +70,7 @@ export async function registerHandlers(fastify: FastifyInstance) {
     transform: jsonSchemaTransform,
   });
 
-  fastify.register(swaggerUi, {
+  await fastify.register(swaggerUi, {
     routePrefix: "/docs",
     uiConfig: {
       deepLinking: false,
@@ -81,15 +81,15 @@ export async function registerHandlers(fastify: FastifyInstance) {
     transformSpecificationClone: true,
   });
 
-  fastify.register(cors, {
+  await fastify.register(cors, {
     origin: "*",
   });
 
-  fastify.register(cookie);
+  await fastify.register(cookie);
 
-  fastify.register(registerFreeRoutes);
-  fastify.register(registerAuthRoutes);
-  fastify.register(registerAdminRoutes);
+  await fastify.register(registerFreeRoutes);
+  await fastify.register(registerAuthRoutes);
+  await fastify.register(registerAdminRoutes);
 
   fastify.setErrorHandler(async (error, req, res) => {
     if (error instanceof ZodError) {
