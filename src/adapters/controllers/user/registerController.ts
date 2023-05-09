@@ -1,10 +1,10 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { RegisterUserInput } from "./schemas/registerUserSchema";
-import { User } from "../../model/user";
+import { RegisterUserInput } from "../schemas/registerUserSchema";
+import { User } from "../../../model/user";
 import { Decimal } from "@prisma/client/runtime/library";
-import { Email } from "../../model/data/email";
-import { RegisterUser } from "../../usecases/registerUser";
-import { Password } from "../../model/data/password";
+import { Email } from "../../../model/data/email";
+import { RegisterUser } from "../../../usecases/user/registerUser";
+import { Password } from "../../../model/data/password";
 import { StatusCodes } from "http-status-codes";
 
 export class RegisterController {

@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
-import { registerLoginRoute } from "../routes/login";
-import { registerRegisterRoute } from "../routes/register";
+import { registerLoginRoute } from "../routes/user/login";
+import { registerRegisterRoute } from "../routes/user/register";
 import { registerAddNewsRoute } from "../routes/news/addNews";
 import { validateJWT } from "../hooks/auth";
 import { verifyIsAdmin } from "../hooks/admin";

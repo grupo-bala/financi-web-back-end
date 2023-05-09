@@ -1,11 +1,13 @@
 import { FastifyInstance } from "fastify";
-import { LoginController } from "../../adapters/controllers/loginController";
+import {
+  LoginController,
+} from "../../../adapters/controllers/user/loginController";
 import {
   PostgresUserRepository,
-} from "../../adapters/repositories/postgresUserRepository";
-import { LoginUser } from "../../usecases/loginUser";
+} from "../../../adapters/repositories/postgresUserRepository";
+import { LoginUser } from "../../../usecases/user/loginUser";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { schemas } from "../../adapters/controllers/schemas/schemas";
+import { schemas } from "../../../adapters/controllers/schemas/schemas";
 
 export async function registerLoginRoute(fastify: FastifyInstance) {
   fastify.withTypeProvider<ZodTypeProvider>().post("/login", {
