@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { LoginUser } from "../../../usecases/user/loginUser";
-import { LoginUserInput } from "../schemas/loginUserSchema";
+import { LoginUserInput } from "../schemas/user/loginUserSchema";
 import { StatusCodes } from "http-status-codes";
 import { Password } from "../../../model/data/password";
 import { EnviromentVars } from "../../../server/config/enviromentVars";

@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { RegisterUserInput } from "../schemas/registerUserSchema";
+import { RegisterUserInput } from "../schemas/user/registerUserSchema";
 import { User } from "../../../model/user";
 import { Decimal } from "@prisma/client/runtime/library";
 import { Email } from "../../../model/data/email";

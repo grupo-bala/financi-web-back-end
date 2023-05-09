@@ -1,5 +1,5 @@
-import { registerUserSchema } from "./registerUserSchema";
-import { loginUserSchema } from "./loginUserSchema";
+import { registerUserSchema } from "./user/registerUserSchema";
+import { loginUserSchema } from "./user/loginUserSchema";
 import { addNewsSchema } from "./news/addNewsSchema";
 import { getAllNewsPreviewSchema } from "./news/getAllNewsPreviewSchema";
 import { removeNewsSchema } from "./news/removeNewsSchema";
