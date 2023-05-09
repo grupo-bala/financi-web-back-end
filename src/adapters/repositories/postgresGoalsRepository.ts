@@ -11,7 +11,7 @@ export class PostgresGoalsRepository implements GoalsRepository {
     deadline,
     totalValue,
     userId,
-  }: Goal) {
+  }: Goal): Promise<void> {
     await PrismaHelper
       .client
       .goal
@@ -26,10 +26,7 @@ export class PostgresGoalsRepository implements GoalsRepository {
       });
   }
 
-  async existsInUserByTitle({
-    title,
-    userId,
-  }: Goal) {
+  async existsInUserByTitle(userId: number, title: string): Promise<boolean> {
     const count = await PrismaHelper
       .client
       .goal
@@ -42,5 +39,87 @@ export class PostgresGoalsRepository implements GoalsRepository {
 
     const none = 0;
     return count > none;
+  }
+
+  async existsInUserById(userId: number, goalId: number): Promise<boolean> {
+    const count = await PrismaHelper
+      .client
+      .goal
+      .count({
+        where: {
+          id_user: userId,
+          id: goalId,
+        },
+      });
+
+    const none = 0;
+    return count > none;
+  }
+
+  async getSizeInUser(userId: number): Promise<number> {
+    return await PrismaHelper
+      .client
+      .goal
+      .count({
+        where: {
+          id_user: userId,
+        },
+      });
+  }
+
+  async getAllOfUser(
+    userId: number, page: number, size: number,
+  ): Promise<Goal[]> {
+    const prismaGoals = await PrismaHelper
+      .client
+      .goal
+      .findMany({
+        skip: --page * size,
+        take: size,
+        orderBy: {
+          id: "desc",
+        },
+        where: {
+          id_user: userId,
+        },
+      });
+
+    const goals = [];
+
+    for (
+      const {
+        id,
+        title,
+        deadline,
+        id_user: userId,
+        total_value: totalValue,
+        current_value: currentValue,
+      } of prismaGoals
+    ) {
+      goals.push(
+        new Goal({
+          id,
+          title,
+          deadline,
+          userId,
+          totalValue,
+          currentValue,
+        }),
+      );
+    }
+
+    return goals;
+  }
+
+  async removeFromUser(userId: number, goalId: number): Promise<void> {
+    await PrismaHelper
+      .client
+      .goal
+      .deleteMany({
+        where: {
+          id: goalId,
+          id_user: userId,
+        },
+      });
   }
 }
