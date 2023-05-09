@@ -3,6 +3,7 @@ import { LoginUser } from "../../usecases/loginUser";
 import { LoginUserInput } from "./schemas/loginUserSchema";
 import { StatusCodes } from "http-status-codes";
 import { Password } from "../../model/data/password";
+import { EnviromentVars } from "../../server/config/enviromentVars";
 
 export class LoginController {
   readonly useCase: LoginUser;
@@ -25,6 +26,7 @@ export class LoginController {
           httpOnly: true,
           path: "/",
           sameSite: "strict",
+          domain: EnviromentVars.vars.COOKIE_DOMAIN,
         })
         .send();
     } catch (e) {
