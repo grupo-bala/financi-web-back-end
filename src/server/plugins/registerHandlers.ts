@@ -55,7 +55,7 @@ export async function registerHandlers(fastify: FastifyInstance) {
         version: "0.1.0",
       },
       host: EnviromentVars.vars.SWAGGER_UI_HOST,
-      schemes: ["http"],
+      schemes: [EnviromentVars.vars.ENVIRONMENT === "debug" ? "http" : "https"],
       tags: [
         {
           name: "user",
