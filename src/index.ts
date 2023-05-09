@@ -1,7 +1,9 @@
 import Fastify from "fastify";
 import { registerHandlers } from "./server/plugins/registerHandlers";
 import { EnviromentVars } from "./server/config/enviromentVars";
+import { config } from "dotenv";
 
+config();
 EnviromentVars.validateVars();
 
 const server = Fastify({
