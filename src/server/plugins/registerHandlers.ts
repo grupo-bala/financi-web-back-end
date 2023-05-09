@@ -22,25 +22,28 @@ import swaggerUi from "@fastify/swagger-ui";
 import { EnviromentVars } from "../config/enviromentVars";
 import { ZodError } from "zod";
 import { StatusCodes } from "http-status-codes";
+import { registerAddGoalRoute } from "../routes/goals/addGoal.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
-  registerLoginRoute(fastify);
-  registerRegisterRoute(fastify);
-  registerGetAllNewsPreviewRoute(fastify);
-  registerGetNewsRoute(fastify);
+  await registerLoginRoute(fastify);
+  await registerRegisterRoute(fastify);
+  await registerGetAllNewsPreviewRoute(fastify);
+  await registerGetNewsRoute(fastify);
 }
 
 async function registerAdminRoutes(fastify: FastifyInstance) {
   fastify.addHook("preHandler", validateJWT);
   fastify.addHook("preHandler", verifyIsAdmin);
 
-  registerAddNewsRoute(fastify);
-  registerRemoveNewsRoute(fastify);
-  registerUpdateNewsRoute(fastify);
+  await registerAddNewsRoute(fastify);
+  await registerRemoveNewsRoute(fastify);
+  await registerUpdateNewsRoute(fastify);
 }
 
 async function registerAuthRoutes(fastify: FastifyInstance) {
   fastify.addHook("preHandler", validateJWT);
+
+  await registerAddGoalRoute(fastify);
 }
 
 export async function registerHandlers(fastify: FastifyInstance) {
@@ -64,6 +67,10 @@ export async function registerHandlers(fastify: FastifyInstance) {
         {
           name: "news",
           description: "News related end-points",
+        },
+        {
+          name: "goals",
+          description: "Goals related end-points",
         },
       ],
     },
