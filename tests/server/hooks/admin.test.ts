@@ -13,7 +13,8 @@ Object.defineProperty(
 
 describe("testes do hook de admin", () => {
   test("token sem autorização deve falhar", async () => {
-    const token = Token.encode("test", false);
+    const defaultId = 0;
+    const token = Token.encode(defaultId, false);
     const request = {
       cookies: {
         "financi-jwt": token.encoded,
@@ -38,7 +39,8 @@ describe("testes do hook de admin", () => {
   });
 
   test("token autorizado deve passar", async () => {
-    const token = Token.encode("test", true);
+    const defaultId = 0;
+    const token = Token.encode(defaultId, true);
     const request = {
       cookies: {
         "financi-jwt": token.encoded,

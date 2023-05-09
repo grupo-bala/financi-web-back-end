@@ -17,7 +17,8 @@ describe("testes do controller de remover uma notícia", () => {
   });
 
   test("deve falhar com status 404, pois a notícia não existe", async () => {
-    const adminToken = Token.encode("admin", true);
+    const defaultId = 0;
+    const adminToken = Token.encode(defaultId, true);
 
     mock(RemoveNews).mockImplementation(() => {
       return {
@@ -43,7 +44,8 @@ describe("testes do controller de remover uma notícia", () => {
   });
 
   test("caso de uso sem erros deve passar com status 200", async () => {
-    const adminToken = Token.encode("admin", true);
+    const defaultId = 0;
+    const adminToken = Token.encode(defaultId, true);
 
     mock(RemoveNews).mockImplementation(() => {
       return {

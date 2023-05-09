@@ -20,7 +20,8 @@ describe("testes do controller de adicionar notícia", () => {
   test(
     "deve falhar com status 409 e uma mensagem, pois o título já existe",
     async () => {
-      const adminToken = Token.encode("admin", true);
+      const defaultId = 0;
+      const adminToken = Token.encode(defaultId, true);
 
       mock(AddNews).mockImplementation(() => {
         return {
@@ -54,7 +55,8 @@ describe("testes do controller de adicionar notícia", () => {
   test(
     "caso de uso sem erros deve passar com status 201",
     async () => {
-      const adminToken = Token.encode("admin", true);
+      const defaultId = 0;
+      const adminToken = Token.encode(defaultId, true);
 
       mock(AddNews).mockImplementation(() => {
         return {

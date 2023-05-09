@@ -19,9 +19,12 @@ describe("testes do controller de login", () => {
   test(
     "caso de uso sem erros deve retornar status code 200 e um token não vazio",
     async () => {
+      const defaultId = 0;
       mock(LoginUser).mockImplementation(() => {
         return {
-          loginUser: async (_: string, __: Password) => Token.encode("", false),
+          loginUser: async (_: string, __: Password) => {
+            return Token.encode(defaultId, false);
+          },
         };
       });
 
