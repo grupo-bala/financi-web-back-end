@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/server/routes/news/getAllNewsPreview.ts</title>
+    <title>Code coverage report for src/server/routes/goals/addGoal.route.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/server/routes/news</a> getAllNewsPreview.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/server/routes/goals</a> addGoal.route.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>1/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -87,7 +87,13 @@
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -97,41 +103,41 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FastifyInstance } from "fastify";
-import {
-  GetAllNewsPreviewController,
-} from "../../../adapters/controllers/news/getAllNewsPreviewController";
-import { GetAllNewsPreview } from "../../../usecases/news/getAllNewsPreview";
-import {
-  PostgresNewsRepository,
-} from "../../../adapters/repositories/postgresNewsRepository";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { schemas } from "../../../adapters/controllers/schemas/schemas";
+import {
+  addGoalSchema,
+} from "../../../adapters/controllers/schemas/goals/addGoal.schema";
+import {
+  AddGoalController,
+} from "../../../adapters/controllers/goals/addGoal.controller";
+import { AddGoal } from "../../../usecases/goals/addGoal";
+import {
+  PostgresGoalsRepository,
+} from "../../../adapters/repositories/postgresGoalsRepository";
 &nbsp;
-export async function registerGetAllNewsPreviewRoute(fastify: FastifyInstance) {
-  fastify.withTypeProvider&lt;ZodTypeProvider&gt;().get("/get-all-news-preview", {
+export async function registerAddGoalRoute(fastify: FastifyInstance) {
+  fastify.withTypeProvider&lt;ZodTypeProvider&gt;().post("/add-goal", {
     schema: {
-      querystring: schemas.getAllNewsSchema,
-      tags: ["news"],
+      body: addGoalSchema,
+      tags: ["goals"],
     },
-  }, async (req, res) =&gt; {
-    await new GetAllNewsPreviewController(
-      new GetAllNewsPreview(
-        new PostgresNewsRepository(),
+  }, <span class="fstat-no" title="function not covered" >async (r</span>eq, res) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
+<span class="cstat-no" title="statement not covered" >    await new AddGoalController(</span>
+      new AddGoal(
+        new PostgresGoalsRepository(),
       ),
     ).handle(req, res);
   });
@@ -142,7 +148,7 @@ export async function registerGetAllNewsPreviewRoute(fastify: FastifyInstance) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-09T10:35:17.813Z
+                at 2023-05-09T14:24:38.050Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

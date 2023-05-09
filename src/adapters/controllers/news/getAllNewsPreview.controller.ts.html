@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/adapters/controllers/news/removeNewsController.ts</title>
+    <title>Code coverage report for src/adapters/controllers/news/getAllNewsPreview.controller.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/adapters/controllers/news</a> removeNewsController.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/adapters/controllers/news</a> getAllNewsPreview.controller.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -89,55 +89,73 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FastifyReply, FastifyRequest } from "fastify";
-import { RemoveNews } from "../../../usecases/news/removeNews";
-import { RemoveNewsInput } from "../schemas/news/removeNewsSchema";
 import { StatusCodes } from "http-status-codes";
+import { GetAllNewsPreview } from "../../../usecases/news/getAllNewsPreview";
+import {
+  GetAllNewsPreviewInput,
+} from "../schemas/news/getAllNewsPreviewSchema";
 &nbsp;
-export class RemoveNewsController {
-  readonly useCase: RemoveNews;
+export class GetAllNewsPreviewController {
+  readonly useCase: GetAllNewsPreview;
 &nbsp;
-  constructor(useCase: RemoveNews) {
+  constructor(useCase: GetAllNewsPreview) {
     this.useCase = useCase;
   }
 &nbsp;
   async handle(request: FastifyRequest, reply: FastifyReply) {
-    const { id } = request.body as RemoveNewsInput;
+    const { page, size } = request.query as GetAllNewsPreviewInput;
 &nbsp;
     try {
-      await this.useCase.remove(id);
+      const result = await this.useCase.getAll(page, size);
 &nbsp;
-      await reply.status(StatusCodes.OK).send();
+      await reply.status(StatusCodes.OK).send({
+        data: result.previews,
+        pages: result.howManyPages,
+      });
     } catch (e) {
       const error = e as Error;
+&nbsp;
       await reply
-        .status(StatusCodes.NOT_FOUND)
+        .status(StatusCodes.BAD_REQUEST)
         .send({ msg: error.message });
     }
   }
@@ -148,7 +166,7 @@ export class RemoveNewsController {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-09T10:35:17.813Z
+                at 2023-05-09T14:24:38.050Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

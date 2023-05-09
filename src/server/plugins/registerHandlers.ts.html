@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.36% </span>
+                <span class="strong">86.95% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>38/44</span>
+                <span class='fraction'>40/46</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.37% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>38/43</span>
+                <span class='fraction'>40/45</span>
             </div>
         
             
@@ -164,7 +164,14 @@
 <a name='L99'></a><a href='#L99'>99</a>
 <a name='L100'></a><a href='#L100'>100</a>
 <a name='L101'></a><a href='#L101'>101</a>
-<a name='L102'></a><a href='#L102'>102</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -188,18 +195,10 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -207,6 +206,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
@@ -214,6 +224,10 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -266,17 +280,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FastifyInstance } from "fastify";
-import { registerLoginRoute } from "../routes/user/login";
-import { registerRegisterRoute } from "../routes/user/register";
-import { registerAddNewsRoute } from "../routes/news/addNews";
+import { registerLoginRoute } from "../routes/user/login.route";
+import { registerRegisterRoute } from "../routes/user/register.route";
+import { registerAddNewsRoute } from "../routes/news/addNews.route";
 import { validateJWT } from "../hooks/auth";
 import { verifyIsAdmin } from "../hooks/admin";
 import {
   registerGetAllNewsPreviewRoute,
-} from "../routes/news/getAllNewsPreview";
-import { registerRemoveNewsRoute } from "../routes/news/removeNews";
-import { registerGetNewsRoute } from "../routes/news/getNews";
-import { registerUpdateNewsRoute } from "../routes/news/updateNews";
+} from "../routes/news/getAllNewsPreview.route";
+import { registerRemoveNewsRoute } from "../routes/news/removeNews.route";
+import { registerGetNewsRoute } from "../routes/news/getNews.route";
+import { registerUpdateNewsRoute } from "../routes/news/updateNews.route";
 import cors from "@fastify/cors";
 import cookie from "@fastify/cookie";
 import {
@@ -289,25 +303,28 @@ import swaggerUi from "@fastify/swagger-ui";
 import { EnviromentVars } from "../config/enviromentVars";
 import { ZodError } from "zod";
 import { StatusCodes } from "http-status-codes";
+import { registerAddGoalRoute } from "../routes/goals/addGoal.route";
 &nbsp;
 async function registerFreeRoutes(fastify: FastifyInstance) {
-  registerLoginRoute(fastify);
-  registerRegisterRoute(fastify);
-  registerGetAllNewsPreviewRoute(fastify);
-  registerGetNewsRoute(fastify);
+  await registerLoginRoute(fastify);
+  await registerRegisterRoute(fastify);
+  await registerGetAllNewsPreviewRoute(fastify);
+  await registerGetNewsRoute(fastify);
 }
 &nbsp;
 async function registerAdminRoutes(fastify: FastifyInstance) {
   fastify.addHook("preHandler", validateJWT);
   fastify.addHook("preHandler", verifyIsAdmin);
 &nbsp;
-  registerAddNewsRoute(fastify);
-  registerRemoveNewsRoute(fastify);
-  registerUpdateNewsRoute(fastify);
+  await registerAddNewsRoute(fastify);
+  await registerRemoveNewsRoute(fastify);
+  await registerUpdateNewsRoute(fastify);
 }
 &nbsp;
 async function registerAuthRoutes(fastify: FastifyInstance) {
   fastify.addHook("preHandler", validateJWT);
+&nbsp;
+  await registerAddGoalRoute(fastify);
 }
 &nbsp;
 export async function registerHandlers(fastify: FastifyInstance) {
@@ -331,6 +348,10 @@ export async function registerHandlers(fastify: FastifyInstance) {
         {
           name: "news",
           description: "News related end-points",
+        },
+        {
+          name: "goals",
+          description: "Goals related end-points",
         },
       ],
     },
@@ -373,7 +394,7 @@ export async function registerHandlers(fastify: FastifyInstance) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-09T10:35:17.813Z
+                at 2023-05-09T14:24:38.050Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
