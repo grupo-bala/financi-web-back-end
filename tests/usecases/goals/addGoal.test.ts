@@ -12,7 +12,7 @@ describe("testes de adicionar metas", () => {
   test("título já existente no usuário deve falhar", async () => {
     mock(PostgresGoalsRepository).mockImplementation(() => {
       return {
-        existsInUserByTitle: async (_goal: Goal) => true,
+        existsInUserByTitle: async (_userId: number, _title: string) => true,
       };
     });
 
@@ -36,7 +36,7 @@ describe("testes de adicionar metas", () => {
   test("título não existente no usuário deve passar", async () => {
     mock(PostgresGoalsRepository).mockImplementation(() => {
       return {
-        existsInUserByTitle: async (_goal: Goal) => false,
+        existsInUserByTitle: async (_userId: number, _title: string) => false,
         add: async (_goal: Goal) => Promise.resolve(),
       };
     });
