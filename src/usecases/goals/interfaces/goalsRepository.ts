@@ -7,4 +7,5 @@ export interface GoalsRepository {
   getSizeInUser: (userId: number) => Promise<number>,
   getAllOfUser: (userId: number, page: number, size: number) => Promise<Goal[]>,
   removeFromUser: (userId: number, goalId: number) => Promise<void>,
+  updateGoal: (goal: Goal) => Promise<void>,
 }

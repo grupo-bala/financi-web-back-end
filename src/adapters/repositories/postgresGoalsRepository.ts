@@ -122,4 +122,29 @@ export class PostgresGoalsRepository implements GoalsRepository {
         },
       });
   }
+
+  async updateGoal({
+    id,
+    userId,
+    title,
+    currentValue,
+    totalValue,
+    deadline,
+  }: Goal): Promise<void> {
+    await PrismaHelper
+      .client
+      .goal
+      .updateMany({
+        where: {
+          id,
+          id_user: userId,
+        },
+        data: {
+          title,
+          deadline,
+          current_value: currentValue,
+          total_value: totalValue,
+        },
+      });
+  }
 }

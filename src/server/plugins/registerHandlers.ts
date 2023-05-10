@@ -25,6 +25,7 @@ import { StatusCodes } from "http-status-codes";
 import { registerAddGoalRoute } from "../routes/goals/addGoal.route";
 import { registerGetAllGoalsRoute } from "../routes/goals/getAllGoals.route";
 import { registerRemoveGoalRoute } from "../routes/goals/removeGoal.route";
+import { registerUpdateGoalRoute } from "../routes/goals/updateGoal.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -48,6 +49,7 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   await registerAddGoalRoute(fastify);
   await registerGetAllGoalsRoute(fastify);
   await registerRemoveGoalRoute(fastify);
+  await registerUpdateGoalRoute(fastify);
 }
 
 export async function registerHandlers(fastify: FastifyInstance) {
