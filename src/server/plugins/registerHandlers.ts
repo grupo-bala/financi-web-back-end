@@ -99,7 +99,7 @@ export async function registerHandlers(fastify: FastifyInstance) {
   await fastify.register(cors, {
     origin: EnviromentVars.vars.ENVIRONMENT === "debug"
       ? "http://localhost:5173"
-      : "https://financi.fly.dev",
+      : ["https://financi.fly.dev", "https://financi.netlify.app"],
     credentials: true,
   });
 
