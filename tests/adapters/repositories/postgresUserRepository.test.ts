@@ -84,7 +84,7 @@ describe("testes do repositório de usuários", () => {
     await expect(pg.add(newUser)).rejects.toThrow();
   });
 
-  test("buscar usuário existente deve passar", async () => {
+  test("buscar usuário existente por username deve passar", async () => {
     const pg = new PostgresUserRepository();
     const returnUser: financiUser = {
       name: "test",
@@ -109,7 +109,7 @@ describe("testes do repositório de usuários", () => {
     expect(returnedUser.password.value).toBe(returnUser.password);
   });
 
-  test("buscar usuário inexistente deve falhar", async () => {
+  test("buscar usuário inexistente por username deve falhar", async () => {
     const pg = new PostgresUserRepository();
 
     prismaMock.financi_user.findFirst.mockImplementation(
@@ -118,6 +118,44 @@ describe("testes do repositório de usuários", () => {
 
     await expect(
       pg.getByUsername("teste"),
+    ).rejects.toThrow();
+  });
+
+  test("buscar usuário existente por id deve passar", async () => {
+    const pg = new PostgresUserRepository();
+    const returnUser: financiUser = {
+      name: "test",
+      username: "test",
+      email: "test@test.com",
+      balance: new Decimal(0),
+      fixedincome: new Decimal(0),
+      id: 0,
+      isadmin: false,
+      password: "test",
+    };
+
+    prismaMock.financi_user.findFirst.mockImplementation(
+      (_: any) => returnUser as any,
+    );
+
+    const returnedUser = await pg.getById(returnUser.id);
+
+    expect(returnedUser.name).toBe(returnUser.name);
+    expect(returnedUser.username).toBe(returnUser.username);
+    expect(returnedUser.email.value).toBe(returnUser.email);
+    expect(returnedUser.password.value).toBe(returnUser.password);
+  });
+
+  test("buscar usuário inexistente por id deve falhar", async () => {
+    const pg = new PostgresUserRepository();
+    const invalidId = -1;
+
+    prismaMock.financi_user.findFirst.mockImplementation(
+      (_: any) => null as any,
+    );
+
+    await expect(
+      pg.getById(invalidId),
     ).rejects.toThrow();
   });
 });
