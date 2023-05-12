@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/usecases/goals/updateGoal.ts</title>
+    <title>Code coverage report for src/usecases/user/getMe.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/usecases/goals</a> updateGoal.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/usecases/user</a> getMe.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/7</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/7</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
@@ -79,13 +79,7 @@
 <a name='L14'></a><a href='#L14'>14</a>
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a>
-<a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L17'></a><a href='#L17'>17</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -97,34 +91,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Goal } from "../../model/goal";
-import { GoalsRepository } from "./interfaces/goalsRepository";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { UserRepository } from "./interfaces/userRepository";
 &nbsp;
-export class UpdateGoal {
-  readonly goalRepository: GoalsRepository;
+export class GetMe {
+  readonly userRepository: UserRepository;
 &nbsp;
-<span class="fstat-no" title="function not covered" >  constructor(g</span>oalRepository: GoalsRepository) {
-<span class="cstat-no" title="statement not covered" >    this.goalRepository = goalRepository;</span>
+<span class="fstat-no" title="function not covered" >  constructor(u</span>serRepository: UserRepository) {
+<span class="cstat-no" title="statement not covered" >    this.userRepository = userRepository;</span>
   }
 &nbsp;
-  async <span class="fstat-no" title="function not covered" >update(</span>goal: Goal) {
-<span class="cstat-no" title="statement not covered" >    if (!await this.goalRepository.existsInUserById(goal.userId, goal.id)) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new Error("Essa meta não existe nesse usuário");</span>
-    } else <span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="if path not taken" >I</span>if (</span>
-      await this.goalRepository.existsInUserByTitle(goal.userId, goal.title)
-    ) {
-<span class="cstat-no" title="statement not covered" >      throw new Error("Já existe uma meta com esse nome");</span>
+  async <span class="fstat-no" title="function not covered" >getMe(</span>userId: number) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      return await this.userRepository.getById(userId);</span>
+    } catch (e) {
+<span class="cstat-no" title="statement not covered" >      throw new Error("Usuário não existente");</span>
     }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    await this.goalRepository.updateGoal(goal);</span>
   }
 }</pre></td></tr></table></pre>
 
