@@ -26,6 +26,7 @@ import { registerAddGoalRoute } from "../routes/goals/addGoal.route";
 import { registerGetAllGoalsRoute } from "../routes/goals/getAllGoals.route";
 import { registerRemoveGoalRoute } from "../routes/goals/removeGoal.route";
 import { registerUpdateGoalRoute } from "../routes/goals/updateGoal.route";
+import { registerGetMeRoute } from "../routes/user/getMe.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -46,6 +47,7 @@ async function registerAdminRoutes(fastify: FastifyInstance) {
 async function registerAuthRoutes(fastify: FastifyInstance) {
   fastify.addHook("preHandler", validateJWT);
 
+  await registerGetMeRoute(fastify);
   await registerAddGoalRoute(fastify);
   await registerGetAllGoalsRoute(fastify);
   await registerRemoveGoalRoute(fastify);
