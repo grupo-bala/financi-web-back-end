@@ -95,9 +95,11 @@ export async function registerHandlers(fastify: FastifyInstance) {
     transformSpecification: (swaggerObject) => swaggerObject,
     transformSpecificationClone: true,
   });
-
+  const deployUrl = "https://financi.fly.dev";
+  const developmentUrl = "http://localhost:5173";
   await fastify.register(cors, {
-    origin: "*",
+    origin: [deployUrl, developmentUrl],
+    credentials: true,
   });
 
   await fastify.register(cookie);
