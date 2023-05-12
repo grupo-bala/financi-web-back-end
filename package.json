@@ -11,7 +11,9 @@
     "lint": "npx eslint src tests",
     "db:migrate": "prisma migrate dev",
     "db:pull": "prisma db pull",
-    "db:view": "prisma studio"
+    "db:view": "prisma studio",
+    "docker:start": "docker compose up -d",
+    "docker:stop": "docker compose down"
   },
   "repository": {
     "type": "git",
