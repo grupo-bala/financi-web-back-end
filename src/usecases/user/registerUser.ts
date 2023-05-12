@@ -1,5 +1,5 @@
 import { User } from "../../model/user";
-import { UserRepository } from "../interfaces/userRepository";
+import { UserRepository } from "./interfaces/userRepository";
 
 export class RegisterUser {
   readonly userRepository: UserRepository;

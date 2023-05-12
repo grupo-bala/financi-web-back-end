@@ -1,6 +1,6 @@
 import { Token } from "../../adapters/data/token";
 import { Password } from "../../model/data/password";
-import { UserRepository } from "../interfaces/userRepository";
+import { UserRepository } from "./interfaces/userRepository";
 
 export class LoginUser {
   readonly userRepository: UserRepository;
