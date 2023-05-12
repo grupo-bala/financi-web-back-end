@@ -72,7 +72,9 @@
       "error",
       "unix"
     ],
-    "max-len": "error",
+    "max-len": ["error", {
+      "ignorePattern": "^(import\\s.+\\sfrom\\s.+|\\} from)"
+    }],
     "no-extra-parens": "error",
     "no-multi-spaces": "error",
     "no-multiple-empty-lines": [
