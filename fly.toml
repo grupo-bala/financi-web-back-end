@@ -6,6 +6,9 @@ processes = []
 [env]
   PORT = "8080"
 
+[build]
+  dockerfile = "docker/deploy.dockerfile"
+
 [experimental]
   auto_rollback = true
 

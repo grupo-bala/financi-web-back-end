@@ -14,7 +14,9 @@ services:
       - "/var/lib/postgresql/data"
   
   server:
-    build: .
+    build:
+      context: .
+      dockerfile: docker/dev.dockerfile
     depends_on:
       - db
     ports:

@@ -12,7 +12,8 @@
     "db:migrate": "prisma migrate dev",
     "db:pull": "prisma db pull",
     "db:view": "prisma studio",
-    "docker:start": "docker compose up -d",
+    "db:dev": "prisma db execute --file sql/defaultAdm.sql --schema prisma/schema.prisma",
+    "docker:start": "docker compose up -d --build",
     "docker:stop": "docker compose down"
   },
   "repository": {
