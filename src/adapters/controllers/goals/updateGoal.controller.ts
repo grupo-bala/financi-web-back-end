@@ -45,11 +45,11 @@ export class UpdateGoalController {
       const error = e as Error;
       if (error.message.includes("Já existe")) {
         await reply
-          .status(StatusCodes.NOT_FOUND)
+          .status(StatusCodes.CONFLICT)
           .send({ msg: error.message });
       } else {
         await reply
-          .status(StatusCodes.CONFLICT)
+          .status(StatusCodes.NOT_FOUND)
           .send({ msg: error.message });
       }
     }
