@@ -13,25 +13,28 @@ describe("testes do controller de pegar todas as categorias", () => {
     server.register(registerHandlers);
   });
 
-  test("caso de uso sem erros deve passar com status 200", async () => {
-    const defaultId = 0;
-    const token = Token.encode(defaultId, false);
+  test(
+    "caso de uso sem erros deve passar com status 200 e um json com data",
+    async () => {
+      const defaultId = 0;
+      const token = Token.encode(defaultId, false);
 
-    mock(GetAllCategories).mockImplementation(() => {
-      return {
-        getAll: async () => [],
-      };
-    });
+      mock(GetAllCategories).mockImplementation(() => {
+        return {
+          getAll: async () => [],
+        };
+      });
 
-    const response = await server.inject({
-      method: "GET",
-      url: "http://localhost/get-all-categories",
-      cookies: {
-        "financi-jwt": token.encoded,
-      },
-    });
+      const response = await server.inject({
+        method: "GET",
+        url: "http://localhost/get-all-categories",
+        cookies: {
+          "financi-jwt": token.encoded,
+        },
+      });
 
-    expect(response.statusCode).toBe(StatusCodes.OK);
-    expect(response.json()).toHaveProperty("data");
-  });
+      expect(response.statusCode).toBe(StatusCodes.OK);
+      expect(response.json()).toHaveProperty("data");
+    },
+  );
 });
