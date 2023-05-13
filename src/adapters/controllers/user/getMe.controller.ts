@@ -17,6 +17,7 @@ export class GetMeController {
       );
 
       const {
+        id,
         name,
         username,
         fixedIncome,
@@ -27,6 +28,7 @@ export class GetMeController {
       await reply
         .status(StatusCodes.OK)
         .send({
+          id,
           name,
           username,
           fixedIncome,
