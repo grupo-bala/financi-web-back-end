@@ -27,6 +27,9 @@ import { registerGetAllGoalsRoute } from "../routes/goals/getAllGoals.route";
 import { registerRemoveGoalRoute } from "../routes/goals/removeGoal.route";
 import { registerUpdateGoalRoute } from "../routes/goals/updateGoal.route";
 import { registerGetMeRoute } from "../routes/user/getMe.route";
+import { staticFiles } from "./staticFiles";
+import fastifyMultipart from "@fastify/multipart";
+import { registerUploadPhotoRoute } from "../routes/user/uploadPhoto.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -48,6 +51,7 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   fastify.addHook("preHandler", validateJWT);
 
   await registerGetMeRoute(fastify);
+  await registerUploadPhotoRoute(fastify);
   await registerAddGoalRoute(fastify);
   await registerGetAllGoalsRoute(fastify);
   await registerRemoveGoalRoute(fastify);
@@ -59,14 +63,13 @@ export async function registerHandlers(fastify: FastifyInstance) {
   fastify.setSerializerCompiler(serializerCompiler);
 
   await fastify.register(swagger, {
-    swagger: {
+    openapi: {
       info: {
         title: "Financi API",
         description: "API para front-end do site Financi",
         version: "0.1.0",
       },
-      host: EnviromentVars.vars.SWAGGER_UI_HOST,
-      schemes: [EnviromentVars.vars.ENVIRONMENT === "debug" ? "http" : "https"],
+      servers: [ { url: EnviromentVars.vars.SWAGGER_UI_HOST } ],
       tags: [
         {
           name: "user",
@@ -82,7 +85,15 @@ export async function registerHandlers(fastify: FastifyInstance) {
         },
       ],
     },
-    transform: jsonSchemaTransform,
+    transform: ({ schema, url }) => {
+      if (url === "/upload-photo") {
+        const transformed = schema as any;
+
+        return { schema: transformed, url };
+      } else {
+        return jsonSchemaTransform({ schema, url });
+      }
+    },
   });
 
   await fastify.register(swaggerUi, {
@@ -95,6 +106,9 @@ export async function registerHandlers(fastify: FastifyInstance) {
     transformSpecification: (swaggerObject) => swaggerObject,
     transformSpecificationClone: true,
   });
+
+  await fastify.register(fastifyMultipart);
+  await fastify.register(staticFiles);
 
   await fastify.register(cors, {
     origin: EnviromentVars.vars.ENVIRONMENT === "debug"
