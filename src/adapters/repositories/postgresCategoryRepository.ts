@@ -11,4 +11,19 @@ export class PostgresCategoryRepository implements CategoryRepository {
 
     return prismaCategories;
   }
+
+  async existsById(id: number): Promise<boolean> {
+    const count = await PrismaHelper
+      .client
+      .category
+      .count({
+        where: {
+          id,
+        },
+      });
+
+    const empty = 0;
+
+    return count > empty;
+  }
 }
