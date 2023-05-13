@@ -87,6 +87,7 @@ export async function registerHandlers(fastify: FastifyInstance) {
     },
     transform: ({ schema, url }) => {
       if (url === "/upload-photo") {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const transformed = schema as any;
 
         return { schema: transformed, url };

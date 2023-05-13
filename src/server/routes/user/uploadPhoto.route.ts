@@ -1,5 +1,4 @@
 import { FastifyInstance } from "fastify";
-import { ZodTypeProvider } from "fastify-type-provider-zod";
 import {
   UploadPhotoController,
 } from "../../../adapters/controllers/user/uploadPhoto.controller";
