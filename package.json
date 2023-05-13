@@ -7,7 +7,7 @@
     "start": "prisma migrate deploy && node build/index.js",
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "test": "jest --forceExit",
+    "test": "jest tests",
     "lint": "npx eslint src tests",
     "db:migrate": "prisma migrate dev",
     "db:pull": "prisma db pull",
