@@ -12,13 +12,52 @@ Object.defineProperty(PrismaHelper, "client", {
 });
 
 describe("testes do repositório de categorias", () => {
-  test("caso de uso deve ser executado sem problemas", async () => {
-    const pg = new PostgresCategoryRepository();
+  test(
+    "pegar todas as categorias deve ser executado sem problemas",
+    async () => {
+      const pg = new PostgresCategoryRepository();
 
-    prismaMock.category.findMany.mockImplementation(
-      (_args: any) => [] as any,
-    );
+      prismaMock.category.findMany.mockImplementation(
+        (_args: any) => [] as any,
+      );
 
-    await expect(pg.getAll()).resolves.toBeInstanceOf(Array);
-  });
+      await expect(pg.getAll()).resolves.toBeInstanceOf(Array);
+    },
+  );
+
+  test(
+    "checar se uma categoria existe deve retornar falso caso não exista",
+    async () => {
+      const pg = new PostgresCategoryRepository();
+      const count = 0;
+
+      prismaMock.category.count.mockImplementation(
+        (_args: any) => count as any,
+      );
+
+      const id = 1;
+
+      await expect(pg.existsById(id))
+        .resolves
+        .toBe(false);
+    },
+  );
+
+  test(
+    "checar se uma categoria existe deve retornar true caso ela exista",
+    async () => {
+      const pg = new PostgresCategoryRepository();
+      const count = 1;
+
+      prismaMock.category.count.mockImplementation(
+        (_args: any) => count as any,
+      );
+
+      const id = 1;
+
+      await expect(pg.existsById(id))
+        .resolves
+        .toBe(true);
+    },
+  );
 });
