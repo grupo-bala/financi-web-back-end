@@ -21,14 +21,26 @@ export class LoginController {
         Password.fromString(query.password),
       );
 
-      await reply
-        .setCookie("financi-jwt", jwt.encoded, {
-          httpOnly: true,
-          path: "/",
-          sameSite: "strict",
-          domain: EnviromentVars.vars.COOKIE_DOMAIN,
-        })
-        .send();
+      if (EnviromentVars.vars.ENVIRONMENT === "debug") {
+        await reply
+          .setCookie("financi-jwt", jwt.encoded, {
+            httpOnly: true,
+            path: "/",
+            sameSite: "strict",
+            domain: EnviromentVars.vars.COOKIE_DOMAIN,
+          })
+          .send();
+      } else {
+        await reply
+          .setCookie("financi-jwt", jwt.encoded, {
+            httpOnly: true,
+            path: "/",
+            sameSite: "none",
+            secure: true,
+            domain: EnviromentVars.vars.COOKIE_DOMAIN,
+          })
+          .send();
+      }
     } catch (e) {
       const error = e as Error;
       await reply
