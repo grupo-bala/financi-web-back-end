@@ -164,4 +164,41 @@ export class PostgresNewsRepository implements NewsRepository {
     const none = 0;
     return count > none;
   }
+
+  async getRecommendedPreviews(): Promise<NewsPreview[]> {
+    const prismaNews = await PrismaHelper
+      .client
+      .news
+      .findMany({
+        take: 5,
+        where: {
+          recommended: true,
+        },
+        orderBy: {
+          id: "desc",
+        },
+      });
+
+    const recommendedNews: NewsPreview[] = [];
+
+    for (
+      const {
+        id,
+        img_url: imgURL,
+        publish_date: publishDate,
+        recommended,
+        title,
+      } of prismaNews
+    ) {
+      recommendedNews.push({
+        id,
+        imgURL,
+        publishDate,
+        recommended,
+        title,
+      });
+    }
+
+    return recommendedNews;
+  }
 }
