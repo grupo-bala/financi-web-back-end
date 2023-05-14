@@ -10,4 +10,5 @@ export interface NewsRepository {
   remove: (id: number) => Promise<void>;
   get: (id: number) => Promise<News>;
   update: (news: News) => Promise<void>;
+  getRecommendedPreviews: () => Promise<NewsPreview[]>;
 }
