@@ -15,7 +15,7 @@ export class GetAllTransactionsPreview {
     const minimum = 0;
 
     if (page <= minimum) {
-      throw new Error("A página deve ser um numero positivo maior que zero");
+      throw new Error("A página deve ser um número positivo maior que zero");
     } else if (size <= minimum) {
       throw new Error("O tamanho deve ser um número positivo maior que zero");
     }
