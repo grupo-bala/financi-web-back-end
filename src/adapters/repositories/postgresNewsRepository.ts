@@ -53,7 +53,7 @@ export class PostgresNewsRepository implements NewsRepository {
         },
       });
 
-    const newsPreview = [];
+    const newsPreview: NewsPreview[] = [];
 
     for (
       const {
