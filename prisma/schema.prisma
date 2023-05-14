@@ -84,5 +84,5 @@ model news {
   publish_date     DateTime  @db.Date
   last_update_date DateTime? @db.Date
   img_url          String
-  recommended      Boolean
+  recommended      Boolean   @default(false)
 }
