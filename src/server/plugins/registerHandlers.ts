@@ -43,6 +43,7 @@ import {
   registerGetTransactionRoute,
 } from "../routes/transaction/getTransaction.route";
 import { registerGetAllCategoriesRoute } from "../routes/category/getAllCategories.route";
+import { registerGetAllTransactionsPreviewRoute } from "../routes/transaction/getAllTransactionsPreview.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -73,6 +74,7 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   await registerUpdateTransactionRoute(fastify);
   await registerRemoveTransactionRoute(fastify);
   await registerGetTransactionRoute(fastify);
+  await registerGetAllTransactionsPreviewRoute(fastify);
   await registerGetAllCategoriesRoute(fastify);
 }
 
