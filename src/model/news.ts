@@ -4,6 +4,7 @@ export class News {
   readonly summary: string;
   readonly content: string;
   readonly imgURL: string;
+  readonly recommended: boolean;
   readonly id: number | null;
   readonly publishDate: Date | null;
   readonly lastUpdateDate: Date | null;
@@ -14,6 +15,7 @@ export class News {
     summary: string,
     content: string,
     imgURL: string,
+    recommended: boolean,
     publishDate: Date | null,
     lastUpdateDate: Date | null,
     id: number | null,
@@ -23,6 +25,7 @@ export class News {
     this.title = title;
     this.summary = summary;
     this.content = content;
+    this.recommended = recommended;
     this.publishDate = publishDate;
     this.lastUpdateDate = lastUpdateDate;
     this.imgURL = imgURL;
