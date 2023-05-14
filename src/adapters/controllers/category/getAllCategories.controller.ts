@@ -10,7 +10,7 @@ export class GetAllCategoriesController {
   }
 
   async handle(_request: FastifyRequest, reply: FastifyReply) {
-    const categories = this.useCase.getAll();
+    const categories = await this.useCase.getAll();
 
     await reply
       .status(StatusCodes.OK)
