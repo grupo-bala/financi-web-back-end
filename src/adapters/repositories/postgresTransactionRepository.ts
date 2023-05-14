@@ -1,4 +1,5 @@
 import { Transaction } from "../../model/transaction";
+import { TransactionPreview } from "../../model/transactionPreview";
 import {
   TransactionRepository,
 } from "../../usecases/transaction/interface/transactionRepository";
@@ -114,5 +115,47 @@ export class PostgresTransactionRepository implements TransactionRepository {
           id,
         },
       });
+  }
+
+  async getSize(): Promise<number> {
+    return await PrismaHelper
+      .client
+      .transaction
+      .count();
+  }
+
+  async getAllPreviews(
+    page: number,
+    size: number,
+  ): Promise<TransactionPreview[]> {
+    const prismaTransactions = await PrismaHelper
+      .client
+      .transaction
+      .findMany({
+        skip: --page * size,
+        take: size,
+        orderBy: {
+          id: "desc",
+        },
+      });
+
+    const transactionsPreview: TransactionPreview[] = [];
+
+    for (
+      const {
+        id,
+        id_category: categoryId,
+        is_entry: isEntry,
+        occurrence_date: date,
+        title,
+        value,
+      } of prismaTransactions
+    ) {
+      transactionsPreview.push(
+        new TransactionPreview(value, categoryId, title, isEntry, date, id),
+      );
+    }
+
+    return transactionsPreview;
   }
 }
