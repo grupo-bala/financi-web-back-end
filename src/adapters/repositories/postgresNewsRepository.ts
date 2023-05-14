@@ -25,6 +25,7 @@ export class PostgresNewsRepository implements NewsRepository {
     publishDate,
     summary,
     title,
+    recommended,
   }: News): Promise<void> {
     await PrismaHelper
       .client
@@ -37,6 +38,7 @@ export class PostgresNewsRepository implements NewsRepository {
           publish_date: publishDate!,
           summary,
           title,
+          recommended,
         },
       });
   }
@@ -61,10 +63,11 @@ export class PostgresNewsRepository implements NewsRepository {
         publish_date: publishDate,
         title,
         id,
+        recommended,
       } of prismaNews
     ) {
       newsPreview.push(
-        new NewsPreview(id, title, imgURL, publishDate),
+        new NewsPreview(id, title, imgURL, publishDate, recommended),
       );
     }
 
@@ -98,6 +101,7 @@ export class PostgresNewsRepository implements NewsRepository {
       publish_date: publishDate,
       summary,
       title,
+      recommended,
     } = await PrismaHelper
       .client
       .news
@@ -112,6 +116,7 @@ export class PostgresNewsRepository implements NewsRepository {
       title,
       content,
       imgURL,
+      recommended,
       lastUpdateDate,
       publishDate,
       summary,
