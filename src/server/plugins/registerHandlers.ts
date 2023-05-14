@@ -30,6 +30,19 @@ import { registerGetMeRoute } from "../routes/user/getMe.route";
 import { staticFiles } from "./staticFiles";
 import fastifyMultipart from "@fastify/multipart";
 import { registerUploadPhotoRoute } from "../routes/user/uploadPhoto.route";
+import {
+  registerAddTransactionRoute,
+} from "../routes/transaction/addTransaction.route";
+import {
+  registerUpdateTransactionRoute,
+} from "../routes/transaction/updateTransaction.route";
+import {
+  registerRemoveTransactionRoute,
+} from "../routes/transaction/removeTransaction.route";
+import {
+  registerGetTransactionRoute,
+} from "../routes/transaction/getTransaction.route";
+import { registerGetAllCategoriesRoute } from "../routes/category/getAllCategories.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -56,6 +69,11 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   await registerGetAllGoalsRoute(fastify);
   await registerRemoveGoalRoute(fastify);
   await registerUpdateGoalRoute(fastify);
+  await registerAddTransactionRoute(fastify);
+  await registerUpdateTransactionRoute(fastify);
+  await registerRemoveTransactionRoute(fastify);
+  await registerGetTransactionRoute(fastify);
+  await registerGetAllCategoriesRoute(fastify);
 }
 
 export async function registerHandlers(fastify: FastifyInstance) {
