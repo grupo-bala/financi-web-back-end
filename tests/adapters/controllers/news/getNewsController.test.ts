@@ -48,6 +48,7 @@ describe("testes do controller de pegar uma notícia", () => {
         "",
         "",
         "",
+        false,
         null,
         null,
         null,

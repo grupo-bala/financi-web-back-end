@@ -45,6 +45,7 @@ describe("testes do controller de atualizar uma notícia", () => {
           title: "",
           updateDate: new Date().toISOString(),
           id: "-1",
+          recommended: "true",
         },
       });
 
@@ -80,7 +81,7 @@ describe("testes do controller de atualizar uma notícia", () => {
           summary: "",
           title: "",
           updateDate: new Date().toISOString(),
-          id: "-1",
+          id: "1",
         },
       });
 
@@ -112,7 +113,8 @@ describe("testes do controller de atualizar uma notícia", () => {
         summary: "",
         title: "",
         updateDate: new Date().toISOString(),
-        id: "-1",
+        id: "1",
+        recommended: "true",
       },
     });
 

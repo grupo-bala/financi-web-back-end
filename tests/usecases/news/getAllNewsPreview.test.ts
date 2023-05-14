@@ -68,6 +68,7 @@ describe("testes de pegar todos os previews de todas as notícias", () => {
       "",
       "",
       new Date(),
+      false,
     );
 
     mock(PostgresNewsRepository).mockImplementation(() => {

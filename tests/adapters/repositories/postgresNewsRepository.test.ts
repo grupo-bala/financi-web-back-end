@@ -121,6 +121,7 @@ describe("testes do repositório de notícias", () => {
       "",
       "",
       "",
+      false,
       new Date(),
       new Date(),
       id,
@@ -137,6 +138,7 @@ describe("testes do repositório de notícias", () => {
           publish_date: news.publishDate,
           summary: "",
           title: "",
+          recommended: false,
         } as any;
       },
     );
@@ -180,6 +182,7 @@ describe("testes do repositório de notícias", () => {
         "",
         "",
         "",
+        false,
         new Date(),
         new Date(),
         id,
@@ -210,6 +213,7 @@ describe("testes do repositório de notícias", () => {
         "",
         "",
         "",
+        false,
         new Date(),
         new Date(),
         id,
@@ -237,6 +241,7 @@ describe("testes do repositório de notícias", () => {
         "",
         "",
         "",
+        false,
         new Date(),
         new Date(),
         id,
@@ -267,6 +272,7 @@ describe("testes do repositório de notícias", () => {
         "",
         "",
         "",
+        false,
         new Date(),
         new Date(),
         id,
@@ -289,6 +295,7 @@ describe("testes do repositório de notícias", () => {
           publish_date: new Date(),
           title: "",
           id: id,
+          recommended: false,
         },
       ];
       const news = [
@@ -297,6 +304,7 @@ describe("testes do repositório de notícias", () => {
           "",
           "",
           prismaPreviews[0].publish_date,
+          false,
         ),
       ];
 

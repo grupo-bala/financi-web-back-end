@@ -34,6 +34,7 @@ describe("testes de pegar uma notícia", () => {
       "",
       "",
       "",
+      false,
       null,
       null,
       null,

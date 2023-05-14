@@ -44,6 +44,7 @@ describe("testes do controller de adicionar notícia", () => {
           content: "test",
           publishDate: new Date().toISOString(),
           imgURL: "test",
+          recommended: "false",
         },
       });
 
@@ -77,6 +78,7 @@ describe("testes do controller de adicionar notícia", () => {
           content: "test",
           publishDate: new Date().toISOString(),
           imgURL: "test",
+          recommended: "false",
         },
       });
 

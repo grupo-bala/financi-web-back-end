@@ -120,6 +120,7 @@ describe("testes do controller de pegar o preview de várias notícias", () => {
         "",
         "",
         new Date(),
+        false,
       );
 
       mock(GetAllNewsPreview).mockImplementation(() => {
@@ -150,6 +151,7 @@ describe("testes do controller de pegar o preview de várias notícias", () => {
             imgURL: "",
             publishDate: newsPreview.publishDate.toISOString(),
             title: "",
+            recommended: false,
           },
         ],
         pages: 1,
