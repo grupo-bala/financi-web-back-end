@@ -285,7 +285,7 @@ describe("testes do repositório de notícias", () => {
   );
 
   test(
-    "Pegar o preview de notícias deve passar",
+    "pegar o preview de notícias deve passar",
     async () => {
       const pg = new PostgresNewsRepository();
       const id = 1;
@@ -318,6 +318,41 @@ describe("testes do repositório de notícias", () => {
       await expect(pg.getAllPreviews(page, size))
         .resolves
         .toEqual(news);
+    },
+  );
+
+  test(
+    "pegar o preview das notícias recomendadas",
+    async () => {
+      const id = 1;
+      const date = new Date();
+      const prismaPreviews = [
+        {
+          img_url: "",
+          publish_date: date,
+          title: "",
+          id: id,
+          recommended: true,
+        },
+      ];
+
+      prismaMock.news.findMany.mockImplementation(
+        (_args: any) => prismaPreviews as any,
+      );
+
+      const pg = new PostgresNewsRepository();
+
+      expect(pg.getRecommendedPreviews())
+        .resolves
+        .toEqual([
+          new NewsPreview(
+            id,
+            "",
+            "",
+            date,
+            true,
+          ),
+        ]);
     },
   );
 });
