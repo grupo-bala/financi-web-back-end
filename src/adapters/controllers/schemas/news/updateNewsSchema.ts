@@ -8,6 +8,7 @@ export const updateNewsSchema = z.object({
   content: z.string(),
   updateDate: z.coerce.date(),
   imgURL: z.string(),
+  recommended: z.coerce.boolean(),
 });
 
 export type UpdateNewsInput = z.infer<typeof updateNewsSchema>;

@@ -20,6 +20,7 @@ export class UpdateNewsController {
       title,
       updateDate,
       id,
+      recommended,
     } = request.body as UpdateNewsInput;
 
     try {
@@ -30,6 +31,7 @@ export class UpdateNewsController {
           summary,
           content,
           imgURL,
+          recommended,
           null,
           updateDate,
           id,
