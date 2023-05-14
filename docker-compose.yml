@@ -26,6 +26,6 @@ services:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/financi
       PORT: 8080
       SECRET_KEY: dev
-      SWAGGER_UI_HOST: localhost:8080
+      SWAGGER_UI_HOST: http://localhost:8080
       COOKIE_DOMAIN: localhost
       ENVIRONMENT: debug
