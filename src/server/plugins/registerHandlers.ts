@@ -44,12 +44,14 @@ import {
 } from "../routes/transaction/getTransaction.route";
 import { registerGetAllCategoriesRoute } from "../routes/category/getAllCategories.route";
 import { registerGetAllTransactionsPreviewRoute } from "../routes/transaction/getAllTransactionsPreview.route";
+import { registerGetRecommendedNewsPreviewRoute } from "../routes/news/getRecommendedNewsPreview.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
   await registerRegisterRoute(fastify);
   await registerGetAllNewsPreviewRoute(fastify);
   await registerGetNewsRoute(fastify);
+  await registerGetRecommendedNewsPreviewRoute(fastify);
 }
 
 async function registerAdminRoutes(fastify: FastifyInstance) {
