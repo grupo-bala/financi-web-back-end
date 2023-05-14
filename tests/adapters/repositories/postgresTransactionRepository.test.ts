@@ -8,6 +8,7 @@ import { PrismaHelper } from "../../../src/adapters/repositories/prismaHelper";
 import { mockDeep } from "jest-mock-extended";
 import { Transaction } from "../../../src/model/transaction";
 import { Decimal } from "@prisma/client/runtime/library";
+import { TransactionPreview } from "../../../src/model/transactionPreview";
 
 const prismaMock = mockDeep<PrismaClient>();
 Object.defineProperty(PrismaHelper, "client", {
@@ -95,7 +96,7 @@ describe("testes do repositório de transações", () => {
       .toThrow();
   });
 
-  test("pegar uma transação deve passar", async () => {
+  test("pegar uma transação deve passar caso o id exista", async () => {
     const pg = new PostgresTransactionRepository();
     const categoryId = 1;
     const id = 1;
@@ -128,6 +129,24 @@ describe("testes do repositório de transações", () => {
       .toEqual(transaction);
   });
 
+  test(
+    "pegar uma transação do banco deve soltar uma exceção caso o id não exista",
+    async () => {
+      const pg = new PostgresTransactionRepository();
+      const id = -1;
+
+      prismaMock.transaction.findUniqueOrThrow.mockImplementation(
+        (_args: any) => {
+          throw new Error;
+        },
+      );
+
+      await expect(pg.get(id))
+        .rejects
+        .toThrow();
+    },
+  );
+
   test("remover uma transação deve passar", async () => {
     const pg = new PostgresTransactionRepository();
 
@@ -153,4 +172,90 @@ describe("testes do repositório de transações", () => {
       .not
       .toThrow();
   });
+
+  test("pegar o tamanho do repositório deve passar", async () => {
+    const pg = new PostgresTransactionRepository();
+    const size = 10;
+
+    prismaMock.transaction.count.mockImplementation(
+      (_args: any) => size as any,
+    );
+
+    await expect(pg.getSize())
+      .resolves
+      .toBe(size);
+  });
+
+  test(
+    "remover uma transação deve soltar ume exceção caso o id não exista",
+    async () => {
+      const pg = new PostgresTransactionRepository();
+
+      prismaMock.transaction.delete.mockImplementation(
+        (_args: any) => {
+          throw new Error;
+        },
+      );
+
+      const idThatNotExists = 1;
+
+      await expect(
+        pg.remove(idThatNotExists),
+      ).rejects.toThrow();
+    },
+  );
+
+  test("pegar o tamanho do repositório deve passar", async () => {
+    const pg = new PostgresTransactionRepository();
+    const size = 10;
+
+    prismaMock.transaction.count.mockImplementation(
+      (_args: any) => size as any,
+    );
+
+    await expect(pg.getSize())
+      .resolves
+      .toBe(size);
+  });
+
+  test(
+    "Pegar o preview de transações deve passar",
+    async () => {
+      const pg = new PostgresTransactionRepository();
+      const id = 1;
+      const categoryId = 1;
+      const date = new Date();
+      const prismaPreviews = [
+        {
+          id: id,
+          id_category: categoryId,
+          is_entry: true,
+          occurrence_date: date,
+          title: "",
+          value: new Decimal("123.1"),
+        },
+      ];
+      const transactions = [
+        new TransactionPreview(
+          new Decimal("123.1"),
+          categoryId,
+          "",
+          true,
+          date,
+          id,
+        ),
+      ];
+
+      prismaMock.transaction.findMany.mockImplementation(
+        (_args: any) => prismaPreviews as any,
+      );
+
+      const page = 1;
+      const size = 10;
+
+      await expect(pg.getAllPreviews(page, size))
+        .resolves
+        .toEqual(transactions);
+    },
+  );
 });
