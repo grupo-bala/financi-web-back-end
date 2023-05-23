@@ -120,6 +120,23 @@ describe("testes do repositório de metas", () => {
       .toStrictEqual([]);
   });
 
+  test(
+    "usuário com 1 meta deve retornar lista com tamanho maior que zero",
+    async () => {
+      const pg = new PostgresGoalsRepository();
+      const id = 0;
+      const page = 1;
+      const size = 1;
+
+      prismaMock.goal.findMany.mockImplementation(
+        (_args: any) => [{}] as any,
+      );
+
+      const list = await pg.getAllOfUser(id, page, size);
+      const oneElement = 1;
+      expect(list.length).toBe(oneElement);
+    });
+
   test("remover meta do usuário deve passar", async () => {
     const pg = new PostgresGoalsRepository();
     const id = 0;
