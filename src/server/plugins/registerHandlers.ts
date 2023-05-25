@@ -85,6 +85,15 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
 }
 
 export async function registerHandlers(fastify: FastifyInstance) {
+  fastify.setErrorHandler(async (error, _, res) => {
+    if (error instanceof ZodError) {
+      fastify.log.warn(error);
+      await res
+        .status(StatusCodes.BAD_REQUEST)
+        .send({ msg: JSON.parse(error.message) });
+    }
+  });
+
   fastify.setValidatorCompiler(validatorCompiler);
   fastify.setSerializerCompiler(serializerCompiler);
 
@@ -149,13 +158,4 @@ export async function registerHandlers(fastify: FastifyInstance) {
   await fastify.register(registerFreeRoutes);
   await fastify.register(registerAuthRoutes);
   await fastify.register(registerAdminRoutes);
-
-  fastify.setErrorHandler(async (error, req, res) => {
-    if (error instanceof ZodError) {
-      fastify.log.warn(error);
-      await res
-        .status(StatusCodes.BAD_REQUEST)
-        .send(error.issues);
-    }
-  });
 }
