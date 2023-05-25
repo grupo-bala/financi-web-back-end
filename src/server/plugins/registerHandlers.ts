@@ -45,6 +45,8 @@ import {
 import { registerGetAllCategoriesRoute } from "../routes/category/getAllCategories.route";
 import { registerGetAllTransactionsPreviewRoute } from "../routes/transaction/getAllTransactionsPreview.route";
 import { registerGetRecommendedNewsPreviewRoute } from "../routes/news/getRecommendedNewsPreview.route";
+import { registerGetTransactionsByPeriodRoute } from "../routes/statistics/getTransactionsByPeriod.route";
+import { registerGetCategoriesByPeriodRoute } from "../routes/statistics/getCategoriesByPeriod.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -78,6 +80,8 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   await registerGetTransactionRoute(fastify);
   await registerGetAllTransactionsPreviewRoute(fastify);
   await registerGetAllCategoriesRoute(fastify);
+  await registerGetTransactionsByPeriodRoute(fastify);
+  await registerGetCategoriesByPeriodRoute(fastify);
 }
 
 export async function registerHandlers(fastify: FastifyInstance) {
