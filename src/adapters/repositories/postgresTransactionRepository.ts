@@ -1,6 +1,8 @@
 import { Transaction } from "../../model/transaction";
 import { TransactionPreview } from "../../model/transactionPreview";
+import { Interval } from "../../usecases/statistics/data/Filter";
 import {
+  TransactionCategory,
   TransactionRepository,
 } from "../../usecases/transaction/interface/transactionRepository";
 import { PrismaHelper } from "./prismaHelper";
@@ -157,5 +159,44 @@ export class PostgresTransactionRepository implements TransactionRepository {
     }
 
     return transactionsPreview;
+  }
+
+  async getByPeriod(
+    userId: number,
+    interval: Interval,
+  ): Promise<TransactionCategory[]> {
+    const transactions = await PrismaHelper
+      .client
+      .transaction
+      .findMany({
+        where: {
+          occurrence_date: {
+            gte: interval.initDate,
+            lte: interval.endDate,
+          },
+          id_user: userId,
+        },
+        include: {
+          category: true,
+        },
+        orderBy: {
+          occurrence_date: "desc",
+        },
+      });
+
+    return transactions.map((t) => {
+      const transaction = new Transaction(
+        t.value,
+        t.id_category,
+        t.title,
+        t.description,
+        t.is_entry,
+        t.occurrence_date,
+        t.id_user,
+        t.id,
+      );
+
+      return { category: t.category.name, ...transaction };
+    });
   }
 }
