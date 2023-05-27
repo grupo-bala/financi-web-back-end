@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.11% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.11% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -95,28 +95,28 @@
 <a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -127,25 +127,25 @@ import { StatisticsRepository } from "./interface/statisticsRepository";
 export class GetTransactionsByPeriod {
   readonly statisticsRepository: StatisticsRepository;
 &nbsp;
-<span class="fstat-no" title="function not covered" >  constructor(s</span>tatisticsRepository: StatisticsRepository) {
-<span class="cstat-no" title="statement not covered" >    this.statisticsRepository = statisticsRepository;</span>
+  constructor(statisticsRepository: StatisticsRepository) {
+    this.statisticsRepository = statisticsRepository;
   }
 &nbsp;
-  async <span class="fstat-no" title="function not covered" >get(</span>userId: number, interval: Interval, view: View) {
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (interval.endDate &lt; interval.initDate) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new Error("A data final não pode ser menor que a data inicial");</span>
+  async get(userId: number, interval: Interval, view: View) {
+    if (interval.endDate &lt; interval.initDate) {
+      throw new Error("A data final não pode ser menor que a data inicial");
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (view === "Day") {</span>
-<span class="cstat-no" title="statement not covered" >      return await this.statisticsRepository.getTransactionsByDay(</span>
+    if (view === "Day") {
+      return await this.statisticsRepository.getTransactionsByDay(
         userId, interval,
       );
-    } else <span class="cstat-no" title="statement not covered" >if (view === "Week") {</span>
-<span class="cstat-no" title="statement not covered" >      return await this.statisticsRepository.getTransactionsByWeek(</span>
+    } else if (view === "Week") {
+      return await this.statisticsRepository.getTransactionsByWeek(
         userId, interval,
       );
     } else {
-<span class="cstat-no" title="statement not covered" >      return await this.statisticsRepository.getTransactionsByMonth(</span>
+      return await this.statisticsRepository.getTransactionsByMonth(
         userId, interval,
       );
     }
@@ -157,7 +157,7 @@ export class GetTransactionsByPeriod {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-25T13:55:39.158Z
+                at 2023-05-27T21:43:56.342Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
