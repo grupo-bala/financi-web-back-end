@@ -16,7 +16,6 @@ export class UpdateTransactionController {
     const {
       categoryId,
       date,
-      description,
       isEntry,
       title,
       value,
@@ -29,7 +28,6 @@ export class UpdateTransactionController {
           new Decimal(value),
           categoryId,
           title,
-          description,
           isEntry,
           date,
           null,

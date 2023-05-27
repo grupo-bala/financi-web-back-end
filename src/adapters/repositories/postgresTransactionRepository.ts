@@ -28,7 +28,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
       categoryId,
       userId,
       date,
-      description,
       isEntry,
       title,
       value,
@@ -39,7 +38,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
       .transaction
       .create({
         data: {
-          description,
           is_entry: isEntry,
           occurrence_date: date!,
           title,
@@ -55,7 +53,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
       id,
       categoryId,
       date,
-      description,
       isEntry,
       title,
       value,
@@ -72,7 +69,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
           value,
           is_entry: isEntry,
           occurrence_date: date!,
-          description,
           title,
           id_category: categoryId!,
         },
@@ -81,7 +77,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
 
   async get(id: number): Promise<Transaction> {
     const {
-      description,
       id_category: categoryId,
       is_entry: isEntry,
       occurrence_date: date,
@@ -100,7 +95,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
       value,
       categoryId,
       title,
-      description,
       isEntry,
       date,
       null,

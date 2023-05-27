@@ -5,7 +5,6 @@ export const addTransactionSchema = z.object({
   date: z.coerce.date(),
   categoryId: z.coerce.number(),
   title: z.string(),
-  description: z.string(),
   isEntry: z.coerce.boolean(),
 });
 

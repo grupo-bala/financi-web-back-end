@@ -17,7 +17,6 @@ export class AddTransactionController {
     const {
       categoryId,
       date,
-      description,
       isEntry,
       title,
       value,
@@ -30,7 +29,6 @@ export class AddTransactionController {
           new Decimal(value),
           categoryId,
           title,
-          description,
           isEntry,
           date,
           token.id,

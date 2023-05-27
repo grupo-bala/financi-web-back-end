@@ -17,7 +17,6 @@ export class GetTransactionController {
       const {
         categoryId,
         date,
-        description,
         id: transactionId,
         isEntry,
         title,
@@ -30,7 +29,6 @@ export class GetTransactionController {
           data: {
             categoryId,
             date,
-            description,
             transactionId,
             isEntry,
             title,
