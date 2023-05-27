@@ -1,7 +1,7 @@
 import { Interval } from "../data/Filter";
 
 export interface TransactionsByPeriod {
-  occurrence_date: number,
+  date: string,
   entries_sum: number,
   outs_sum: number,
 }
