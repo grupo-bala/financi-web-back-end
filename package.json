@@ -7,7 +7,7 @@
     "start": "prisma migrate deploy && node build/index.js",
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "test": "jest tests",
+    "test": "jest tests --forceExit",
     "lint": "npx eslint src tests",
     "db:migrate": "prisma migrate dev",
     "db:pull": "prisma db pull",
@@ -55,6 +55,7 @@
     "fastify-type-provider-zod": "^1.1.9",
     "http-status-codes": "^2.2.0",
     "jsonwebtoken": "^9.0.0",
+    "jspdf": "^2.5.1",
     "sha.js": "^2.4.11",
     "tsx": "^3.12.7",
     "zod": "^3.21.4"
