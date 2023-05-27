@@ -61,7 +61,6 @@ model transaction {
   occurrence_date DateTime     @db.Date
   id_category     Int
   title           String
-  description     String
   is_entry        Boolean
   category        category     @relation(fields: [id_category], references: [id], onDelete: NoAction, onUpdate: NoAction)
   financi_user    financi_user @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction)
