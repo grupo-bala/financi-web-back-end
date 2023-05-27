@@ -38,7 +38,6 @@ describe("testes do caso de uso de atualizar uma transação", () => {
       new Decimal("123.1"),
       categoryId,
       "",
-      "",
       true,
       new Date(),
       userId,
@@ -75,7 +74,6 @@ describe("testes do caso de uso de atualizar uma transação", () => {
     const transaction = new Transaction(
       new Decimal("123.1"),
       categoryId,
-      "",
       "",
       true,
       new Date(),
@@ -114,7 +112,6 @@ describe("testes do caso de uso de atualizar uma transação", () => {
     const transaction = new Transaction(
       new Decimal("123.1"),
       categoryId,
-      "",
       "",
       true,
       new Date(),

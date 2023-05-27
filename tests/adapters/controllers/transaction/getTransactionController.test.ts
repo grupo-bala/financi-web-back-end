@@ -57,7 +57,6 @@ describe("testes do controller de pegar uma transação", () => {
         new Decimal("123.1"),
         categoryId,
         "",
-        "",
         true,
         new Date(),
         defaultId,
@@ -86,7 +85,6 @@ describe("testes do controller de pegar uma transação", () => {
         data: {
           categoryId: transaction.categoryId,
           date: transaction.date.toISOString(),
-          description: transaction.description,
           isEntry: transaction.isEntry,
           title: transaction.title,
           transactionId: transaction.id,

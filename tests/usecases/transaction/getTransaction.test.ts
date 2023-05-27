@@ -36,7 +36,6 @@ describe("testes do caso de uso de pegar uma transação", () => {
       new Decimal("123.2"),
       categoryId,
       "",
-      "",
       true,
       new Date(),
       userId,

@@ -38,7 +38,6 @@ describe("testes do caso de uso de adicionar transação", () => {
         new Decimal("100"),
         categoryId,
         "",
-        "",
         true,
         new Date(),
         userId,
@@ -72,7 +71,6 @@ describe("testes do caso de uso de adicionar transação", () => {
       const newTransaction = new Transaction(
         new Decimal("100"),
         categoryId,
-        "",
         "",
         true,
         new Date(),

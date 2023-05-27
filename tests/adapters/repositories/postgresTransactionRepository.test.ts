@@ -68,7 +68,6 @@ describe("testes do repositório de transações", () => {
       new Decimal("123.1"),
       categoryId,
       "",
-      "",
       true,
       new Date(),
       userId,
@@ -104,7 +103,6 @@ describe("testes do repositório de transações", () => {
       new Decimal("123.1"),
       categoryId,
       "",
-      "",
       true,
       new Date(),
       null,
@@ -114,7 +112,6 @@ describe("testes do repositório de transações", () => {
     prismaMock.transaction.findUniqueOrThrow.mockImplementation(
       (_args: any) => {
         return {
-          description: transaction.description,
           id_category: transaction.categoryId,
           is_entry: transaction.isEntry,
           occurrence_date: transaction.date,
@@ -159,7 +156,6 @@ describe("testes do repositório de transações", () => {
     const transaction = new Transaction(
       new Decimal("123.1"),
       categoryId,
-      "",
       "",
       true,
       new Date(),
