@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -110,43 +110,43 @@
 <a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -163,22 +163,22 @@ import path from "path";
 export class GenerateReportController {
   readonly usecase: GenerateReport;
 &nbsp;
-<span class="fstat-no" title="function not covered" >  constructor(u</span>secase: GenerateReport) {
-<span class="cstat-no" title="statement not covered" >    this.usecase = usecase;</span>
+  constructor(usecase: GenerateReport) {
+    this.usecase = usecase;
   }
 &nbsp;
-  async <span class="fstat-no" title="function not covered" >handle(</span>request: FastifyRequest, reply: FastifyReply) {
-    const { initDate, endDate } = <span class="cstat-no" title="statement not covered" >request.query as GenerateReportInput;</span>
-    const token = <span class="cstat-no" title="statement not covered" >Token.decode(request.cookies["financi-jwt"]!);</span>
+  async handle(request: FastifyRequest, reply: FastifyReply) {
+    const { initDate, endDate } = request.query as GenerateReportInput;
+    const token = Token.decode(request.cookies["financi-jwt"]!);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const reportPath = <span class="cstat-no" title="statement not covered" >await this.usecase.generate(</span>
+    try {
+      const reportPath = await this.usecase.generate(
         token.id,
         { initDate, endDate },
       );
 &nbsp;
-      const fileStream = <span class="cstat-no" title="statement not covered" >fs.createReadStream(reportPath);</span>
-<span class="cstat-no" title="statement not covered" >      await reply</span>
+      const fileStream = fs.createReadStream(reportPath);
+      await reply
         .type("application/octet-stream")
         .header(
           "Content-Disposition",
@@ -186,11 +186,11 @@ export class GenerateReportController {
         )
         .send(fileStream);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      await PDF.removeReport(reportPath);</span>
+      await PDF.removeReport(reportPath);
     } catch (e) {
-      const error = <span class="cstat-no" title="statement not covered" >e as Error;</span>
+      const error = e as Error;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      await reply</span>
+      await reply
         .status(StatusCodes.BAD_REQUEST)
         .send({ msg: error.message });
     }
@@ -202,7 +202,7 @@ export class GenerateReportController {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-28T21:06:09.287Z
+                at 2023-05-28T22:37:12.957Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
