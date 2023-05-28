@@ -264,7 +264,9 @@
 <a name='L199'></a><a href='#L199'>199</a>
 <a name='L200'></a><a href='#L200'>200</a>
 <a name='L201'></a><a href='#L201'>201</a>
-<a name='L202'></a><a href='#L202'>202</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">25x</span>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -284,10 +286,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -323,13 +325,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -374,7 +372,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -387,6 +384,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -397,6 +399,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -452,7 +457,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -475,13 +479,14 @@ import {
 import { PrismaHelper } from "./prismaHelper";
 &nbsp;
 export class PostgresTransactionRepository implements TransactionRepository {
-  async existsById(id: number): Promise&lt;boolean&gt; {
+  async existsInUserById(id: number, userId: number): Promise&lt;boolean&gt; {
     const count = await PrismaHelper
       .client
       .transaction
       .count({
         where: {
           id,
+          id_user: userId,
         },
       });
 &nbsp;
@@ -495,7 +500,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
       categoryId,
       userId,
       date,
-      description,
       isEntry,
       title,
       value,
@@ -506,7 +510,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
       .transaction
       .create({
         data: {
-          description,
           is_entry: isEntry,
           occurrence_date: date!,
           title,
@@ -522,7 +525,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
       id,
       categoryId,
       date,
-      description,
       isEntry,
       title,
       value,
@@ -539,7 +541,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
           value,
           is_entry: isEntry,
           occurrence_date: date!,
-          description,
           title,
           id_category: categoryId!,
         },
@@ -548,7 +549,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
 &nbsp;
   async get(id: number): Promise&lt;Transaction&gt; {
     const {
-      description,
       id_category: categoryId,
       is_entry: isEntry,
       occurrence_date: date,
@@ -567,7 +567,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
       value,
       categoryId,
       title,
-      description,
       isEntry,
       date,
       null,
@@ -586,16 +585,21 @@ export class PostgresTransactionRepository implements TransactionRepository {
       });
   }
 &nbsp;
-  async getSize(): Promise&lt;number&gt; {
+  async getSize(userId: number): Promise&lt;number&gt; {
     return await PrismaHelper
       .client
       .transaction
-      .count();
+      .count({
+        where: {
+          id_user: userId,
+        },
+      });
   }
 &nbsp;
   async getAllPreviews(
     page: number,
     size: number,
+    userId: number,
   ): Promise&lt;TransactionPreview[]&gt; {
     const prismaTransactions = await PrismaHelper
       .client
@@ -603,8 +607,11 @@ export class PostgresTransactionRepository implements TransactionRepository {
       .findMany({
         skip: --page * size,
         take: size,
+        where: {
+          id_user: userId,
+        },
         orderBy: {
-          id: "desc",
+          occurrence_date: "desc",
         },
       });
 &nbsp;
@@ -656,7 +663,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
         t.value,
         t.id_category,
         t.title,
-        t.description,
         t.is_entry,
         t.occurrence_date,
         t.id_user,
@@ -673,7 +679,7 @@ export class PostgresTransactionRepository implements TransactionRepository {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-27T21:43:56.342Z
+                at 2023-05-28T03:08:26.481Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
