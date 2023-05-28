@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">19.23% </span>
+                <span class="strong">19.35% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/26</span>
+                <span class='fraction'>6/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">19.35% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/25</span>
+                <span class='fraction'>6/31</span>
             </div>
         
             
@@ -145,10 +145,7 @@
 <span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">19x</span>
@@ -158,19 +155,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -180,6 +166,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -223,10 +223,7 @@
 import path from "path";
 import fs from "fs/promises";
 import { TransactionCategory } from "../../usecases/transaction/interface/transactionRepository";
-&nbsp;
-interface TableData {
-  [key: string]: string,
-}
+import autoTable from "jspdf-autotable";
 &nbsp;
 export class PDF {
   static staticPath = path.join(process.cwd(), "public/users/reports");
@@ -236,30 +233,33 @@ export class PDF {
     username: string,
   ): Promise&lt;string&gt; {
     const pdf = <span class="cstat-no" title="statement not covered" >new jsPDF();</span>
-    const x = <span class="cstat-no" title="statement not covered" >0,</span> y = <span class="cstat-no" title="statement not covered" >0;</span>
-    const data: TableData[] = <span class="cstat-no" title="statement not covered" >[];</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    transactions.forEach(<span class="fstat-no" title="function not covered" >(t</span>ransaction) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      data.push({</span>
-        "Título": transaction.title,
-        "Valor": transaction.isEntry
-          ? `R$ ${transaction.value}`
-          : `R$ -${transaction.value}`,
-        "Data": PDF.formatDate(transaction.date),
-        "Categoria": transaction.category,
-      });
-    });
+<span class="cstat-no" title="statement not covered" >    autoTable(pdf, {</span>
+      head: [["Título", "Valor", "Data", "Categoria"]],
+      body: transactions.map(<span class="fstat-no" title="function not covered" >(t</span>) =&gt; <span class="cstat-no" title="statement not covered" >[</span>
+        t.title,
+        t.isEntry ? `+ R$ ${t.value}` : `- R$ ${t.value}`,
+        PDF.formatDate(t.date),
+        t.category,
+      ]),
+      headStyles: {
+        fillColor: "#49AD5A",
+        textColor: "#FFFFFF",
+      },
+      didParseCell: <span class="fstat-no" title="function not covered" >(d</span>ata) =&gt; {
+        const valueColumnIndex = <span class="cstat-no" title="statement not covered" >1;</span>
+<span class="cstat-no" title="statement not covered" >        <span class="missing-if-branch" title="if path not taken" >I</span>if (data.column.index !== valueColumnIndex) {</span>
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    pdf.table(x, y, data, [</span>
-      "Título",
-      "Valor",
-      "Data",
-      "Categoria",
-    ], {
-      headerBackgroundColor: "#49AD5A",
-      headerTextColor: "#FFFFFF",
-      autoSize: true,
-      printHeaders: true,
+<span class="cstat-no" title="statement not covered" >        data.cell.styles.fontStyle = "bold";</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (data.cell.text[0].split(" ")[0] === "+") {</span>
+<span class="cstat-no" title="statement not covered" >          data.cell.styles.textColor = "#49AD5A";</span>
+        } else <span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="if path not taken" >I</span>if (data.cell.text[0].split(" ")[0] === "-") {</span>
+<span class="cstat-no" title="statement not covered" >          data.cell.styles.textColor = "#EF5350";</span>
+        }
+      },
     });
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return await PDF.saveReport(pdf, username);</span>
@@ -304,7 +304,7 @@ export class PDF {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-28T03:08:26.481Z
+                at 2023-05-28T04:47:11.764Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
