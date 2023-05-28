@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { GetTransaction } from "../../../usecases/transaction/getTransaction";
 import { getTransactionInput } from "../schemas/transaction/getTransaction.schema";
 import { StatusCodes } from "http-status-codes";
+import { Token } from "../../data/token";
 
 export class GetTransactionController {
   private readonly useCase: GetTransaction;
@@ -12,6 +13,8 @@ export class GetTransactionController {
 
   async handle(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.query as getTransactionInput;
+    const token = request.cookies["financi-jwt"]!;
+    const userId = Token.decode(token).id;
 
     try {
       const {
@@ -21,7 +24,7 @@ export class GetTransactionController {
         isEntry,
         title,
         value,
-      } = await this.useCase.get(id);
+      } = await this.useCase.get(id, userId);
 
       await reply
         .status(StatusCodes.OK)

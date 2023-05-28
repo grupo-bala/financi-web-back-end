@@ -8,13 +8,14 @@ import {
 import { PrismaHelper } from "./prismaHelper";
 
 export class PostgresTransactionRepository implements TransactionRepository {
-  async existsById(id: number): Promise<boolean> {
+  async existsInUserById(id: number, userId: number): Promise<boolean> {
     const count = await PrismaHelper
       .client
       .transaction
       .count({
         where: {
           id,
+          id_user: userId,
         },
       });
 
@@ -113,16 +114,21 @@ export class PostgresTransactionRepository implements TransactionRepository {
       });
   }
 
-  async getSize(): Promise<number> {
+  async getSize(userId: number): Promise<number> {
     return await PrismaHelper
       .client
       .transaction
-      .count();
+      .count({
+        where: {
+          id_user: userId,
+        },
+      });
   }
 
   async getAllPreviews(
     page: number,
     size: number,
+    userId: number,
   ): Promise<TransactionPreview[]> {
     const prismaTransactions = await PrismaHelper
       .client
@@ -130,8 +136,11 @@ export class PostgresTransactionRepository implements TransactionRepository {
       .findMany({
         skip: --page * size,
         take: size,
+        where: {
+          id_user: userId,
+        },
         orderBy: {
-          id: "desc",
+          occurrence_date: "desc",
         },
       });
 
@@ -183,7 +192,6 @@ export class PostgresTransactionRepository implements TransactionRepository {
         t.value,
         t.id_category,
         t.title,
-        t.description,
         t.is_entry,
         t.occurrence_date,
         t.id_user,

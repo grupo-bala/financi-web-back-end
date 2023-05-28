@@ -8,8 +8,8 @@ export class GetTransaction {
     this.transactionRepository = transactionRepository;
   }
 
-  async get(id: number): Promise<Transaction> {
-    if (!await this.transactionRepository.existsById(id)) {
+  async get(id: number, userId: number): Promise<Transaction> {
+    if (!await this.transactionRepository.existsInUserById(id, userId)) {
       throw new Error("Essa transação não existe");
     }
 

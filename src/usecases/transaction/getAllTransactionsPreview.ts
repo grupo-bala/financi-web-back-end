@@ -8,7 +8,7 @@ export class GetAllTransactionsPreview {
     this.transactionRepository = transactionRepository;
   }
 
-  async get(page: number, size: number): Promise<{
+  async get(page: number, size: number, userId: number): Promise<{
     previews: TransactionPreview[],
     howManyPages: number,
   }> {
@@ -20,7 +20,7 @@ export class GetAllTransactionsPreview {
       throw new Error("O tamanho deve ser um número positivo maior que zero");
     }
 
-    const repositorySize = await this.transactionRepository.getSize();
+    const repositorySize = await this.transactionRepository.getSize(userId);
     const empty = 0;
 
     if (repositorySize === empty) {
@@ -32,7 +32,7 @@ export class GetAllTransactionsPreview {
 
     const repositoryTransactionsPreview = await this
       .transactionRepository
-      .getAllPreviews(page, size);
+      .getAllPreviews(page, size, userId);
 
     return {
       previews: repositoryTransactionsPreview,

@@ -7,8 +7,8 @@ export class RemoveTransaction {
     this.transactionRepository = transactionRepository;
   }
 
-  async remove(id: number): Promise<void> {
-    if (!await this.transactionRepository.existsById(id)) {
+  async remove(id: number, userId: number): Promise<void> {
+    if (!await this.transactionRepository.existsInUserById(id, userId)) {
       throw new Error("Essa transação não existe");
     }
 

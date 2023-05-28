@@ -15,7 +15,10 @@ export class UpdateTransaction {
   }
 
   async update(transaction: Transaction): Promise<void> {
-    if (!await this.transactionRepository.existsById(transaction.id!)) {
+    if (!await this.transactionRepository.existsInUserById(
+      transaction.id!,
+      transaction.userId!,
+    )) {
       throw new Error("Essa transação não existe");
     } else if (
       !await this.categoryRepository.existsById(transaction.categoryId)
