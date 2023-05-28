@@ -51,7 +51,10 @@ describe("testes do controller de relatórios", () => {
       mock(GenerateReport).mockImplementation(() => {
         return {
           generate: async (_id: number, _interval: Interval) => {
-            return await PDF.generateReport([], "test");
+            return await PDF.generateReport([], "test", {
+              initDate: new Date(),
+              endDate: new Date(),
+            });
           },
         };
       });

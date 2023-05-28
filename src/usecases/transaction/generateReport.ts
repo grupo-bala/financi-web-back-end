@@ -24,6 +24,6 @@ export class GenerateReport {
     const transactions = await this.transactionRepository
       .getByPeriod(userId, interval);
 
-    return await PDF.generateReport(transactions, user.username);
+    return await PDF.generateReport(transactions, user.username, interval);
   }
 }

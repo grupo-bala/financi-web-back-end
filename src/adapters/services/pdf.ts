@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs/promises";
 import { TransactionCategory } from "../../usecases/transaction/interface/transactionRepository";
 import autoTable from "jspdf-autotable";
+import { Interval } from "../../usecases/statistics/data/Filter";
 
 export class PDF {
   static staticPath = path.join(process.cwd(), "public/users/reports");
@@ -10,8 +11,24 @@ export class PDF {
   static async generateReport(
     transactions: TransactionCategory[],
     username: string,
+    interval: Interval,
   ): Promise<string> {
     const pdf = new jsPDF();
+
+    const formattedInitDate = PDF.formatDate(interval.initDate);
+    const formattedEndDate = PDF.formatDate(interval.endDate);
+    const pageWidth = pdf.internal.pageSize.width;
+    const half = 0.5;
+    const offsetY = 15;
+
+    pdf.text(
+      `Relatório de transações: ${formattedInitDate} - ${formattedEndDate}`,
+      pageWidth * half,
+      offsetY,
+      {
+        align: "center",
+      },
+    );
 
     autoTable(pdf, {
       head: [["Título", "Valor", "Data", "Categoria"]],
@@ -39,6 +56,7 @@ export class PDF {
           data.cell.styles.textColor = "#EF5350";
         }
       },
+      startY: 25,
     });
 
     return await PDF.saveReport(pdf, username);
