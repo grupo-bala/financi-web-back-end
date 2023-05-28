@@ -15,7 +15,7 @@ describe("testes do caso de uso de remover transação", () => {
   test("deve falhar, pois a transação não existe", async () => {
     mock(PostgresTransactionRepository).mockImplementation(() => {
       return {
-        existsById: async (_: number) => false,
+        existsInUserById: async (_: number, __: number) => false,
       };
     });
 
@@ -24,8 +24,9 @@ describe("testes do caso de uso de remover transação", () => {
     );
 
     const id = -1;
+    const userId = 1;
 
-    await expect(removeTransaction.remove(id))
+    await expect(removeTransaction.remove(id, userId))
       .rejects
       .toThrow(Error);
   });
@@ -33,7 +34,7 @@ describe("testes do caso de uso de remover transação", () => {
   test("deve passar pois a transação existe", async () => {
     mock(PostgresTransactionRepository).mockImplementation(() => {
       return {
-        existsById: async (_: number) => true,
+        existsInUserById: async (_: number, __: number) => true,
         remove: async (_: number) => {},
       };
     });
@@ -43,8 +44,9 @@ describe("testes do caso de uso de remover transação", () => {
     );
 
     const id = 1;
+    const userId = 1;
 
-    await expect(removeTransaction.remove(id))
+    await expect(removeTransaction.remove(id, userId))
       .resolves
       .not
       .toThrow(Error);

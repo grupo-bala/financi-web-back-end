@@ -28,8 +28,9 @@ describe("testes do repositório de transações", () => {
       );
 
       const id = 1;
+      const userId = 1;
 
-      await expect(pg.existsById(id))
+      await expect(pg.existsInUserById(id, userId))
         .resolves
         .toBe(true);
     },
@@ -47,8 +48,9 @@ describe("testes do repositório de transações", () => {
       );
 
       const id = -1;
+      const userId = 1;
 
-      await expect(pg.existsById(id))
+      await expect(pg.existsInUserById(id, userId))
         .resolves
         .toBe(false);
     },
@@ -177,7 +179,9 @@ describe("testes do repositório de transações", () => {
       (_args: any) => size as any,
     );
 
-    await expect(pg.getSize())
+    const userId = 1;
+
+    await expect(pg.getSize(userId))
       .resolves
       .toBe(size);
   });
@@ -209,7 +213,9 @@ describe("testes do repositório de transações", () => {
       (_args: any) => size as any,
     );
 
-    await expect(pg.getSize())
+    const userId = 1;
+
+    await expect(pg.getSize(userId))
       .resolves
       .toBe(size);
   });
@@ -248,8 +254,9 @@ describe("testes do repositório de transações", () => {
 
       const page = 1;
       const size = 10;
+      const userId = 1;
 
-      await expect(pg.getAllPreviews(page, size))
+      await expect(pg.getAllPreviews(page, size, userId))
         .resolves
         .toEqual(transactions);
     },

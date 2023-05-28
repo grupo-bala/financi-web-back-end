@@ -14,7 +14,7 @@ describe("testes do caso de uso de pegar uma transação", () => {
   test("deve falhar, pois a transação não existe", async () => {
     mock(PostgresTransactionRepository).mockImplementation(() => {
       return {
-        existsById: async (_: number) => false,
+        existsInUserById: async (_: number, __: number) => false,
       };
     });
 
@@ -22,8 +22,9 @@ describe("testes do caso de uso de pegar uma transação", () => {
       new PostgresTransactionRepository(),
     );
     const id = -1;
+    const userId = 1;
 
-    await expect(getTransaction.get(id))
+    await expect(getTransaction.get(id, userId))
       .rejects
       .toThrow(Error);
   });
@@ -44,7 +45,7 @@ describe("testes do caso de uso de pegar uma transação", () => {
 
     mock(PostgresTransactionRepository).mockImplementation(() => {
       return {
-        existsById: async (_: number) => true,
+        existsInUserById: async (_: number, __: number) => true,
         get: async (_: number) => transaction,
       };
     });
@@ -53,7 +54,7 @@ describe("testes do caso de uso de pegar uma transação", () => {
       new PostgresTransactionRepository(),
     );
 
-    await expect(getTransaction.get(transactionId))
+    await expect(getTransaction.get(transactionId, userId))
       .resolves
       .toEqual(transaction);
   });

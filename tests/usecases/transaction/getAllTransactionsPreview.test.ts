@@ -20,8 +20,9 @@ describe(
 
       const page = -1;
       const size = 10;
+      const userId = 1;
 
-      await expect(getAllTransactionsPreview.get(page, size))
+      await expect(getAllTransactionsPreview.get(page, size, userId))
         .rejects
         .toThrow("A página deve ser um número positivo maior que zero");
     });
@@ -33,8 +34,9 @@ describe(
 
       const page = 1;
       const size = -10;
+      const userId = 1;
 
-      await expect(getAllTransactionsPreview.get(page, size))
+      await expect(getAllTransactionsPreview.get(page, size, userId))
         .rejects
         .toThrow("O tamanho deve ser um número positivo maior que zero");
     });
@@ -54,8 +56,9 @@ describe(
 
       const page = 1;
       const size = 10;
+      const userId = 1;
 
-      await expect(getAllTransactionsPreview.get(page, size))
+      await expect(getAllTransactionsPreview.get(page, size, userId))
         .resolves
         .toEqual({
           previews: [],
@@ -90,8 +93,9 @@ describe(
 
       const page = 1;
       const size = 10;
+      const userId = 1;
 
-      await expect(getAllTransactionsPreview.get(page, size))
+      await expect(getAllTransactionsPreview.get(page, size, userId))
         .resolves
         .toEqual({
           previews: [transactionPreview],

@@ -21,7 +21,7 @@ describe("testes do caso de uso de atualizar uma transação", () => {
   test("deve falhar, pois a transação não existe", async () => {
     mock(PostgresTransactionRepository).mockImplementation(() => {
       return {
-        existsById: async (_: number) => false,
+        existsInUserById: async (_: number, __: number) => false,
       };
     });
 
@@ -52,7 +52,7 @@ describe("testes do caso de uso de atualizar uma transação", () => {
   test("deve falhar, pois a categoria não existe", async () => {
     mock(PostgresTransactionRepository).mockImplementation(() => {
       return {
-        existsById: async (_: number) => true,
+        existsInUserById: async (_: number, __: number) => true,
       };
     });
 
@@ -89,7 +89,7 @@ describe("testes do caso de uso de atualizar uma transação", () => {
   test("deve passar, pois a categoria e transação existem", async () => {
     mock(PostgresTransactionRepository).mockImplementation(() => {
       return {
-        existsById: async (_: number) => true,
+        existsInUserById: async (_: number, __: number) => true,
         update: async (_: Transaction) => {},
       };
     });
