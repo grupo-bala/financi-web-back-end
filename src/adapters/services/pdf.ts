@@ -2,10 +2,7 @@ import jsPDF from "jspdf";
 import path from "path";
 import fs from "fs/promises";
 import { TransactionCategory } from "../../usecases/transaction/interface/transactionRepository";
-
-interface TableData {
-  [key: string]: string,
-}
+import autoTable from "jspdf-autotable";
 
 export class PDF {
   static staticPath = path.join(process.cwd(), "public/users/reports");
@@ -15,30 +12,33 @@ export class PDF {
     username: string,
   ): Promise<string> {
     const pdf = new jsPDF();
-    const x = 0, y = 0;
-    const data: TableData[] = [];
 
-    transactions.forEach((transaction) => {
-      data.push({
-        "Título": transaction.title,
-        "Valor": transaction.isEntry
-          ? `R$ ${transaction.value}`
-          : `R$ -${transaction.value}`,
-        "Data": PDF.formatDate(transaction.date),
-        "Categoria": transaction.category,
-      });
-    });
+    autoTable(pdf, {
+      head: [["Título", "Valor", "Data", "Categoria"]],
+      body: transactions.map((t) => [
+        t.title,
+        t.isEntry ? `+ R$ ${t.value}` : `- R$ ${t.value}`,
+        PDF.formatDate(t.date),
+        t.category,
+      ]),
+      headStyles: {
+        fillColor: "#49AD5A",
+        textColor: "#FFFFFF",
+      },
+      didParseCell: (data) => {
+        const valueColumnIndex = 1;
+        if (data.column.index !== valueColumnIndex) {
+          return;
+        }
 
-    pdf.table(x, y, data, [
-      "Título",
-      "Valor",
-      "Data",
-      "Categoria",
-    ], {
-      headerBackgroundColor: "#49AD5A",
-      headerTextColor: "#FFFFFF",
-      autoSize: true,
-      printHeaders: true,
+        data.cell.styles.fontStyle = "bold";
+
+        if (data.cell.text[0].split(" ")[0] === "+") {
+          data.cell.styles.textColor = "#49AD5A";
+        } else if (data.cell.text[0].split(" ")[0] === "-") {
+          data.cell.styles.textColor = "#EF5350";
+        }
+      },
     });
 
     return await PDF.saveReport(pdf, username);
