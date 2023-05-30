@@ -7,7 +7,7 @@ import { PostgresTransactionRepository } from "../../../adapters/repositories/po
 import { PostgresUserRepository } from "../../../adapters/repositories/postgresUserRepository";
 
 export async function registerGenerateReportPDFRoute(fastify: FastifyInstance) {
-  fastify.withTypeProvider<ZodTypeProvider>().get("/generate-report", {
+  fastify.withTypeProvider<ZodTypeProvider>().get("/generate-report-pdf", {
     schema: {
       querystring: GenerateReportSchema,
       tags: ["transactions"],
