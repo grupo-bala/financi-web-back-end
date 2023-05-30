@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/adapters/controllers/statistics/getTransactionsByPeriod.controller.ts</title>
+    <title>Code coverage report for src/adapters/controllers/transaction/generateReportXLSX.controller.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/adapters/controllers/statistics</a> getTransactionsByPeriod.controller.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/adapters/controllers/transaction</a> generateReportXLSX.controller.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>6/16</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>6/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -112,12 +112,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
+<span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">23x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -125,72 +142,55 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FastifyReply, FastifyRequest } from "fastify";
-import { GetTransactionsByPeriod } from "../../../usecases/statistics/getTransactionsByPeriod";
-import { GetTransactionsByPeriodInput } from "../schemas/statistics/getTransactionsByPeriod.schema";
+import { GenerateReportXLSX } from "../../../usecases/transaction/generateReportXLSX";
+import { GenerateReportInput } from "../schemas/transaction/generateReport.schema";
+import fs from "fs";
+import path from "path";
 import { Token } from "../../data/token";
+import { XLSX } from "../../services/xlsx";
 import { StatusCodes } from "http-status-codes";
 &nbsp;
-export class GetTransactionsByPeriodController {
-  readonly usecase: GetTransactionsByPeriod;
+export class GenerateReportXLSXController {
+  readonly usecase: GenerateReportXLSX;
 &nbsp;
-  constructor(usecase: GetTransactionsByPeriod) {
-    this.usecase = usecase;
+<span class="fstat-no" title="function not covered" >  constructor(u</span>secase: GenerateReportXLSX) {
+<span class="cstat-no" title="statement not covered" >    this.usecase = usecase;</span>
   }
 &nbsp;
-  async handle(request: FastifyRequest, reply: FastifyReply) {
-    const {
-      initDate,
-      endDate,
-      view,
-    } = request.query as GetTransactionsByPeriodInput;
+  async <span class="fstat-no" title="function not covered" >handle(</span>request: FastifyRequest, reply: FastifyReply) {
+    const { initDate, endDate } = <span class="cstat-no" title="statement not covered" >request.query as GenerateReportInput;</span>
+    const token = <span class="cstat-no" title="statement not covered" >Token.decode(request.cookies["financi-jwt"]!);</span>
 &nbsp;
-    try {
-      const token = Token.decode(
-        request.cookies["financi-jwt"]!,
-      );
-&nbsp;
-      const transactions = await this.usecase.get(
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      const reportPath = <span class="cstat-no" title="statement not covered" >await this.usecase.generate(</span>
         token.id,
         { initDate, endDate },
-        view,
       );
 &nbsp;
-      await reply
-        .status(StatusCodes.OK)
-        .send({
-          data: transactions,
-        });
-    } catch (e) {
-      const error = e as Error;
+      const fileStream = <span class="cstat-no" title="statement not covered" >fs.createReadStream(reportPath);</span>
+<span class="cstat-no" title="statement not covered" >      await reply</span>
+        .type("application/octet-stream")
+        .header(
+          "Content-Disposition",
+          `attachment; filename=${path.basename(reportPath)}`,
+        )
+        .send(fileStream);
 &nbsp;
-      await reply
+<span class="cstat-no" title="statement not covered" >      await XLSX.removeReport(reportPath);</span>
+    } catch (e) {
+      const error = <span class="cstat-no" title="statement not covered" >e as Error;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      await reply</span>
         .status(StatusCodes.BAD_REQUEST)
         .send({ msg: error.message });
     }
