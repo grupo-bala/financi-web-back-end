@@ -29,7 +29,7 @@ describe("testes do controller de relatórios", () => {
 
     const response = await server.inject({
       method: "GET",
-      url: "http://localhost/generate-report",
+      url: "http://localhost/generate-report-pdf",
       query: {
         initDate: "2023-01-01",
         endDate: "2023-05-30",
@@ -61,7 +61,7 @@ describe("testes do controller de relatórios", () => {
 
       const response = await server.inject({
         method: "GET",
-        url: "http://localhost/generate-report",
+        url: "http://localhost/generate-report-pdf",
         query: {
           initDate: "2023-01-01",
           endDate: "2023-05-30",
