@@ -18,7 +18,7 @@ describe("testes de adicionar cursos", () => {
       };
     });
 
-    const newCourse = new Course("", "", null, null, null);
+    const newCourse = new Course("", "", null, null, null, null);
 
     const addCourse = new AddCourse(
       new PostgresCourseRepository(),

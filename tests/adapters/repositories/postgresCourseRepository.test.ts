@@ -58,7 +58,7 @@ describe("testes do repositório de cursos", () => {
       (_args: any) => ({}) as any,
     );
 
-    const course = new Course("", "", null, null, null);
+    const course = new Course("", "", null, null, null, null);
 
     await expect(pg.add(course))
       .resolves
@@ -90,7 +90,7 @@ describe("testes do repositório de cursos", () => {
 
     const id = 1;
 
-    const course = new Course("", "", null, null, id);
+    const course = new Course("", "", null, null, null, id);
 
     await expect(pg.update(course))
       .resolves
@@ -133,6 +133,9 @@ describe("testes do repositório de cursos", () => {
           _avg: {
             duration_sec: aggregateResult,
           },
+          _sum: {
+            duration_sec: aggregateResult,
+          },
         } as any;
       },
     );
@@ -155,6 +158,7 @@ describe("testes do repositório de cursos", () => {
           averageTimePerLesson: 10,
           howManyLessons: 1,
           title: "name",
+          totalTime: 10,
         } as Course,
       ]);
   });

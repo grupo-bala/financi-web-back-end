@@ -23,7 +23,7 @@ describe("testes de atualizar um curso", () => {
     );
 
     const id = -1;
-    const course = new Course("", "", null, null, id);
+    const course = new Course("", "", null, null, null, id);
 
     await expect(updateCourse.update(course))
       .rejects
@@ -43,7 +43,7 @@ describe("testes de atualizar um curso", () => {
     );
 
     const id = 1;
-    const course = new Course("", "", null, null, id);
+    const course = new Course("", "", null, null, null, id);
 
     await expect(updateCourse.update(course))
       .resolves

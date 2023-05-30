@@ -40,8 +40,9 @@ describe("testes de pegar todos os cursos", () => {
       const repositorySize = 1;
       const howManyLessons = 1;
       const avgTime = 30;
+      const totalTime = 30;
       const id = 1;
-      const course = new Course("", "", howManyLessons, avgTime, id);
+      const course = new Course("", "", howManyLessons, avgTime, totalTime, id);
 
       mock(PostgresCourseRepository).mockImplementation(() => {
         return {
