@@ -49,7 +49,6 @@ import { registerGetTransactionsByPeriodRoute } from "../routes/statistics/getTr
 import { registerGetCategoriesByPeriodRoute } from "../routes/statistics/getCategoriesByPeriod.route";
 import { registerGenerateReportPDFRoute } from "../routes/transaction/generateReportPDF.route";
 import { registerGenerateReportXLSX } from "../routes/transaction/generateReportXLSX.route";
-import { registerGenerateReportRoute } from "../routes/transaction/generateReport.route";
 import { registerAddCourseRoute } from "../routes/course/addCourse.route";
 import { registerRemoveCourseRoute } from "../routes/course/removeCourse.route";
 import { registerUpdateCourseRoute } from "../routes/course/updateCourse.route";
@@ -94,7 +93,6 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   await registerGetCategoriesByPeriodRoute(fastify);
   await registerGenerateReportPDFRoute(fastify);
   await registerGenerateReportXLSX(fastify);
-  await registerGenerateReportRoute(fastify);
   await registerGetAllCoursesRoute(fastify);
 }
 
