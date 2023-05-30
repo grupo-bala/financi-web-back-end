@@ -50,7 +50,7 @@ describe("testes do controller de obter usuário", () => {
         },
       });
 
-      const { name, username } = JSON.parse(res.body);
+      const { data: { name, username } } = res.json();
 
       expect(res.statusCode).toBe(StatusCodes.OK);
       expect(name).toBe(returnUser.name);
