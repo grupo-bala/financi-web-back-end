@@ -28,12 +28,14 @@ export class GetMeController {
       await reply
         .status(StatusCodes.OK)
         .send({
-          id,
-          name,
-          username,
-          fixedIncome,
-          balance,
-          email: email.value,
+          data: {
+            id,
+            name,
+            username,
+            fixedIncome,
+            balance,
+            email: email.value,
+          },
         });
     } catch (e) {
       const error = e as Error;
