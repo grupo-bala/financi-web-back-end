@@ -53,6 +53,7 @@ import { registerAddCourseRoute } from "../routes/course/addCourse.route";
 import { registerRemoveCourseRoute } from "../routes/course/removeCourse.route";
 import { registerUpdateCourseRoute } from "../routes/course/updateCourse.route";
 import { registerGetAllCoursesRoute } from "../routes/course/getAllCourses.route";
+import { registerAddLessonRoute } from "../routes/lesson/addLesson.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -72,6 +73,7 @@ async function registerAdminRoutes(fastify: FastifyInstance) {
   await registerAddCourseRoute(fastify);
   await registerRemoveCourseRoute(fastify);
   await registerUpdateCourseRoute(fastify);
+  await registerAddLessonRoute(fastify);
 }
 
 async function registerAuthRoutes(fastify: FastifyInstance) {
