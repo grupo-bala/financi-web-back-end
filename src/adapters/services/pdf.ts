@@ -34,7 +34,13 @@ export class PDF {
       head: [["Título", "Valor", "Data", "Categoria"]],
       body: transactions.map((t) => [
         t.title,
-        t.isEntry ? `+ R$ ${t.value}` : `- R$ ${t.value}`,
+        t.isEntry
+          ? `+ R$ ${Number(t.value).toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+          })}`
+          : `- R$ ${Number(t.value).toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+          })}`,
         PDF.formatDate(t.date),
         t.category,
       ]),

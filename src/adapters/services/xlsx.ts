@@ -27,7 +27,12 @@ export class XLSX {
     const defaultColumnWidth = 10;
     const maxWidth = parsedData
       .reduce((w, r) => Math.max(w, r["Título"].length), defaultColumnWidth);
-    worksheet["!cols"] = [ { wch: maxWidth } ];
+    worksheet["!cols"] = [
+      { wch: maxWidth },
+      { wch: 20 },
+      { wch: 20 },
+      { wch: 20 },
+    ];
 
     jsXLSX.utils.book_append_sheet(workbook, worksheet, "Transações");
 
