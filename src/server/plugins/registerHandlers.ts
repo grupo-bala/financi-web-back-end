@@ -49,6 +49,11 @@ import { registerGetTransactionsByPeriodRoute } from "../routes/statistics/getTr
 import { registerGetCategoriesByPeriodRoute } from "../routes/statistics/getCategoriesByPeriod.route";
 import { registerGenerateReportPDFRoute } from "../routes/transaction/generateReportPDF.route";
 import { registerGenerateReportXLSX } from "../routes/transaction/generateReportXLSX.route";
+import { registerGenerateReportRoute } from "../routes/transaction/generateReport.route";
+import { registerAddCourseRoute } from "../routes/course/addCourse.route";
+import { registerRemoveCourseRoute } from "../routes/course/removeCourse.route";
+import { registerUpdateCourseRoute } from "../routes/course/updateCourse.route";
+import { registerGetAllCoursesRoute } from "../routes/course/getAllCourses.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -65,6 +70,9 @@ async function registerAdminRoutes(fastify: FastifyInstance) {
   await registerAddNewsRoute(fastify);
   await registerRemoveNewsRoute(fastify);
   await registerUpdateNewsRoute(fastify);
+  await registerAddCourseRoute(fastify);
+  await registerRemoveCourseRoute(fastify);
+  await registerUpdateCourseRoute(fastify);
 }
 
 async function registerAuthRoutes(fastify: FastifyInstance) {
@@ -86,6 +94,8 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   await registerGetCategoriesByPeriodRoute(fastify);
   await registerGenerateReportPDFRoute(fastify);
   await registerGenerateReportXLSX(fastify);
+  await registerGenerateReportRoute(fastify);
+  await registerGetAllCoursesRoute(fastify);
 }
 
 export async function registerHandlers(fastify: FastifyInstance) {
