@@ -60,11 +60,14 @@ export class PostgresCourseRepository implements CourseRepository {
           },
         });
 
-      const averageTimePerLessonQuery = await PrismaHelper
+      const aggregation = await PrismaHelper
         .client
         .lesson
         .aggregate({
           _avg: {
+            duration_sec: true,
+          },
+          _sum: {
             duration_sec: true,
           },
           where: {
@@ -75,8 +78,12 @@ export class PostgresCourseRepository implements CourseRepository {
       const secondsInMinute = 60;
       const emptyCourseTime = 0;
 
-      const averageTimePerLessonInSeconds = averageTimePerLessonQuery
+      const averageTimePerLessonInSeconds = aggregation
         ._avg
+        .duration_sec ?? emptyCourseTime;
+
+      const totalTimeInSeconds = aggregation
+        ._sum
         .duration_sec ?? emptyCourseTime;
 
       courses.push({
@@ -87,6 +94,9 @@ export class PostgresCourseRepository implements CourseRepository {
           averageTimePerLessonInSeconds / secondsInMinute,
         ),
         howManyLessons,
+        totalTime: Math.ceil(
+          totalTimeInSeconds / secondsInMinute,
+        ),
       });
     }
 

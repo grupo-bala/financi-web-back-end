@@ -4,12 +4,14 @@ export class Course {
   readonly id: number | null;
   readonly howManyLessons: number | null;
   readonly averageTimePerLesson: number | null;
+  readonly totalTime: number | null;
 
   constructor(
     title: string,
     description: string,
     howManyLessons: number | null,
     avarageTimePerLesson: number | null,
+    totalTime: number | null,
     id: number | null,
   ) {
     this.id = id;
@@ -17,5 +19,6 @@ export class Course {
     this.description = description;
     this.howManyLessons = howManyLessons;
     this.averageTimePerLesson = avarageTimePerLesson;
+    this.totalTime = totalTime;
   }
 }

@@ -20,6 +20,7 @@ export class UpdateCourseController {
         description,
         null,
         null,
+        null,
         id,
       ));
 

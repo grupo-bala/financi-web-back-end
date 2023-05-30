@@ -20,6 +20,7 @@ export class AddCourseController {
       null,
       null,
       null,
+      null,
     ));
 
     await reply.status(StatusCodes.CREATED).send();
