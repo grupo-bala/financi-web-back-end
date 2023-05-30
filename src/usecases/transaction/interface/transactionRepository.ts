@@ -6,7 +6,7 @@ export type TransactionCategory = Transaction & { category: string };
 
 export interface TransactionRepository {
   existsInUserById: (id: number, userId: number) => Promise<boolean>;
-  add: (transaction: Transaction) => Promise<void>;
+  add: (transaction: Transaction) => Promise<Transaction>;
   update: (transaction: Transaction) => Promise<void>;
   get: (id: number) => Promise<Transaction>;
   remove: (id: number) => Promise<void>;

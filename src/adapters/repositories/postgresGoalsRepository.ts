@@ -11,8 +11,8 @@ export class PostgresGoalsRepository implements GoalsRepository {
     deadline,
     totalValue,
     userId,
-  }: Goal): Promise<void> {
-    await PrismaHelper
+  }: Goal): Promise<Goal> {
+    const { id } = await PrismaHelper
       .client
       .goal
       .create({
@@ -24,6 +24,15 @@ export class PostgresGoalsRepository implements GoalsRepository {
           id_user: userId,
         },
       });
+
+    return new Goal({
+      id,
+      title,
+      deadline,
+      userId,
+      totalValue,
+      currentValue,
+    });
   }
 
   async existsInUserByTitle(userId: number, title: string): Promise<boolean> {

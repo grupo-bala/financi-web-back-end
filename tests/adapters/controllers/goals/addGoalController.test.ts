@@ -48,7 +48,7 @@ describe("testes do controller de adicionar metas", () => {
   test("caso de uso sem erro deve retornar status code 201", async () => {
     mock(AddGoal).mockImplementation(() => {
       return {
-        add: async (_goal: Goal) => Promise.resolve(),
+        add: async (_goal: Goal) => Promise.resolve() as any,
       };
     });
 

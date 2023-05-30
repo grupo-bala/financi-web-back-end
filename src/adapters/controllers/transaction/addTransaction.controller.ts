@@ -24,7 +24,7 @@ export class AddTransactionController {
     const token = Token.decode(request.cookies["financi-jwt"]!);
 
     try {
-      await this.useCase.add(
+      const transaction = await this.useCase.add(
         new Transaction(
           new Decimal(value),
           categoryId,
@@ -36,7 +36,9 @@ export class AddTransactionController {
         ),
       );
 
-      await reply.status(StatusCodes.CREATED).send();
+      await reply
+        .status(StatusCodes.CREATED)
+        .send({ data: transaction });
     } catch (e) {
       const error = e as Error;
 

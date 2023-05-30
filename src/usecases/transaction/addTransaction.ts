@@ -14,11 +14,11 @@ export class AddTransaction {
     this.categoryRepository = categoryRepository;
   }
 
-  async add(transaction: Transaction): Promise<void> {
+  async add(transaction: Transaction): Promise<Transaction> {
     if (!await this.categoryRepository.existsById(transaction.categoryId)) {
       throw new Error("Essa categoria não existe");
     }
 
-    await this.transactionRepository.add(transaction);
+    return await this.transactionRepository.add(transaction);
   }
 }

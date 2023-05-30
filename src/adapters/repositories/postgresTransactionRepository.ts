@@ -24,7 +24,7 @@ export class PostgresTransactionRepository implements TransactionRepository {
     return count > empty;
   }
 
-  async add(transaction: Transaction): Promise<void> {
+  async add(transaction: Transaction): Promise<Transaction> {
     const {
       categoryId,
       userId,
@@ -34,7 +34,7 @@ export class PostgresTransactionRepository implements TransactionRepository {
       value,
     } = transaction;
 
-    await PrismaHelper
+    const { id } = await PrismaHelper
       .client
       .transaction
       .create({
@@ -47,6 +47,16 @@ export class PostgresTransactionRepository implements TransactionRepository {
           id_category: categoryId,
         },
       });
+
+    return new Transaction(
+      value,
+      categoryId,
+      title,
+      isEntry,
+      date,
+      userId,
+      id,
+    );
   }
 
   async update(transaction: Transaction): Promise<void> {

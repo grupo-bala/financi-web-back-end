@@ -21,7 +21,7 @@ describe("testes do caso de uso de adicionar transação", () => {
     async () => {
       mock(PostgresTransactionRepository).mockImplementation(() => {
         return {
-          add: async () => {},
+          add: async () => ({} as any),
         };
       });
 

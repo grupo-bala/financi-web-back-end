@@ -26,7 +26,7 @@ describe("testes do controller de adicionar uma transação", () => {
 
     mock(AddTransaction).mockImplementation(() => {
       return {
-        add: async (_: Transaction) => {},
+        add: async (_: Transaction) => ({} as any),
       };
     });
 

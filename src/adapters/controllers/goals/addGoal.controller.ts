@@ -25,7 +25,7 @@ export class AddGoalController {
       );
       const noMoney = 0;
 
-      await this.useCase.add({
+      const goal = await this.useCase.add({
         id: -1,
         currentValue: new Decimal(noMoney),
         title,
@@ -36,7 +36,7 @@ export class AddGoalController {
 
       await reply
         .status(StatusCodes.CREATED)
-        .send();
+        .send({ data: goal });
     } catch (e) {
       const error = e as Error;
       await reply

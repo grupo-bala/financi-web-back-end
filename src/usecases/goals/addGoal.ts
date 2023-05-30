@@ -15,6 +15,6 @@ export class AddGoal {
       throw new Error("Uma meta com esse nome já existe para esse usuário");
     }
 
-    await this.goalsRepository.add(goal);
+    return await this.goalsRepository.add(goal);
   }
 }

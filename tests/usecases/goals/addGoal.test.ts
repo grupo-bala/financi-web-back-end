@@ -37,7 +37,7 @@ describe("testes de adicionar metas", () => {
     mock(PostgresGoalsRepository).mockImplementation(() => {
       return {
         existsInUserByTitle: async (_userId: number, _title: string) => false,
-        add: async (_goal: Goal) => Promise.resolve(),
+        add: async (_goal: Goal) => Promise.resolve() as any,
       };
     });
 
