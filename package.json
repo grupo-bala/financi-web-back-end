@@ -59,6 +59,7 @@
     "jspdf-autotable": "^3.5.29",
     "sha.js": "^2.4.11",
     "tsx": "^3.12.7",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz",
     "zod": "^3.21.4"
   }
 }
