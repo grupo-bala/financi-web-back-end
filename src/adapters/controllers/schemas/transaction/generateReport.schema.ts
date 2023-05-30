@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-export const generateReportSchema = z.object({
+export const GenerateReportSchema = z.object({
   initDate: z.coerce.date(),
   endDate: z.coerce.date(),
 });
 
-export type GenerateReportInput = z.infer<typeof generateReportSchema>;
+export type GenerateReportInput = z.infer<typeof GenerateReportSchema>;

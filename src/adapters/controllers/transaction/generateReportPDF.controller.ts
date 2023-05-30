@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { GenerateReport } from "../../../usecases/transaction/generateReport";
+import { GenerateReportPDF } from "../../../usecases/transaction/generateReportPDF";
 import { GenerateReportInput } from "../schemas/transaction/generateReport.schema";
 import { Token } from "../../data/token";
 import { StatusCodes } from "http-status-codes";
@@ -7,10 +7,10 @@ import { PDF } from "../../services/pdf";
 import fs from "fs";
 import path from "path";
 
-export class GenerateReportController {
-  readonly usecase: GenerateReport;
+export class GenerateReportPDFController {
+  readonly usecase: GenerateReportPDF;
 
-  constructor(usecase: GenerateReport) {
+  constructor(usecase: GenerateReportPDF) {
     this.usecase = usecase;
   }
 

@@ -1,14 +1,14 @@
 import Fastify from "fastify";
 import { registerHandlers } from "../../../../src/server/plugins/registerHandlers";
 import { Token } from "../../../../src/adapters/data/token";
-import { GenerateReport } from "../../../../src/usecases/transaction/generateReport";
+import { GenerateReportPDF } from "../../../../src/usecases/transaction/generateReportPDF";
 import { mock } from "../../../util";
 import { Interval } from "../../../../src/usecases/statistics/data/Filter";
 import { StatusCodes } from "http-status-codes";
 import { PDF } from "../../../../src/adapters/services/pdf";
 
 const server = Fastify();
-jest.mock("../../../../src/usecases/transaction/generateReport.ts");
+jest.mock("../../../../src/usecases/transaction/generateReportPDF.ts");
 
 describe("testes do controller de relatórios", () => {
   beforeAll(() => {
@@ -19,7 +19,7 @@ describe("testes do controller de relatórios", () => {
     const defaultId = 0;
     const token = Token.encode(defaultId, false);
 
-    mock(GenerateReport).mockImplementation(() => {
+    mock(GenerateReportPDF).mockImplementation(() => {
       return {
         generate: async (_id: number, _interval: Interval) => {
           throw new Error();
@@ -48,7 +48,7 @@ describe("testes do controller de relatórios", () => {
       const defaultId = 0;
       const token = Token.encode(defaultId, false);
 
-      mock(GenerateReport).mockImplementation(() => {
+      mock(GenerateReportPDF).mockImplementation(() => {
         return {
           generate: async (_id: number, _interval: Interval) => {
             return await PDF.generateReport([], "test", {

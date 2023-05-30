@@ -3,7 +3,7 @@ import { Interval } from "../statistics/data/Filter";
 import { UserRepository } from "../user/interfaces/userRepository";
 import { TransactionRepository } from "./interface/transactionRepository";
 
-export class GenerateReport {
+export class GenerateReportPDF {
   private readonly transactionRepository: TransactionRepository;
   private readonly userRepository: UserRepository;
 

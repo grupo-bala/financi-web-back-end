@@ -8,8 +8,8 @@ import {
   PostgresUserRepository,
 } from "../../../src/adapters/repositories/postgresUserRepository";
 import {
-  GenerateReport,
-} from "../../../src/usecases/transaction/generateReport";
+  GenerateReportPDF,
+} from "../../../src/usecases/transaction/generateReportPDF";
 import { User } from "../../../src/model/user";
 import { Decimal } from "@prisma/client/runtime/library";
 import { Email } from "../../../src/model/data/email";
@@ -30,7 +30,7 @@ describe("testes do caso de uso de gerar relatório", () => {
   });
 
   test("data inicial maior que final deve falhar", async () => {
-    const usecase = new GenerateReport(
+    const usecase = new GenerateReportPDF(
       new PostgresTransactionRepository(),
       new PostgresUserRepository(),
     );
@@ -76,7 +76,7 @@ describe("testes do caso de uso de gerar relatório", () => {
       };
     });
 
-    const usecase = new GenerateReport(
+    const usecase = new GenerateReportPDF(
       new PostgresTransactionRepository(),
       new PostgresUserRepository(),
     );
