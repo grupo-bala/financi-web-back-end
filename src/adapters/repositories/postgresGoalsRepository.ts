@@ -1,8 +1,10 @@
+import { Decimal } from "@prisma/client/runtime/library";
 import { Goal } from "../../model/goal";
 import {
   GoalsRepository,
 } from "../../usecases/goals/interfaces/goalsRepository";
 import { PrismaHelper } from "./prismaHelper";
+import { differenceInMonths } from "date-fns";
 
 export class PostgresGoalsRepository implements GoalsRepository {
   async add({
@@ -12,6 +14,11 @@ export class PostgresGoalsRepository implements GoalsRepository {
     totalValue,
     userId,
   }: Goal): Promise<Goal> {
+    const monthDiff = differenceInMonths(deadline, new Date());
+    const minDist = 1;
+    const idealPerMonth =
+      new Decimal(Number(totalValue) / Math.max(monthDiff + minDist, minDist));
+
     const { id } = await PrismaHelper
       .client
       .goal
@@ -22,6 +29,7 @@ export class PostgresGoalsRepository implements GoalsRepository {
           total_value: totalValue,
           deadline,
           id_user: userId,
+          ideal_per_month: idealPerMonth,
         },
       });
 
@@ -32,6 +40,7 @@ export class PostgresGoalsRepository implements GoalsRepository {
       userId,
       totalValue,
       currentValue,
+      idealPerMonth,
     });
   }
 
@@ -103,6 +112,7 @@ export class PostgresGoalsRepository implements GoalsRepository {
         id_user: userId,
         total_value: totalValue,
         current_value: currentValue,
+        ideal_per_month: idealPerMonth,
       } of prismaGoals
     ) {
       goals.push(
@@ -113,6 +123,7 @@ export class PostgresGoalsRepository implements GoalsRepository {
           userId,
           totalValue,
           currentValue,
+          idealPerMonth,
         }),
       );
     }
@@ -140,6 +151,11 @@ export class PostgresGoalsRepository implements GoalsRepository {
     totalValue,
     deadline,
   }: Goal): Promise<void> {
+    const monthDiff = differenceInMonths(deadline, new Date());
+    const minDist = 1;
+    const idealPerMonth =
+      new Decimal(Number(totalValue) / Math.max(monthDiff + minDist, minDist));
+
     await PrismaHelper
       .client
       .goal
@@ -153,6 +169,7 @@ export class PostgresGoalsRepository implements GoalsRepository {
           deadline,
           current_value: currentValue,
           total_value: totalValue,
+          ideal_per_month: idealPerMonth,
         },
       });
   }

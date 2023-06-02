@@ -26,6 +26,7 @@ export class UpdateGoalController {
       const token = Token.decode(
         request.cookies["financi-jwt"]!,
       );
+      const noMoney = 0;
 
       await this.useCase.update(
         new Goal({
@@ -34,6 +35,7 @@ export class UpdateGoalController {
           currentValue: new Decimal(currentValue),
           totalValue: new Decimal(totalValue),
           deadline,
+          idealPerMonth: new Decimal(noMoney),
           userId: token.id,
         }),
       );

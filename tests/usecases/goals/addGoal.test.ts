@@ -23,6 +23,7 @@ describe("testes de adicionar metas", () => {
       userId: 0,
       currentValue: new Decimal(noMoney),
       totalValue: new Decimal(noMoney),
+      idealPerMonth: new Decimal(noMoney),
       deadline: new Date(),
     });
 
@@ -48,6 +49,7 @@ describe("testes de adicionar metas", () => {
       userId: 0,
       currentValue: new Decimal(noMoney),
       totalValue: new Decimal(noMoney),
+      idealPerMonth: new Decimal(noMoney),
       deadline: new Date(),
     });
 

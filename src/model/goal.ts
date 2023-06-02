@@ -6,6 +6,7 @@ export class Goal {
   readonly userId: number;
   readonly totalValue: Decimal;
   readonly currentValue: Decimal;
+  readonly idealPerMonth: Decimal;
   readonly deadline: Date;
 
   constructor({
@@ -15,6 +16,7 @@ export class Goal {
     totalValue,
     currentValue,
     deadline,
+    idealPerMonth,
   }: {
     id: number,
     title: string,
@@ -22,6 +24,7 @@ export class Goal {
     totalValue: Decimal,
     currentValue: Decimal,
     deadline: Date,
+    idealPerMonth: Decimal,
   }) {
     this.id = id;
     this.title = title;
@@ -29,5 +32,6 @@ export class Goal {
     this.totalValue = totalValue;
     this.currentValue = currentValue;
     this.deadline = deadline;
+    this.idealPerMonth = idealPerMonth;
   }
 }

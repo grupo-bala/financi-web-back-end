@@ -75,6 +75,7 @@ describe("testes de obter todas as metas de um usuário", () => {
       userId: 0,
       currentValue: new Decimal(noMoney),
       totalValue: new Decimal(noMoney),
+      idealPerMonth: new Decimal(noMoney),
       deadline: new Date(),
     });
 

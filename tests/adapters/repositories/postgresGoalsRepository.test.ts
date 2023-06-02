@@ -23,6 +23,7 @@ describe("testes do repositório de metas", () => {
       userId: 0,
       totalValue: new Decimal(noMoney),
       currentValue: new Decimal(noMoney),
+      idealPerMonth: new Decimal(noMoney),
       deadline: new Date(),
     });
 
@@ -159,6 +160,7 @@ describe("testes do repositório de metas", () => {
       userId: 0,
       totalValue: new Decimal(noMoney),
       currentValue: new Decimal(noMoney),
+      idealPerMonth: new Decimal(noMoney),
       deadline: new Date(),
     });
 
@@ -180,6 +182,7 @@ describe("testes do repositório de metas", () => {
       userId: 0,
       totalValue: new Decimal(noMoney),
       currentValue: new Decimal(noMoney),
+      idealPerMonth: new Decimal(noMoney),
       deadline: new Date(),
     });
 

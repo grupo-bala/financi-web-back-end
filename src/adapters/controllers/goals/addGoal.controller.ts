@@ -31,6 +31,7 @@ export class AddGoalController {
         title,
         totalValue: new Decimal(totalValue),
         deadline,
+        idealPerMonth: new Decimal(noMoney),
         userId: token.id,
       });
 
