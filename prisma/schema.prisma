@@ -35,13 +35,14 @@ model financi_user {
 }
 
 model goal {
-  id            Int          @id @default(autoincrement())
-  title         String
-  id_user       Int
-  total_value   Decimal      @db.Decimal(10, 2)
-  current_value Decimal      @db.Decimal(10, 2)
-  deadline      DateTime     @db.Date
-  financi_user  financi_user @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id              Int          @id @default(autoincrement())
+  title           String
+  id_user         Int
+  total_value     Decimal      @db.Decimal(10, 2)
+  current_value   Decimal      @db.Decimal(10, 2)
+  deadline        DateTime     @db.Date
+  ideal_per_month Decimal      @default(0)
+  financi_user    financi_user @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model lesson {
