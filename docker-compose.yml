@@ -21,6 +21,7 @@ services:
       - db
     ports:
       - "8080:8080"
+      - "5555:5555"
     restart: always
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/financi

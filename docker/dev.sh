@@ -1,2 +1,2 @@
 #!/bin/bash
-npm run db:migrate && npm run db:dev && node build/index.js
+npm run db:migrate && npm run db:dev && npm run db:view -- --browser none & node build/index.js
