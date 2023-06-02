@@ -4,6 +4,7 @@ import { updateTransactionInput } from "../schemas/transaction/updateTransaction
 import { StatusCodes } from "http-status-codes";
 import { Transaction } from "../../../model/transaction";
 import { Decimal } from "@prisma/client/runtime/library";
+import { Token } from "../../data/token";
 
 export class UpdateTransactionController {
   private readonly useCase: UpdateTransaction;
@@ -22,6 +23,8 @@ export class UpdateTransactionController {
       id,
     } = request.body as updateTransactionInput;
 
+    const token = Token.decode(request.cookies["financi-jwt"]!);
+
     try {
       await this.useCase.update(
         new Transaction(
@@ -30,7 +33,7 @@ export class UpdateTransactionController {
           title,
           isEntry,
           date,
-          null,
+          token.id,
           id,
         ),
       );
