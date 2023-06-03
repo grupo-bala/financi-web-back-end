@@ -54,6 +54,11 @@ import { registerRemoveCourseRoute } from "../routes/course/removeCourse.route";
 import { registerUpdateCourseRoute } from "../routes/course/updateCourse.route";
 import { registerGetAllCoursesRoute } from "../routes/course/getAllCourses.route";
 import { registerAddLessonRoute } from "../routes/lesson/addLesson.route";
+import { registerRemoveLessonRoute } from "../routes/lesson/removeLesson.route";
+import { registerUpdateLessonRoute } from "../routes/lesson/updateLesson.route";
+import { registerGetAllLessonsRoute } from "../routes/lesson/getAllLessons.route";
+import { registerGetLessonRoute } from "../routes/lesson/getLesson.route";
+import { registerUpdateLessonWatchedStatusRoute } from "../routes/lesson/updateLessonWatchedStatus.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -74,6 +79,8 @@ async function registerAdminRoutes(fastify: FastifyInstance) {
   await registerRemoveCourseRoute(fastify);
   await registerUpdateCourseRoute(fastify);
   await registerAddLessonRoute(fastify);
+  await registerRemoveLessonRoute(fastify);
+  await registerUpdateLessonRoute(fastify);
 }
 
 async function registerAuthRoutes(fastify: FastifyInstance) {
@@ -96,6 +103,9 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   await registerGenerateReportPDFRoute(fastify);
   await registerGenerateReportXLSX(fastify);
   await registerGetAllCoursesRoute(fastify);
+  await registerGetAllLessonsRoute(fastify);
+  await registerGetLessonRoute(fastify);
+  await registerUpdateLessonWatchedStatusRoute(fastify);
 }
 
 export async function registerHandlers(fastify: FastifyInstance) {
