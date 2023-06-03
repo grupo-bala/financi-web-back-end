@@ -22,11 +22,12 @@ export class AddLessonController {
     try {
       await this.usecase.add(
         new Lesson({
-          id: -1,
+          id: null,
           durationSecs: durationSeconds,
           videoURL,
           courseId,
           name,
+          viewedLesson: null,
         }),
       );
 
