@@ -21,11 +21,12 @@ describe("testes do token jwt", () => {
     const oneHour = oneMinute * oneMinute;
 
     const token = Token.encode(id, isAdmin);
+    const maximumDifference = millisecondsInSecond * oneMinute;
+    const nextHour = Math.floor(Date.now() / millisecondsInSecond + oneHour);
 
     expect(token.id).toBe(id);
-    expect(token.expirationTime).toBeCloseTo(
-      Math.floor(Date.now() / millisecondsInSecond + oneHour),
-    );
+    expect(token.expirationTime - nextHour)
+      .toBeLessThanOrEqual(maximumDifference);
     expect(token.isAdmin).toBeTruthy();
   });
 
