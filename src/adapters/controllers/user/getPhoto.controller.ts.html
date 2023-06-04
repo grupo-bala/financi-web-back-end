@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/adapters/controllers/course/addCourse.controller.ts</title>
+    <title>Code coverage report for src/adapters/controllers/user/getPhoto.controller.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/adapters/controllers/course</a> addCourse.controller.ts</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/adapters/controllers/user</a> getPhoto.controller.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">41.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>5/12</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">41.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>5/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,58 +91,58 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FastifyReply, FastifyRequest } from "fastify";
-import { AddCourse } from "../../../usecases/course/addCourse";
-import { AddCourseInput } from "../schemas/course/addCourse.schema";
-import { Course } from "../../../model/course";
+import { Token } from "../../data/token";
+import { Profile } from "../../services/profile";
+import fs from "fs";
 import { StatusCodes } from "http-status-codes";
 &nbsp;
-export class AddCourseController {
-  private readonly useCase: AddCourse;
+export class GetPhotoController {
+  async <span class="fstat-no" title="function not covered" >handle(</span>request: FastifyRequest, reply: FastifyReply) {
+    const token = <span class="cstat-no" title="statement not covered" >Token.decode(</span>
+      request.cookies["financi-jwt"]!,
+    );
 &nbsp;
-  constructor(useCase: AddCourse) {
-    this.useCase = useCase;
-  }
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      const filePath = <span class="cstat-no" title="statement not covered" >await Profile.get(token.id);</span>
+      const fileStream = <span class="cstat-no" title="statement not covered" >fs.createReadStream(filePath);</span>
 &nbsp;
-  async handle(request: FastifyRequest, reply: FastifyReply) {
-    const { title, description } = request.body as AddCourseInput;
+<span class="cstat-no" title="statement not covered" >      await reply</span>
+        .type("application/octet-stream")
+        .send(fileStream);
+    } catch (e) {
+      const error = <span class="cstat-no" title="statement not covered" >e as Error;</span>
 &nbsp;
-    await this.useCase.add(new Course(
-      title,
-      description,
-      null,
-      null,
-      null,
-      null,
-    ));
-&nbsp;
-    await reply.status(StatusCodes.CREATED).send();
+<span class="cstat-no" title="statement not covered" >      await reply</span>
+        .status(StatusCodes.BAD_REQUEST)
+        .send({ msg: error.message });
+    }
   }
 }</pre></td></tr></table></pre>
 
