@@ -12,7 +12,7 @@ export class GetAllGoalsController {
   }
 
   async handle(request: FastifyRequest, reply: FastifyReply) {
-    const { page, size } = request.query as GetAllGoalsInput;
+    const { page, size, search } = request.query as GetAllGoalsInput;
 
     try {
       const token = Token.decode(
@@ -23,6 +23,7 @@ export class GetAllGoalsController {
         token.id,
         page,
         size,
+        search,
       );
 
       await reply

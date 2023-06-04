@@ -74,19 +74,23 @@ export class PostgresGoalsRepository implements GoalsRepository {
     return count > none;
   }
 
-  async getSizeInUser(userId: number): Promise<number> {
+  async getSizeInUser(userId: number, search?: string): Promise<number> {
     return await PrismaHelper
       .client
       .goal
       .count({
         where: {
           id_user: userId,
+          title: {
+            contains: search,
+            mode: "insensitive",
+          },
         },
       });
   }
 
   async getAllOfUser(
-    userId: number, page: number, size: number,
+    userId: number, page: number, size: number, search?: string,
   ): Promise<Goal[]> {
     const prismaGoals = await PrismaHelper
       .client
@@ -99,6 +103,10 @@ export class PostgresGoalsRepository implements GoalsRepository {
         },
         where: {
           id_user: userId,
+          title: {
+            contains: search,
+            mode: "insensitive",
+          },
         },
       });
 

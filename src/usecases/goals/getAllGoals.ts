@@ -8,7 +8,9 @@ export class GetAllGoals {
     this.goalsRepository = goalsRepository;
   }
 
-  async getAll(userId: number, page: number, size: number): Promise<{
+  async getAll(
+    userId: number, page: number, size: number, search?: string,
+  ): Promise<{
     goals: Goal[],
     howManyPages: number,
   }> {
@@ -20,7 +22,7 @@ export class GetAllGoals {
       throw new Error("O tamanho deve ser um número positivo maior que zero");
     }
 
-    const repoSize = await this.goalsRepository.getSizeInUser(userId);
+    const repoSize = await this.goalsRepository.getSizeInUser(userId, search);
     const empty = 0;
 
     if (repoSize === empty) {
@@ -30,7 +32,8 @@ export class GetAllGoals {
       };
     }
 
-    const goals = await this.goalsRepository.getAllOfUser(userId, page, size);
+    const goals =
+      await this.goalsRepository.getAllOfUser(userId, page, size, search);
 
     return {
       goals,
