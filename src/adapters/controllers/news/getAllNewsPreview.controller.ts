@@ -13,10 +13,10 @@ export class GetAllNewsPreviewController {
   }
 
   async handle(request: FastifyRequest, reply: FastifyReply) {
-    const { page, size } = request.query as GetAllNewsPreviewInput;
+    const { page, size, search } = request.query as GetAllNewsPreviewInput;
 
     try {
-      const result = await this.useCase.getAll(page, size);
+      const result = await this.useCase.getAll(page, size, search);
 
       await reply.status(StatusCodes.OK).send({
         data: result.previews,

@@ -8,7 +8,11 @@ export class GetAllNewsPreview {
     this.newsRepository = newsRepository;
   }
 
-  async getAll(page: number, size: number): Promise<{
+  async getAll(
+    page: number,
+    size: number,
+    search?: string,
+  ): Promise<{
     previews: NewsPreview[],
     howManyPages: number
   }> {
@@ -30,7 +34,9 @@ export class GetAllNewsPreview {
       };
     }
 
-    const repositoryNews = await this.newsRepository.getAllPreviews(page, size);
+    const repositoryNews = await this
+      .newsRepository
+      .getAllPreviews(page, size, search);
 
     return {
       previews: repositoryNews,

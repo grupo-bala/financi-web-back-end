@@ -43,13 +43,23 @@ export class PostgresNewsRepository implements NewsRepository {
       });
   }
 
-  async getAllPreviews(page: number, size: number): Promise<NewsPreview[]> {
+  async getAllPreviews(
+    page: number,
+    size: number,
+    search?: string,
+  ): Promise<NewsPreview[]> {
     const prismaNews = await PrismaHelper
       .client
       .news
       .findMany({
         skip: --page * size,
         take: size,
+        where: {
+          title: {
+            contains: search,
+            mode: "insensitive",
+          },
+        },
         orderBy: {
           id: "desc",
         },
