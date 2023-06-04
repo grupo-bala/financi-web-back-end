@@ -3,7 +3,6 @@ FROM node:latest
 COPY . .
 
 EXPOSE 8080
-EXPOSE 5555
 
 RUN npm i -D
 RUN npm run build

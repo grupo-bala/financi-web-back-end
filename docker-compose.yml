@@ -16,12 +16,11 @@ services:
   server:
     build:
       context: .
-      dockerfile: docker/dev.dockerfile
+      dockerfile: docker/server.dev.dockerfile
     depends_on:
       - db
     ports:
       - "8080:8080"
-      - "5555:5555"
     restart: always
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/financi
@@ -30,3 +29,17 @@ services:
       SWAGGER_UI_HOST: http://localhost:8080
       COOKIE_DOMAIN: localhost
       ENVIRONMENT: debug
+  
+  dbview:
+    build:
+      context: .
+      dockerfile: docker/dbview.dev.dockerfile
+    depends_on:
+      - db
+      - server
+    ports:
+      - "5555:5555"
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/financi
+    
