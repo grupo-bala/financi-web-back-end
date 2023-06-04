@@ -17,7 +17,8 @@ export interface TransactionRepository {
   getAllPreviews: (
     page: number,
     size: number,
-    userId: number
+    userId: number,
+    search?: string,
   ) => Promise<TransactionPreview[]>;
-  getSize: (userId: number) => Promise<number>;
+  getSize: (userId: number, search?: string) => Promise<number>;
 }

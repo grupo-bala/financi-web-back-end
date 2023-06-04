@@ -124,13 +124,17 @@ export class PostgresTransactionRepository implements TransactionRepository {
       });
   }
 
-  async getSize(userId: number): Promise<number> {
+  async getSize(userId: number, search?: string): Promise<number> {
     return await PrismaHelper
       .client
       .transaction
       .count({
         where: {
           id_user: userId,
+          title: {
+            contains: search,
+            mode: "insensitive",
+          },
         },
       });
   }
@@ -139,6 +143,7 @@ export class PostgresTransactionRepository implements TransactionRepository {
     page: number,
     size: number,
     userId: number,
+    search?: string,
   ): Promise<TransactionPreview[]> {
     const prismaTransactions = await PrismaHelper
       .client
@@ -148,6 +153,10 @@ export class PostgresTransactionRepository implements TransactionRepository {
         take: size,
         where: {
           id_user: userId,
+          title: {
+            contains: search,
+            mode: "insensitive",
+          },
         },
         orderBy: {
           occurrence_date: "desc",

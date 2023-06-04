@@ -12,12 +12,17 @@ export class GetAllTransactionsPreviewController {
   }
 
   async handle(request: FastifyRequest, reply: FastifyReply) {
-    const { page, size } = request.query as GetAllTransactionsPreviewInput;
+    const {
+      page,
+      size,
+      search,
+    } = request.query as GetAllTransactionsPreviewInput;
+
     const token = request.cookies["financi-jwt"]!;
     const userId = Token.decode(token).id;
 
     try {
-      const result = await this.useCase.get(page, size, userId);
+      const result = await this.useCase.get(page, size, userId, search);
 
       await reply.status(StatusCodes.OK).send({
         data: result.previews,
