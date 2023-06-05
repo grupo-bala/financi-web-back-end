@@ -106,4 +106,22 @@ export class PostgresUserRepository implements UserRepository {
       isAdmin: user.isadmin,
     });
   }
+
+  async update(
+    userId: number, email: Email, name: string, fixedIncome: number,
+  ): Promise<void> {
+    await PrismaHelper
+      .client
+      .financi_user
+      .update({
+        where: {
+          id: userId,
+        },
+        data: {
+          name,
+          email: email.value,
+          fixedincome: fixedIncome,
+        },
+      });
+  }
 }

@@ -60,6 +60,7 @@ import { registerGetLessonRoute } from "../routes/lesson/getLesson.route";
 import { registerUpdateLessonWatchedStatusRoute } from "../routes/lesson/updateLessonWatchedStatus.route";
 import { registerGetPhotoRoute } from "../routes/user/getPhoto.route";
 import { registerLogoutRoute } from "../routes/user/logout.route";
+import { registerUpdateUserRoute } from "../routes/user/updateUser.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -91,6 +92,7 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   await registerGetMeRoute(fastify);
   await registerUploadPhotoRoute(fastify);
   await registerGetPhotoRoute(fastify);
+  await registerUpdateUserRoute(fastify);
   await registerAddGoalRoute(fastify);
   await registerGetAllGoalsRoute(fastify);
   await registerRemoveGoalRoute(fastify);
@@ -118,6 +120,10 @@ export async function registerHandlers(fastify: FastifyInstance) {
       await res
         .status(StatusCodes.BAD_REQUEST)
         .send({ msg: JSON.parse(error.message) });
+    } else {
+      await res
+        .status(error.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR)
+        .send({ msg: error.message });
     }
   });
 
