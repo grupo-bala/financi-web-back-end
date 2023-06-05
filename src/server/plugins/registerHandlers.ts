@@ -59,6 +59,7 @@ import { registerGetAllLessonsRoute } from "../routes/lesson/getAllLessons.route
 import { registerGetLessonRoute } from "../routes/lesson/getLesson.route";
 import { registerUpdateLessonWatchedStatusRoute } from "../routes/lesson/updateLessonWatchedStatus.route";
 import { registerGetPhotoRoute } from "../routes/user/getPhoto.route";
+import { registerLogoutRoute } from "../routes/user/logout.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -86,6 +87,7 @@ async function registerAdminRoutes(fastify: FastifyInstance) {
 async function registerAuthRoutes(fastify: FastifyInstance) {
   fastify.addHook("preHandler", validateJWT);
 
+  await registerLogoutRoute(fastify);
   await registerGetMeRoute(fastify);
   await registerUploadPhotoRoute(fastify);
   await registerGetPhotoRoute(fastify);
