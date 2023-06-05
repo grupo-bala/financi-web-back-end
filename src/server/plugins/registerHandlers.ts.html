@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.74% </span>
+                <span class="strong">90.09% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>98/108</span>
+                <span class='fraction'>100/111</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">10% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/5</span>
+                <span class='fraction'>1/10</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.58% </span>
+                <span class="strong">90.9% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>98/107</span>
+                <span class='fraction'>100/110</span>
             </div>
         
             
@@ -249,7 +249,13 @@
 <a name='L184'></a><a href='#L184'>184</a>
 <a name='L185'></a><a href='#L185'>185</a>
 <a name='L186'></a><a href='#L186'>186</a>
-<a name='L187'></a><a href='#L187'>187</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">27x</span>
@@ -311,23 +317,9 @@
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-yes">27x</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
@@ -337,7 +329,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
@@ -366,6 +374,10 @@
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -497,6 +509,7 @@ import { registerGetLessonRoute } from "../routes/lesson/getLesson.route";
 import { registerUpdateLessonWatchedStatusRoute } from "../routes/lesson/updateLessonWatchedStatus.route";
 import { registerGetPhotoRoute } from "../routes/user/getPhoto.route";
 import { registerLogoutRoute } from "../routes/user/logout.route";
+import { registerUpdateUserRoute } from "../routes/user/updateUser.route";
 &nbsp;
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -528,6 +541,7 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   await registerGetMeRoute(fastify);
   await registerUploadPhotoRoute(fastify);
   await registerGetPhotoRoute(fastify);
+  await registerUpdateUserRoute(fastify);
   await registerAddGoalRoute(fastify);
   await registerGetAllGoalsRoute(fastify);
   await registerRemoveGoalRoute(fastify);
@@ -550,11 +564,15 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
 &nbsp;
 export async function registerHandlers(fastify: FastifyInstance) {
   fastify.setErrorHandler(<span class="fstat-no" title="function not covered" >async (e</span>rror, _, res) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (error instanceof ZodError) {</span>
+<span class="cstat-no" title="statement not covered" >    if (error instanceof ZodError) {</span>
 <span class="cstat-no" title="statement not covered" >      fastify.log.warn(error);</span>
 <span class="cstat-no" title="statement not covered" >      await res</span>
         .status(StatusCodes.BAD_REQUEST)
         .send({ msg: JSON.parse(error.message) });
+    } else {
+<span class="cstat-no" title="statement not covered" >      await res</span>
+        .status(error.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR)
+        .send({ msg: error.message });
     }
   });
 &nbsp;
@@ -628,7 +646,7 @@ export async function registerHandlers(fastify: FastifyInstance) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-05T04:05:53.691Z
+                at 2023-06-05T17:10:20.472Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

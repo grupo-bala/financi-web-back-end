@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/server/routes/news/getNews.route.ts</title>
+    <title>Code coverage report for src/usecases/user/updateUser.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../../prettify.css" />
-    <link rel="stylesheet" href="../../../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/server/routes/news</a> getNews.route.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/usecases/user</a> updateUser.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -82,59 +82,44 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { FastifyInstance } from "fastify";
-import {
-  GetNewsController,
-} from "../../../adapters/controllers/news/getNews.controller";
-import { GetNews } from "../../../usecases/news/getNews";
-import {
-  PostgresNewsRepository,
-} from "../../../adapters/repositories/postgresNewsRepository";
-import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { schemas } from "../../../adapters/controllers/schemas/schemas";
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Email } from "../../model/data/email";
+import { UserRepository } from "./interfaces/userRepository";
 &nbsp;
-export async function registerGetNewsRoute(fastify: FastifyInstance) {
-  fastify.withTypeProvider&lt;ZodTypeProvider&gt;().get("/get-news", {
-    schema: {
-      querystring: schemas.getNewsSchema,
-      tags: ["news"],
-    },
-  }, async (req, res) =&gt; {
-    await new GetNewsController(
-      new GetNews(
-        new PostgresNewsRepository(),
-      ),
-    ).handle(req, res);
-  });
+export class UpdateUser {
+  readonly userRepository: UserRepository;
+&nbsp;
+<span class="fstat-no" title="function not covered" >  constructor(u</span>serRepository: UserRepository) {
+<span class="cstat-no" title="statement not covered" >    this.userRepository = userRepository;</span>
+  }
+&nbsp;
+  async <span class="fstat-no" title="function not covered" >update(</span>
+    userId: number, email: Email, name: string, fixedIncome: number,
+  ) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      await this.userRepository.update(userId, email, name, fixedIncome);</span>
+    } catch (e) {
+<span class="cstat-no" title="statement not covered" >      throw new Error("Usuário não existente");</span>
+    }
+  }
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -144,14 +129,14 @@ export async function registerGetNewsRoute(fastify: FastifyInstance) {
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2023-06-05T17:10:20.472Z
             </div>
-        <script src="../../../../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../../../sorter.js"></script>
-        <script src="../../../../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     
