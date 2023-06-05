@@ -31,7 +31,7 @@ describe("testes do controller de registro", () => {
         email: "test@test.com",
         password: "test",
         username: "test",
-        fixedIncome: 0,
+        fixedIncome: 1000,
       }),
       headers: {
         "content-type": "application/json",
@@ -60,7 +60,7 @@ describe("testes do controller de registro", () => {
           email: "test@test.com",
           password: "test",
           username: "test",
-          fixedIncome: 0,
+          fixedIncome: 1000,
         }),
         headers: {
           "content-type": "application/json",
