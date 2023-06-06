@@ -30,6 +30,65 @@ export class PostgresCourseRepository implements CourseRepository {
       });
   }
 
+  async get(id: number): Promise<Course> {
+    const course = await PrismaHelper
+      .client
+      .course
+      .findFirst({
+        where: {
+          id,
+        },
+      });
+
+    const howManyLessons = await PrismaHelper
+      .client
+      .lesson
+      .count({
+        where: {
+          id_course: id,
+        },
+      });
+
+    const aggregation = await PrismaHelper
+      .client
+      .lesson
+      .aggregate({
+        _avg: {
+          duration_sec: true,
+        },
+        _sum: {
+          duration_sec: true,
+        },
+        where: {
+          id_course: id,
+        },
+      });
+
+    const secondsInMinute = 60;
+    const emptyCourseTime = 0;
+
+    const averageTimePerLessonInSeconds = aggregation
+      ._avg
+      .duration_sec ?? emptyCourseTime;
+
+    const totalTimeInSeconds = aggregation
+      ._sum
+      .duration_sec ?? emptyCourseTime;
+
+    return new Course(
+      course!.name,
+      course!.description,
+      howManyLessons,
+      Math.ceil(
+        averageTimePerLessonInSeconds / secondsInMinute,
+      ),
+      Math.ceil(
+        totalTimeInSeconds / secondsInMinute,
+      ),
+      course!.id,
+    );
+  }
+
   async getAll(page: number, size: number): Promise<Course[]> {
     const prismaCourses = await PrismaHelper
       .client

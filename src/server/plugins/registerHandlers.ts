@@ -61,6 +61,7 @@ import { registerUpdateLessonWatchedStatusRoute } from "../routes/lesson/updateL
 import { registerGetPhotoRoute } from "../routes/user/getPhoto.route";
 import { registerLogoutRoute } from "../routes/user/logout.route";
 import { registerUpdateUserRoute } from "../routes/user/updateUser.route";
+import { registerGetCourseRoute } from "../routes/course/getCourse.route";
 
 async function registerFreeRoutes(fastify: FastifyInstance) {
   await registerLoginRoute(fastify);
@@ -108,6 +109,7 @@ async function registerAuthRoutes(fastify: FastifyInstance) {
   await registerGenerateReportPDFRoute(fastify);
   await registerGenerateReportXLSX(fastify);
   await registerGetAllCoursesRoute(fastify);
+  await registerGetCourseRoute(fastify);
   await registerGetAllLessonsRoute(fastify);
   await registerGetLessonRoute(fastify);
   await registerUpdateLessonWatchedStatusRoute(fastify);
