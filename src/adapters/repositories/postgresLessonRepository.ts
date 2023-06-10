@@ -148,7 +148,7 @@ export class PostgresLessonRepository implements LessonRepository {
     return lessonsPreview;
   }
 
-  async get(id: number, userId: number): Promise<Lesson> {
+  async get(userId: number, id: number): Promise<Lesson> {
     const {
       duration_sec: durationSecs,
       id_course: courseId,
@@ -159,14 +159,14 @@ export class PostgresLessonRepository implements LessonRepository {
       .lesson
       .findUniqueOrThrow({
         where: {
-          id,
+          id: userId,
         },
       });
 
     return {
       courseId,
       durationSecs,
-      id,
+      id: userId,
       name,
       videoURL,
       viewedLesson: await this.isWatched(userId, id),
