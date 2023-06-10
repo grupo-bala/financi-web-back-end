@@ -159,14 +159,14 @@ export class PostgresLessonRepository implements LessonRepository {
       .lesson
       .findUniqueOrThrow({
         where: {
-          id: userId,
+          id,
         },
       });
 
     return {
       courseId,
       durationSecs,
-      id: userId,
+      id,
       name,
       videoURL,
       viewedLesson: await this.isWatched(userId, id),
