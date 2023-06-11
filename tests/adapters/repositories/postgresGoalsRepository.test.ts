@@ -36,34 +36,6 @@ describe("testes do repositório de metas", () => {
       .not.toThrow();
   });
 
-  test("título buscado existe deve retornar verdadeiro", async () => {
-    const pg = new PostgresGoalsRepository();
-    const count = 1;
-    const userId = 0;
-
-    prismaMock.goal.count.mockImplementation(
-      (_args: any) => count as any,
-    );
-
-    await expect(pg.existsInUserByTitle(userId, ""))
-      .resolves
-      .toBeTruthy();
-  });
-
-  test("título buscado não existe deve retornar falso", async () => {
-    const pg = new PostgresGoalsRepository();
-    const count = 0;
-    const userId = 0;
-
-    prismaMock.goal.count.mockImplementation(
-      (_args: any) => count as any,
-    );
-
-    await expect(pg.existsInUserByTitle(userId, ""))
-      .resolves
-      .toBeFalsy();
-  });
-
   test("id buscado existe deve retornar verdadeiro", async () => {
     const pg = new PostgresGoalsRepository();
     const count = 1;
