@@ -44,21 +44,6 @@ export class PostgresGoalsRepository implements GoalsRepository {
     });
   }
 
-  async existsInUserByTitle(userId: number, title: string): Promise<boolean> {
-    const count = await PrismaHelper
-      .client
-      .goal
-      .count({
-        where: {
-          title,
-          id_user: userId,
-        },
-      });
-
-    const none = 0;
-    return count > none;
-  }
-
   async existsInUserById(userId: number, goalId: number): Promise<boolean> {
     const count = await PrismaHelper
       .client
