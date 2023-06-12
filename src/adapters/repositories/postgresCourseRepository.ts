@@ -64,7 +64,6 @@ export class PostgresCourseRepository implements CourseRepository {
         },
       });
 
-    const secondsInMinute = 60;
     const emptyCourseTime = 0;
 
     const averageTimePerLessonInSeconds = aggregation
@@ -79,12 +78,8 @@ export class PostgresCourseRepository implements CourseRepository {
       course!.name,
       course!.description,
       howManyLessons,
-      Math.ceil(
-        averageTimePerLessonInSeconds / secondsInMinute,
-      ),
-      Math.ceil(
-        totalTimeInSeconds / secondsInMinute,
-      ),
+      Math.ceil(averageTimePerLessonInSeconds),
+      totalTimeInSeconds,
       course!.id,
     );
   }
@@ -134,7 +129,6 @@ export class PostgresCourseRepository implements CourseRepository {
           },
         });
 
-      const secondsInMinute = 60;
       const emptyCourseTime = 0;
 
       const averageTimePerLessonInSeconds = aggregation
@@ -149,13 +143,9 @@ export class PostgresCourseRepository implements CourseRepository {
         description,
         id,
         title: name,
-        averageTimePerLesson: Math.ceil(
-          averageTimePerLessonInSeconds / secondsInMinute,
-        ),
+        averageTimePerLesson: averageTimePerLessonInSeconds,
         howManyLessons,
-        totalTime: Math.ceil(
-          totalTimeInSeconds / secondsInMinute,
-        ),
+        totalTime: totalTimeInSeconds,
       });
     }
 
