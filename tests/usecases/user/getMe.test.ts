@@ -12,6 +12,7 @@ import { Email } from "../../../src/model/data/email";
 import { Password } from "../../../src/model/data/password";
 
 jest.mock("../../../src/adapters/repositories/postgresUserRepository");
+jest.mock("../../../src/adapters/repositories/postgresTransactionRepository");
 
 describe("testes de obter o usuário", () => {
   test("deve falhar pois o usuário não existe", async () => {
@@ -52,6 +53,16 @@ describe("testes de obter o usuário", () => {
       };
     });
 
+    mock(PostgresTransactionRepository).mockImplementation(() => {
+      return {
+        getCurrentBalance: async (_userId: number) => ({
+          ...returnUser,
+          entries: new Decimal(noMoney),
+          outs: new Decimal(noMoney),
+        }),
+      };
+    });
+
     await expect(
       new GetMe(
         new PostgresUserRepository(),
@@ -59,8 +70,8 @@ describe("testes de obter o usuário", () => {
       ).getMe(returnUser.id),
     ).resolves.toEqual({
       ...returnUser,
-      entries: null,
-      outs: null,
+      entries: new Decimal(noMoney),
+      outs: new Decimal(noMoney),
     });
   });
 });
