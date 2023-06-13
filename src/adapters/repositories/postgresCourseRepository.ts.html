@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.41% </span>
+                <span class="strong">74.07% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/29</span>
+                <span class='fraction'>20/27</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.41% </span>
+                <span class="strong">74.07% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>21/29</span>
+                <span class='fraction'>20/27</span>
             </div>
         
             
@@ -249,17 +249,7 @@
 <a name='L184'></a><a href='#L184'>184</a>
 <a name='L185'></a><a href='#L185'>185</a>
 <a name='L186'></a><a href='#L186'>186</a>
-<a name='L187'></a><a href='#L187'>187</a>
-<a name='L188'></a><a href='#L188'>188</a>
-<a name='L189'></a><a href='#L189'>189</a>
-<a name='L190'></a><a href='#L190'>190</a>
-<a name='L191'></a><a href='#L191'>191</a>
-<a name='L192'></a><a href='#L192'>192</a>
-<a name='L193'></a><a href='#L193'>193</a>
-<a name='L194'></a><a href='#L194'>194</a>
-<a name='L195'></a><a href='#L195'>195</a>
-<a name='L196'></a><a href='#L196'>196</a>
-<a name='L197'></a><a href='#L197'>197</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">32x</span>
+<a name='L187'></a><a href='#L187'>187</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -326,7 +316,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -347,10 +336,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -396,7 +381,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -407,10 +391,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -521,7 +501,6 @@ export class PostgresCourseRepository implements CourseRepository {
         },
       });
 &nbsp;
-    const secondsInMinute = <span class="cstat-no" title="statement not covered" >60;</span>
     const emptyCourseTime = <span class="cstat-no" title="statement not covered" >0;</span>
 &nbsp;
     const averageTimePerLessonInSeconds = <span class="cstat-no" title="statement not covered" >aggregation</span>
@@ -536,12 +515,8 @@ export class PostgresCourseRepository implements CourseRepository {
       course!.name,
       course!.description,
       howManyLessons,
-      Math.ceil(
-        averageTimePerLessonInSeconds / secondsInMinute,
-      ),
-      Math.ceil(
-        totalTimeInSeconds / secondsInMinute,
-      ),
+      Math.ceil(averageTimePerLessonInSeconds),
+      totalTimeInSeconds,
       course!.id,
     );
   }
@@ -591,7 +566,6 @@ export class PostgresCourseRepository implements CourseRepository {
           },
         });
 &nbsp;
-      const secondsInMinute = 60;
       const emptyCourseTime = 0;
 &nbsp;
       const averageTimePerLessonInSeconds = aggregation
@@ -606,13 +580,9 @@ export class PostgresCourseRepository implements CourseRepository {
         description,
         id,
         title: name,
-        averageTimePerLesson: Math.ceil(
-          averageTimePerLessonInSeconds / secondsInMinute,
-        ),
+        averageTimePerLesson: averageTimePerLessonInSeconds,
         howManyLessons,
-        totalTime: Math.ceil(
-          totalTimeInSeconds / secondsInMinute,
-        ),
+        totalTime: totalTimeInSeconds,
       });
     }
 &nbsp;
@@ -658,7 +628,7 @@ export class PostgresCourseRepository implements CourseRepository {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-11T01:32:23.760Z
+                at 2023-06-13T01:24:37.881Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
