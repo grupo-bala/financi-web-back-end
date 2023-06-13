@@ -2,6 +2,9 @@ import { Decimal } from "@prisma/client/runtime/library";
 import {
   PostgresUserRepository,
 } from "../../../src/adapters/repositories/postgresUserRepository";
+import {
+  PostgresTransactionRepository,
+} from "../../../src/adapters/repositories/postgresTransactionRepository";
 import { User } from "../../../src/model/user";
 import { GetMe } from "../../../src/usecases/user/getMe";
 import { mock } from "../../util";
@@ -25,6 +28,7 @@ describe("testes de obter o usuário", () => {
     await expect(
       new GetMe(
         new PostgresUserRepository(),
+        new PostgresTransactionRepository(),
       ).getMe(invalidId),
     ).rejects.toThrow();
   });
@@ -51,7 +55,12 @@ describe("testes de obter o usuário", () => {
     await expect(
       new GetMe(
         new PostgresUserRepository(),
+        new PostgresTransactionRepository(),
       ).getMe(returnUser.id),
-    ).resolves.toBe(returnUser);
+    ).resolves.toEqual({
+      ...returnUser,
+      entries: null,
+      outs: null,
+    });
   });
 });

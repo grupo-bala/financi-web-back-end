@@ -9,6 +9,7 @@ import {
 import {
   PostgresUserRepository,
 } from "../../../adapters/repositories/postgresUserRepository";
+import { PostgresTransactionRepository } from "../../../adapters/repositories/postgresTransactionRepository";
 
 export async function registerGetMeRoute(fastify: FastifyInstance) {
   fastify.withTypeProvider<ZodTypeProvider>().get("/get-me", {
@@ -19,6 +20,7 @@ export async function registerGetMeRoute(fastify: FastifyInstance) {
     await new GetMeController(
       new GetMe(
         new PostgresUserRepository(),
+        new PostgresTransactionRepository(),
       ),
     ).handle(req, res);
   });

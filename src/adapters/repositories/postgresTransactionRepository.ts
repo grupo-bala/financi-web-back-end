@@ -2,6 +2,7 @@ import { Transaction } from "../../model/transaction";
 import { TransactionPreview } from "../../model/transactionPreview";
 import { Interval } from "../../usecases/statistics/data/Filter";
 import {
+  Balance,
   TransactionCategory,
   TransactionRepository,
 } from "../../usecases/transaction/interface/transactionRepository";
@@ -219,5 +220,24 @@ export class PostgresTransactionRepository implements TransactionRepository {
 
       return { category: t.category.name, ...transaction };
     });
+  }
+
+  async getCurrentBalance(userId: number): Promise<Balance> {
+    const unitOffset = 1;
+    const month = new Date().getMonth() + unitOffset;
+
+    const balance = await PrismaHelper
+      .client
+      .$queryRaw`
+        select
+          sum(case when value > 0 then value else 0 end) entries,
+          sum(case when value < 0 then value else 0 end) outs
+        from transaction
+        where
+          date_part('month', occurrence_date) = ${month}
+          and id_user = ${userId}
+      ` as Balance[];
+
+    return balance.shift()!;
   }
 }

@@ -23,6 +23,8 @@ export class GetMeController {
         fixedIncome,
         balance,
         email,
+        entries,
+        outs,
       } = await this.useCase.getMe(token.id);
 
       await reply
@@ -35,6 +37,8 @@ export class GetMeController {
             fixedIncome,
             balance,
             email: email.value,
+            entries,
+            outs,
           },
         });
     } catch (e) {

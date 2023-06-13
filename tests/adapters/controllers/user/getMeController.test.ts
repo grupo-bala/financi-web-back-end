@@ -38,7 +38,11 @@ describe("testes do controller de obter usuário", () => {
 
       mock(GetMe).mockImplementation(() => {
         return {
-          getMe: async (_id: number) => returnUser,
+          getMe: async (_id: number) => ({
+            ...returnUser,
+            entries: new Decimal(noMoney),
+            outs: new Decimal(noMoney),
+          }),
         };
       });
 
