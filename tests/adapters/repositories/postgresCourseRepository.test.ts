@@ -125,7 +125,7 @@ describe("testes do repositório de cursos", () => {
       (_args: any) => prismaCourse as any,
     );
 
-    const aggregateResult = 600;
+    const aggregateResult = 10;
 
     prismaMock.lesson.aggregate.mockImplementation(
       (_args: any) => {
