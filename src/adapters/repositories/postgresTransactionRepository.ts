@@ -230,8 +230,8 @@ export class PostgresTransactionRepository implements TransactionRepository {
       .client
       .$queryRaw`
         select
-          sum(case when value > 0 then value else 0 end) entries,
-          sum(case when value < 0 then value else 0 end) outs
+          sum(case when is_entry then value else 0 end) entries,
+          sum(case when not is_entry then value else 0 end) outs
         from transaction
         where
           date_part('month', occurrence_date) = ${month}
