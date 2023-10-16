@@ -1,0 +1,69 @@
+name: CI workflow
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  lint:
+    name: Run linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup for lint
+        uses: actions/checkout@v3
+      
+      - name: Install node
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm i
+      
+      - name: Run eslint
+        run: npm run lint
+  
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup for tests
+        uses: actions/checkout@v3
+      
+      - name: Install node
+        uses: actions/setup-node@v3.5.1
+        with:
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm i
+      
+      - name: Generate prisma client
+        run: npx prisma generate
+      
+      - name: Run tests
+        run: npm test -- --collectCoverage
+        env:
+          DATABASE_URL: postgres://usuario:localhost@senha/financi
+          SECRET_KEY: jwt_secret_key
+          PORT: 8080
+          SWAGGER_UI_HOST: localhost:8080
+          COOKIE_DOMAIN: localhost
+          ENVIRONMENT: debug
+
+      - name: Deploy coverage
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: coverage/lcov-report
+  
+  deploy:
+    name: Deploy on Fly.io
+    runs-on: ubuntu-latest
+    needs: [test, lint]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,84 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model category {
+  id          Int           @id @default(autoincrement())
+  name        String
+  transaction transaction[]
+}
+
+model course {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  lesson      lesson[]
+}
+
+model financi_user {
+  id            Int             @id @default(autoincrement())
+  name          String
+  username      String          @unique
+  password      String
+  fixedincome   Decimal         @db.Decimal(10, 2)
+  balance       Decimal         @db.Decimal(10, 2)
+  email         String
+  isadmin       Boolean         @default(false)
+  goal          goal[]
+  transaction   transaction[]
+  viewed_lesson viewed_lesson[]
+}
+
+model goal {
+  id              Int          @id @default(autoincrement())
+  title           String
+  id_user         Int
+  total_value     Decimal      @db.Decimal(10, 2)
+  current_value   Decimal      @db.Decimal(10, 2)
+  deadline        DateTime     @db.Date
+  ideal_per_month Decimal      @default(0)
+  financi_user    financi_user @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model lesson {
+  id            Int             @id @default(autoincrement())
+  video_url     String
+  duration_sec  Int
+  id_course     Int
+  name          String
+  course        course          @relation(fields: [id_course], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  viewed_lesson viewed_lesson[]
+}
+
+model transaction {
+  id              Int          @id @default(autoincrement())
+  id_user         Int
+  value           Decimal      @db.Decimal(10, 2)
+  occurrence_date DateTime     @db.Date
+  id_category     Int
+  title           String
+  is_entry        Boolean
+  category        category     @relation(fields: [id_category], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  financi_user    financi_user @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model viewed_lesson {
+  id           Int          @id @default(autoincrement())
+  id_user      Int
+  id_lesson    Int
+  lesson       lesson       @relation(fields: [id_lesson], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  financi_user financi_user @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model news {
+  id               Int       @id @default(autoincrement())
+  author           String
+  title            String    @unique(map: "unique_title")
+  summary          String
+  content          String
+  publish_date     DateTime  @db.Date
+  last_update_date DateTime? @db.Date
+  img_url          String
+  recommended      Boolean   @default(false)
 }

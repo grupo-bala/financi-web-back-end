@@ -4,9 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node build/index.js",
-    "dev": "tsc -w & nodemon build/index.js",
-    "test": "jest"
+    "start": "prisma migrate deploy && node build/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "test": "jest tests",
+    "lint": "npx eslint src tests",
+    "db:migrate": "prisma migrate dev",
+    "db:pull": "prisma db pull",
+    "db:view": "prisma studio",
+    "db:dev": "ls sql | xargs -I % sh -c 'prisma db execute --file sql/% --schema prisma/schema.prisma'",
+    "docker:start": "npm run docker:stop && docker compose up -d --build",
+    "docker:stop": "docker compose down --volumes"
   },
   "repository": {
     "type": "git",
@@ -20,15 +28,39 @@
   "homepage": "https://github.com/grupo-bala/financi-web-back-end#readme",
   "devDependencies": {
     "@types/jest": "^29.5.0",
+    "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^18.15.11",
+    "@types/sha.js": "^2.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
     "jest": "^29.5.0",
-    "nodemon": "^2.0.22",
-    "prisma": "^4.12.0",
+    "jest-mock-extended": "^3.0.4",
+    "pino-pretty": "^10.0.0",
+    "prisma": "^4.15.0",
     "ts-jest": "^29.1.0",
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@fastify/cookie": "^8.3.0",
+    "@fastify/cors": "^8.2.1",
+    "@fastify/multipart": "^7.6.0",
+    "@fastify/static": "^6.10.1",
+    "@fastify/swagger": "^8.3.1",
+    "@fastify/swagger-ui": "^1.8.1",
+    "@prisma/client": "^4.12.0",
+    "date-fns": "^2.30.0",
     "dotenv": "^16.0.3",
-    "fastify": "^4.15.0"
+    "fastify": "^4.15.0",
+    "fastify-plugin": "^4.5.0",
+    "fastify-type-provider-zod": "^1.1.9",
+    "http-status-codes": "^2.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.29",
+    "sha.js": "^2.4.11",
+    "tsx": "^3.12.7",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz",
+    "zod": "^3.21.4"
   }
 }
